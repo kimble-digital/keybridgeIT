@@ -37,3 +37,4 @@ lives in **`src/data/site.ts`** — one file. This is the seam to swap for a CMS
 ## Animation
 GSAP + ScrollTrigger via CDN. Respects `prefers-reduced-motion`. Reveal content is
 shown by default and animates only when JS is active, so nothing can get stuck hidden.
+# keybridgeIT
