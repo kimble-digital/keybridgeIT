@@ -5,6 +5,7 @@ import ServiceGrid from "../components/ServiceGrid.astro";
 import CloudControl from "../components/CloudControl.astro";
 import Testimonials from "../components/Testimonials.astro";
 import CtaBand from "../components/CtaBand.astro";
+import SupportLinks from "../components/SupportLinks.astro";
 import { industries } from "../data/site";
 
 const switchReasons = [
@@ -102,6 +103,18 @@ const switchReasons = [
     </div>
   </section>
 
+  <!-- Existing client shortcuts -->
+  <section class="section clienthelp">
+    <div class="wrap clienthelp-inner reveal">
+      <div class="clienthelp-head">
+        <div class="eyebrow" style="margin-bottom:14px"><span class="dot"></span> EXISTING CLIENTS</div>
+        <h2>Already with us and need a hand?</h2>
+        <p>Jump straight to our help desk, or let an engineer connect to your screen.</p>
+      </div>
+      <SupportLinks variant="panel" />
+    </div>
+  </section>
+
   <CtaBand
     title="Discover the Keybridge Difference"
     body="Whether you're reviewing your current provider, strengthening your security or exploring how AI could create value inside your business, we're happy to start with an honest conversation."
@@ -134,5 +147,10 @@ const switchReasons = [
   .reviews-link .arr{transition:transform .2s}
   .reviews-link a:hover .arr{transform:translateX(3px)}
 
-  @media(max-width:900px){.split{grid-template-columns:1fr;gap:30px}.whygrid{grid-template-columns:1fr;gap:24px}.whyline{margin-top:8px;padding-top:0}.switchlist{grid-template-columns:1fr}}
+  .clienthelp{border-top:1px solid var(--line)}
+  .clienthelp-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
+  .clienthelp-head h2{font-size:clamp(1.6rem,3vw,2rem);margin-bottom:12px}
+  .clienthelp-head p{color:var(--muted);max-width:40ch;line-height:1.6}
+
+  @media(max-width:900px){.split{grid-template-columns:1fr;gap:30px}.whygrid{grid-template-columns:1fr;gap:24px}.whyline{margin-top:8px;padding-top:0}.switchlist{grid-template-columns:1fr}.clienthelp-inner{grid-template-columns:1fr;gap:28px}}
 </style>
