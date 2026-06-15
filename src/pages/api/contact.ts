@@ -26,7 +26,7 @@ import type { APIRoute } from "astro";
 export const prerender = false;
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const HONEYPOT = "company_website";
+const HONEYPOT = "cf_hp_check";
 
 const LABELS: Record<string, string> = {
   reason: "What's prompting this",
