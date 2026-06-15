@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import ContactForm from "../components/ContactForm.astro";
+import SupportLinks from "../components/SupportLinks.astro";
 const AC = "var(--teal)";
 // TODO: point at your real service-desk portal if you have one
 const PORTAL_URL = "#";
@@ -14,6 +15,16 @@ const PORTAL_URL = "#";
   />
 
   <section class="section"><div class="wrap sup-wrap">
+    <div class="sup-now">
+      <div class="sup-now-head">
+        <h2>Need help right now?</h2>
+        <p>Already a client with an urgent issue? Reach us instantly.</p>
+      </div>
+      <SupportLinks variant="panel" />
+    </div>
+
+    <div class="sup-or"><span>or log a request below</span></div>
+
     <ContactForm subject="Support request" accent={AC} cta="Submit support request" variant="support" />
     <p class="sup-foot">Already raised something? <a href={PORTAL_URL}>Track your existing tickets</a>.</p>
   </div></section>
@@ -21,6 +32,11 @@ const PORTAL_URL = "#";
 
 <style>
   .sup-wrap{max-width:720px}
+  .sup-now{margin-bottom:14px}
+  .sup-now-head h2{font-size:1.5rem;margin-bottom:6px}
+  .sup-now-head p{color:var(--muted);margin-bottom:20px}
+  .sup-or{display:flex;align-items:center;gap:16px;margin:34px 0;color:var(--muted2);font-size:13px;text-transform:uppercase;letter-spacing:.12em}
+  .sup-or::before,.sup-or::after{content:"";height:1px;background:var(--line);flex:1}
   .sup-foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
   .sup-foot a{color:var(--teal)}
 </style>

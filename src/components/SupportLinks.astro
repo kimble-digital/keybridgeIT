@@ -1,0 +1,73 @@
+---
+// Client support shortcuts — Live Chat (ConnectWise) + Remote Support (RMM).
+// One place for the URLs; reused on the support page, homepage band, footer
+// and mobile menu via the `variant` prop.
+//   variant="panel"  → two rich cards (support page / homepage)
+//   variant="footer" → compact buttons for the footer
+//   variant="menu"   → full-width buttons for the mobile menu
+interface Props { variant?: "panel" | "footer" | "menu"; }
+const { variant = "panel" } = Astro.props;
+
+const LIVE_CHAT = "https://euchat.myconnectwise.net/customer/partnerId/541952ba108119461394e237?n=1&q=Helpdesk";
+const REMOTE = "https://keybridgeit.rmmservice.eu/connect/#/";
+---
+<div class={`sl sl-${variant}`}>
+  <a class="sl-item sl-chat" href={LIVE_CHAT} target="_blank" rel="noopener noreferrer">
+    <span class="sl-ic" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/>
+      </svg>
+    </span>
+    <span class="sl-txt"><b>Live Chat</b><small>Message the help desk now</small></span>
+  </a>
+
+  <a class="sl-item sl-remote" href={REMOTE} target="_blank" rel="noopener noreferrer">
+    <span class="sl-ic" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2.5" y="4" width="19" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        <path d="M9 10.5l2 2 4-4"/>
+      </svg>
+    </span>
+    <span class="sl-txt"><b>Remote Support</b><small>Let an engineer connect to your screen</small></span>
+  </a>
+</div>
+
+<style>
+  .sl{display:flex;gap:16px}
+  .sl-item{display:flex;align-items:center;gap:14px;text-decoration:none;transition:transform .18s, border-color .2s, background .2s}
+  .sl-ic{display:grid;place-items:center;flex:0 0 auto}
+  .sl-txt{display:flex;flex-direction:column;line-height:1.25}
+  .sl-txt b{font-family:var(--display);font-weight:700}
+  .sl-txt small{color:var(--muted);font-size:12.5px;margin-top:3px}
+
+  /* ---- panel: two rich cards (support page + homepage band) ---- */
+  .sl-panel{flex-wrap:wrap}
+  .sl-panel .sl-item{flex:1 1 240px;min-width:240px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+  .sl-panel .sl-item:hover{transform:translateY(-2px)}
+  .sl-panel .sl-ic{width:46px;height:46px;border-radius:11px}
+  .sl-panel .sl-txt b{font-size:17px;color:var(--ink)}
+  .sl-panel .sl-chat .sl-ic{background:color-mix(in srgb, var(--teal) 16%, transparent);color:var(--teal)}
+  .sl-panel .sl-chat:hover{border-color:var(--teal)}
+  .sl-panel .sl-remote .sl-ic{background:color-mix(in srgb, var(--purple) 18%, transparent);color:#c79bff}
+  .sl-panel .sl-remote:hover{border-color:var(--purple)}
+
+  /* ---- footer: compact buttons ---- */
+  .sl-footer{flex-direction:column;gap:10px}
+  .sl-footer .sl-item{padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02)}
+  .sl-footer .sl-item:hover{background:rgba(255,255,255,.05)}
+  .sl-footer .sl-ic{width:34px;height:34px;border-radius:9px}
+  .sl-footer .sl-txt b{font-size:14px;color:var(--ink)}
+  .sl-footer .sl-txt small{font-size:11.5px}
+  .sl-footer .sl-chat .sl-ic{background:color-mix(in srgb, var(--teal) 16%, transparent);color:var(--teal)}
+  .sl-footer .sl-remote .sl-ic{background:color-mix(in srgb, var(--purple) 18%, transparent);color:#c79bff}
+
+  /* ---- menu: full-width buttons for the mobile panel ---- */
+  .sl-menu{flex-direction:column;gap:10px}
+  .sl-menu .sl-item{padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.03)}
+  .sl-menu .sl-ic{width:38px;height:38px;border-radius:10px}
+  .sl-menu .sl-txt b{font-size:15px;color:var(--ink)}
+  .sl-menu .sl-chat .sl-ic{background:color-mix(in srgb, var(--teal) 16%, transparent);color:var(--teal)}
+  .sl-menu .sl-remote .sl-ic{background:color-mix(in srgb, var(--purple) 18%, transparent);color:#c79bff}
+
+  @media(max-width:540px){.sl-panel .sl-item{flex:1 1 100%}}
+</style>

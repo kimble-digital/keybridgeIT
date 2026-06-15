@@ -16,7 +16,7 @@ export const stats = [
   { value: "15", label: "Years in business", color: "var(--purple)" },
   { value: "200", label: "Organisations supported", color: "var(--orange)" },
   { value: "130+", label: "Five-star reviews", color: "var(--lime)" },
-  { value: "5,000", label: "Devices managed", color: "var(--teal)" },
+  { value: "5,497", label: "Devices managed", color: "var(--teal)" },
   { value: "24/7", label: "Real-person support", color: "var(--purple)" },
   { value: "Microsoft", label: "Solutions Partner", color: "var(--orange)" },
 ];

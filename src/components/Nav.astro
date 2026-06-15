@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import SupportLinks from "./SupportLinks.astro";
 import { nav, company } from "../data/site";
 const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
 ---
@@ -44,6 +45,11 @@ const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
     </a>
     <a href="/contact" class="navutil nav-mobile">Contact</a>
 
+    <div class="nav-clienthelp">
+      <span class="nav-clienthelp-label">Existing client support</span>
+      <SupportLinks variant="menu" />
+    </div>
+
     <a href="/it-review" class="navcta">Book a Free IT Review</a>
 
     <div class="navlinks-foot">
@@ -77,6 +83,7 @@ const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
   .navutil-ic{opacity:.8;transition:opacity .2s}
   .navlinks a.navutil:hover .navutil-ic{opacity:1}
   .navlinks a.nav-mobile{display:none} /* shown only in the mobile menu */
+  .nav-clienthelp{display:none} /* mobile menu only */
 
   .navcta{background:var(--purple);color:#fff!important;padding:10px 18px;border-radius:8px;font-weight:600;font-family:var(--display);white-space:nowrap;transition:transform .2s,background .2s}
   .navcta:hover{background:var(--purple-deep);transform:translateY(-1px)}
@@ -142,6 +149,9 @@ const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
     .navlinks a.nav-mobile{display:block}
     .navlinks a.navutil{font-size:18px;color:var(--ink)}
     .navutil-ic{width:18px;height:18px}
+
+    .nav-clienthelp{display:block;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+    .nav-clienthelp-label{display:block;font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted);margin-bottom:12px}
 
     .navcta{margin-top:18px;text-align:center;padding:15px;font-size:15px;border-radius:10px;border-bottom:none}
 
