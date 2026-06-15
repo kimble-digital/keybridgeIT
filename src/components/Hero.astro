@@ -1,0 +1,149 @@
+---
+import { stats } from "../data/site";
+
+// Hero robot images — they cross-fade/rotate. Edit these to match the actual
+// filenames you dropped into  public/images/  (all on black backgrounds).
+const robots = [
+  "/images/robot-run.png",
+  "/images/robot-pressup.png",
+  "/images/robot-crawl.png",
+  "/images/robot-stand.png",
+  "/images/robot-fly.png",
+];
+---
+<header class="hero">
+  <div class="grid-bg"></div>
+  <div class="glow gp"></div>
+  <div class="glow gt"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-left">
+      <div class="eyebrow hb"><span class="dot"></span> AI &nbsp;|&nbsp; CYBER &nbsp;|&nbsp; SUPPORT</div>
+      <h1>
+        <span class="line"><span data-w>Secure IT.</span></span>
+        <span class="line"><span data-w>Protected <span class="accent">data.</span></span></span>
+        <span class="line"><span data-w>Smarter ways</span></span>
+        <span class="line"><span data-w>to <span class="rotator" id="rot">operate</span>.</span></span>
+      </h1>
+      <p class="lead hsub">
+        We help <b>recruitment agencies, law firms and accountancy practices</b> keep their technology secure,
+        teams productive and businesses moving forward.
+      </p>
+      <div class="cta-row hcta">
+        <a href="/it-review" class="btn-primary">Book a Free IT Review →</a>
+        <a href="#services" class="btn-ghost">See how we work</a>
+      </div>
+    </div>
+
+    <aside class="hero-right" aria-hidden="true">
+      <div class="robots">
+        {robots.map((src, i) => (
+          <img src={src} alt="" class={`robot-img${i === 0 ? " active" : ""}`} />
+        ))}
+      </div>
+    </aside>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker">
+      {[0,1].map(() => stats.map((s) => (
+        <span class="item"><span class="bdot" style={`background:${s.color}`}></span>{s.value} <small>{s.label}</small></span>
+      )))}
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero{min-height:100svh;display:flex;flex-direction:column;padding:96px 0 0;position:relative;overflow:hidden}
+  .hero-inner{position:relative;z-index:2;width:100%;flex:1 1 auto;display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+  .hero-left{display:flex;flex-direction:column;justify-content:center}
+  .gp{width:560px;height:560px;background:var(--purple);top:-120px;left:-80px;opacity:.28}
+  .gt{width:480px;height:480px;background:var(--teal);bottom:-120px;right:-60px;opacity:.22}
+  h1{margin-bottom:22px;max-width:16ch;line-height:1.02;font-size:clamp(42px,5.6vw,74px)}
+  .line{display:block;overflow:hidden}
+  .line span[data-w]{display:inline-block;will-change:transform}
+  .line.revealed{overflow:visible}
+  .rotator{position:relative;display:inline-block;color:var(--lime)}
+  .hsub{max-width:52ch;margin-bottom:38px}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hb{margin-bottom:28px;opacity:0}
+
+  @media(min-width:1040px){
+    .hero-inner{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:40px}
+  }
+
+  /* ---- rotating robots ---- */
+  .hero-right{display:flex;justify-content:center;align-items:flex-end;width:100%;align-self:stretch}
+  .robots{position:relative;width:100%;max-width:none;aspect-ratio:1/1;margin-top:auto;animation:robotFloat 6s ease-in-out infinite;will-change:transform}
+  .robot-img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center;
+    opacity:0;transition:opacity 1.2s ease;
+    mix-blend-mode:screen; /* drops the black background of the source images */
+  }
+  .robot-img.active{opacity:1}
+  @keyframes robotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @media(prefers-reduced-motion:reduce){.robots{animation:none}}
+  @media(max-width:1039px){.robots{max-width:420px;margin:0 auto}}
+
+  .ticker-wrap{position:relative;z-index:2;margin-top:40px;flex:0 0 auto;border-block:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.012)}
+  .ticker{display:flex;white-space:nowrap;will-change:transform}
+  .ticker .item{display:inline-flex;align-items:center;gap:14px;padding:18px 38px;font-family:var(--display);font-weight:600;font-size:15px;border-right:1px solid var(--line)}
+  .ticker .item small{color:var(--muted);font-weight:400;font-family:var(--body)}
+  .ticker .item .bdot{width:6px;height:6px;border-radius:50%}
+</style>
+
+<script is:inline>
+  // rotate the hero robot images (independent of GSAP)
+  window.addEventListener('load', () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const imgs = [...document.querySelectorAll('.hero .robot-img')];
+    if (imgs.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      imgs[i].classList.remove('active');
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add('active');
+    }, 5000);
+  });
+</script>
+
+<script is:inline>
+  window.addEventListener('load', () => {
+    if (!window.gsap) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const words = gsap.utils.toArray('[data-w]');
+
+    if (reduce) {
+      gsap.set(words, { yPercent: 0 });
+      document.querySelector('.hb').style.opacity = 1;
+      document.querySelectorAll('.line').forEach(l => l.classList.add('revealed'));
+    } else {
+      gsap.set(words, { yPercent: 115 });
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      tl.to('.hb', { opacity: 1, duration: .6 }, 0)
+        .to(words, { yPercent: 0, duration: 1.1, stagger: .09, onComplete: () => {
+          document.querySelectorAll('.line').forEach(l => l.classList.add('revealed'));
+        } }, .1)
+        .from('.hsub', { opacity: 0, y: 20, duration: .8 }, '-=.6')
+        .from('.hcta', { opacity: 0, y: 20, duration: .7 }, '-=.5')
+        .from('.hero-right', { opacity: 0, y: 26, duration: 1, ease: 'power2.out' }, '-=.6');
+
+      // word rotator
+      const rotWords = ['operate','grow','automate','win'];
+      const rotColors = ['var(--lime)','var(--teal)','#f5c542','var(--orange)'];
+      let ri = 0;
+      const rot = document.getElementById('rot');
+      setInterval(() => {
+        ri = (ri + 1) % rotWords.length;
+        gsap.to(rot, { yPercent: -100, opacity: 0, duration: .32, ease: 'power2.in', onComplete: () => {
+          rot.textContent = rotWords[ri];
+          rot.style.color = rotColors[ri];
+          gsap.fromTo(rot, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power2.out' });
+        }});
+      }, 2200);
+
+      // ticker marquee
+      gsap.to('#ticker', { xPercent: -50, duration: 26, ease: 'none', repeat: -1 });
+    }
+  });
+</script>

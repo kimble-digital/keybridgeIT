@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Prose from "../../components/Prose.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const cases = [
+  { t:"Client Information Collection", d:"Automate requesting records, tracking outstanding information and following up with clients, reducing the endless chasing around filing deadlines." },
+  { t:"Client Onboarding", d:"Collect information, request documents, support identity and AML processes, and keep new client onboarding moving without unnecessary administration." },
+  { t:"Knowledge Management", d:"Give your team instant access to internal guidance, templates, procedures and past work, so expertise is shared across the firm." },
+  { t:"Document Processing", d:"Extract information from incoming documents, organise them correctly and flag anything unusual for review." },
+  { t:"Management Commentary & Reporting", d:"Assist with drafting commentary, summarising financial information and identifying key trends, reducing manual effort in recurring reporting." },
+];
+const faqs = [
+  { q:"Will AI work with our existing systems?", a:"Usually, but it depends on the software. Some platforms support AI and automation far better than others. We'll assess your systems and recommend the most practical route forward." },
+  { q:"Is client financial data safe?", a:"Yes. We design governance, permissions and security controls before anything goes live, ensuring sensitive information remains protected and accessible only to authorised users." },
+  { q:"Where should we start?", a:"Usually with the process creating the most administrative overhead — often information collection, onboarding, document management or internal knowledge sharing." },
+  { q:"Do we need Microsoft Copilot first?", a:"Not necessarily. Some firms begin with Copilot adoption, while others start with workflow automation. We'll help you determine the right starting point." },
+  { q:"Will AI replace accountants?", a:"No. Accountancy remains a profession built on expertise, judgement and trust. AI is most effective when it removes repetitive administration." },
+];
+---
+<Base title="AI for Accountancy Firms — Keybridge IT" description="Turn administration into automation. Security-first AI for practices under deadline pressure.">
+  <PageHero
+    eyebrow="AI FOR ACCOUNTANCY"
+    title="Turn administration into automation"
+    lead="The information needed to complete the work doesn't arrive when it's requested — it arrives days before the deadline. From collecting information and onboarding clients to answering routine questions, AI agents can take ownership of the repetitive tasks that slow firms down."
+    stats="15 Years Supporting Professional Services · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+  />
+
+  <Prose eyebrow="WHERE AI CREATES VALUE" title="Most firms already know where the bottlenecks are">
+    <p>It's the client who hasn't sent the records. It's the onboarding process waiting for documents. It's the knowledge buried in a partner's inbox. It's the recurring work that has to happen every month, quarter and year.</p>
+    <p>These are exactly the types of processes AI agents are good at supporting.</p>
+  </Prose>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid-3">
+        {cases.map((c,i) => (
+          <article class={`card reveal ${["v-orange","v-purple","v-teal","v-lime","v-orange"][i]}`}>
+            <div class="bartop"></div>
+            <h3>{c.t}</h3><p>{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Prose eyebrow="DEADLINE PRESSURE" title="Most firms don't struggle because the work is too complex">
+    <p>They struggle because the information arrives too late. As deadlines approach, teams find themselves chasing records, answering routine questions and managing incomplete information instead of focusing on the work itself.</p>
+    <p>AI can help by automatically requesting information, tracking outstanding items, answering routine queries and escalating exceptions when human intervention is needed. The goal isn't to replace accountants — it's to help firms stay ahead of deadlines.</p>
+  </Prose>
+
+  <Prose eyebrow="JUDGEMENT STAYS HUMAN" title="AI should support judgement, not replace it">
+    <p>Accountancy relies on professional judgement, experience and accountability. AI can organise information, automate repetitive tasks and support decision-making, but responsibility must always remain with qualified people. That's why we build AI to support accountants, not replace them.</p>
+  </Prose>
+
+  <Faq items={faqs} />
+  <CtaBand title="Book an AI discovery session" body="We'll identify the operational bottlenecks consuming the most time inside your practice and show you where AI can create genuine value." btn="Book a Discovery Session" />
+</Base>

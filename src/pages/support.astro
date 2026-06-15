@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactForm from "../components/ContactForm.astro";
+const AC = "var(--teal)";
+// TODO: point at your real service-desk portal if you have one
+const PORTAL_URL = "#";
+---
+<Base title="Support — Keybridge IT" description="Log a support request with the Keybridge IT service desk. Give us the detail once and we'll get the right person on it.">
+  <PageHero
+    eyebrow="SUPPORT"
+    title="Log a support request"
+    lead="Tell us what's going on and we'll get the right person on it. The more you give us here, the faster we can fix it, with no back-and-forth."
+  />
+
+  <section class="section"><div class="wrap sup-wrap">
+    <ContactForm subject="Support request" accent={AC} cta="Submit support request" variant="support" />
+    <p class="sup-foot">Already raised something? <a href={PORTAL_URL}>Track your existing tickets</a>.</p>
+  </div></section>
+</Base>
+
+<style>
+  .sup-wrap{max-width:720px}
+  .sup-foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .sup-foot a{color:var(--teal)}
+</style>

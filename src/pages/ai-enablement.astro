@@ -1,0 +1,196 @@
+---
+import Base from "../layouts/Base.astro";
+import ServiceHero from "../components/service/ServiceHero.astro";
+import FlowViz from "../components/service/FlowViz.astro";
+import GridViz from "../components/service/GridViz.astro";
+import LockViz from "../components/service/LockViz.astro";
+import OrbitViz from "../components/service/OrbitViz.astro";
+import BigQuote from "../components/shared/BigQuote.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Faq from "../components/Faq.astro";
+
+const workforce = [
+  { area: "Sales", items: ["Qualify inbound enquiries", "Prepare call briefs and research", "Update CRM records automatically"] },
+  { area: "Marketing", items: ["Repurpose content across channels", "Build campaign reports", "Produce newsletters and social content"] },
+  { area: "Finance", items: ["Process invoices", "Chase overdue payments", "Draft management reporting commentary"] },
+  { area: "HR", items: ["Support employee onboarding", "Answer policy and benefits questions", "Screen and shortlist applications"] },
+  { area: "Operations", items: ["Move data between systems", "Produce meeting summaries and actions", "Answer routine internal questions"] },
+  { area: "Everyday", items: ["Microsoft Copilot across Outlook and Teams", "Word, Excel and PowerPoint", "Everyday work, faster and more efficient"] },
+];
+
+const faqs = [
+  { q: "What's the difference between Copilot and an AI agent?", a: "Copilot helps an individual complete a task. An AI agent takes ownership of a task or process and runs it automatically. We help clients get value from both, but agents are where businesses start getting real capacity back." },
+  { q: "Do we need Microsoft Copilot before we can use AI agents?", a: "Not necessarily. Every organisation is different. Some start with Copilot adoption, while others have clear automation opportunities from day one. We'll help you identify the right starting point." },
+  { q: "Is our data safe if an AI agent can access it?", a: "Yes, with the right governance. We control what each agent can see, what systems it can access and what actions it's allowed to take before anything goes live." },
+  { q: "How do we know which processes are worth automating?", a: "That's the first thing we work out together. Our discovery session identifies the repetitive work consuming the most time and highlights the areas where AI is most likely to deliver value." },
+  { q: "Will AI replace jobs?", a: "Most organisations use AI to reduce repetitive administration and free up capacity, not replace expertise. The goal is to allow your team to spend more time on higher-value work, not less time working." },
+  { q: "How long does it take to get started?", a: "Most projects begin with a discovery session and a single pilot process. Once we've proven the approach, we can expand into other areas of the business over time." },
+];
+---
+<Base title="AI Enablement — Keybridge IT" description="Stop asking AI questions. Start putting it to work. Security-first agentic AI for professional-services firms.">
+
+  <ServiceHero
+    accent="lime"
+    eyebrow="AI ENABLEMENT"
+    title={`Stop asking AI questions. <span class="hl">Start putting it to work.</span>`}
+    lead="By now, most teams have learned to ask AI a question and get a useful answer. That's a start, but it's the shallow end. You're still the one doing the work. You're just typing faster."
+    tickerId="ai-ticker"
+  />
+
+  <!-- The real shift + flow viz -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--lime);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap split-viz">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> THE REAL SHIFT</div>
+        <h2 style="max-width:16ch;margin-bottom:26px">Hand the job to a digital worker</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">The real shift is agentic AI. Instead of asking a tool for help, you hand a job to a digital worker that completes it for you, every time it needs doing. The chasing, updating, reporting and repetitive admin that quietly consumes your team's week gets done in the background without anyone touching it.</p>
+        <p style="color:var(--muted);line-height:1.75">Most businesses haven't reached this point yet. They've bought the licences and stopped at the questions. Identifying where AI can create genuine value, then building and governing the right agents, is a specialist job. That's where we come in.</p>
+      </div>
+      <div class="reveal viz-wrap">
+        <FlowViz accent="var(--lime)" />
+      </div>
+    </div>
+  </section>
+
+  <!-- The two levels of AI: two-column split -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> WHERE THE VALUE IS</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">The two levels of AI, and where the value is</h2>
+      <div class="levels">
+        <div class="level reveal">
+          <span class="lvl-num">01</span>
+          <h3>Assisted AI</h3>
+          <p>Assisted AI is what most people are using now. You ask Microsoft Copilot, ChatGPT or Claude to draft an email, summarise a thread or analyse a spreadsheet, and it helps. It makes individuals faster, and it's a sensible place for your team to build confidence.</p>
+        </div>
+        <div class="level level-hl reveal">
+          <span class="lvl-num">02</span>
+          <h3>Agentic AI</h3>
+          <p>Agentic AI is the level above. You delegate an entire task or process to an AI agent, and it runs it from start to finish, on a schedule or in response to a trigger. This is the part that gives back real capacity, because the work no longer depends on someone finding time to do it.</p>
+        </div>
+      </div>
+      <p class="reveal levels-foot">We get your team comfortable with the first, then build the second. That's where businesses start getting real capacity back.</p>
+    </div>
+  </section>
+
+  <!-- What an AI workforce could do: 6-block grid with SVG in header -->
+  <section class="section sec-tint2">
+    <div class="wrap">
+      <div class="wf-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> AN AI WORKFORCE</div>
+          <h2 style="max-width:18ch">What an AI workforce could do across your business</h2>
+          <p style="color:var(--muted);line-height:1.75;max-width:48ch;margin-top:18px">The biggest challenge with AI isn't the technology. It's identifying the repetitive work that quietly consumes hours every week. These are the kinds of tasks AI agents can take ownership of.</p>
+        </div>
+        <div class="wf-viz"><GridViz accent="var(--lime)" /></div>
+      </div>
+      <div class="wf-grid">
+        {workforce.map((w) => (
+          <article class="wf-card reveal">
+            <h3>{w.area}</h3>
+            <ul>{w.items.map((it) => <li>{it}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent="var(--lime)"
+    quote="We had Copilot for a year and barely used it. Keybridge built agents that actually do the work. That's when it clicked."
+    name="Finance Director"
+    role="Accountancy firm, Leeds (placeholder — to be updated)"
+  />
+
+  <!-- We find the opportunities -->
+  <section class="section">
+    <div class="wrap secure-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> HOW WE WORK</div>
+        <h2 style="max-width:16ch">We find the opportunities, then build the programmes</h2>
+      </div>
+      <div class="reveal secure-body">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Knowing which tasks are worth handing to an AI agent, and which aren't, is the expertise. We start with a discovery session that maps where your teams spend the most time on repetitive work and identifies the processes best suited to automation.</p>
+        <p style="color:var(--muted);line-height:1.75">From there, we prove the approach on a single process before building out further. You end up with AI doing real jobs inside your business, not another subscription that nobody uses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe, governed: full-width row, visual right -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--lime);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Safe, governed and honest about the limits</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">An AI agent with access to your systems and data needs proper controls. That's why we approach AI as a security-first technology, not just an automation project. We define what each agent can see, what it can access and what actions it's allowed to take.</p>
+        <p style="color:var(--muted);line-height:1.75">We're also honest about what AI can and can't do. Not every process should be automated, and an agent is only as good as the rules, data and safeguards behind it. That's why we build carefully, test thoroughly and don't deploy anything we wouldn't trust in our own business.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent="var(--lime)" /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge: full-width row, visual left -->
+  <section class="section">
+    <div class="wrap feat-row reverse">
+      <div class="reveal viz-wrap"><OrbitViz accent="var(--lime)" /></div>
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Why firms choose Keybridge for AI</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We're a Microsoft Solutions Partner with a dedicated AI practice inside a team that already supports 200 organisations across the UK. Unlike many AI consultancies, we don't approach AI in isolation. We understand the systems, security, governance and day-to-day operations that sit behind it.</p>
+        <p style="color:var(--muted);line-height:1.75">Fifteen years of managing technology for professional-services firms means every agent we build starts with the right foundations, secure, governed and designed to work in the real world.</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--lime)" />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the repetitive work in your business that AI can take care of, and show you where to start."
+    btn="Book a Discovery Session"
+    accent="var(--lime)"
+  />
+</Base>
+
+<style>
+  .split-viz{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .levels{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .level{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:38px 32px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));overflow:hidden}
+  .level-hl{border-color:rgba(141,191,63,.4)}
+  .level-hl::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--lime)}
+  .lvl-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--lime)}
+  .level h3{margin:14px 0 14px;font-size:1.6rem}
+  .level p{color:var(--muted);line-height:1.7}
+  .levels-foot{margin-top:30px;font-family:var(--display);font-size:clamp(1.1rem,1.8vw,1.4rem);line-height:1.4;color:var(--ink);max-width:44ch}
+
+  .wf-head{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;margin-bottom:46px}
+  .wf-viz{display:flex;justify-content:center}
+  .wf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .wf-card{border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .wf-card:hover{border-color:rgba(141,191,63,.4);transform:translateY(-4px)}
+  .wf-card h3{font-size:1.25rem;margin-bottom:16px;color:var(--lime)}
+  .wf-card ul{list-style:none;display:grid;gap:10px}
+  .wf-card li{color:var(--muted);font-size:14px;line-height:1.5;padding-left:18px;position:relative}
+  .wf-card li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--lime)}
+
+  .secure-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .secure-body{align-self:end}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .feat-row.reverse .viz-wrap{order:-1}
+  .upcard{border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0))}
+  .upcard h3{margin-bottom:14px;font-size:1.3rem}
+  .upcard p{color:var(--muted);line-height:1.7}
+
+  @media(max-width:900px){
+    .split-viz,.levels,.wf-head,.secure-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .feat-row.reverse .viz-wrap{order:0}
+    .wf-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .wf-grid{grid-template-columns:repeat(2,1fr)}
+  }
+</style>

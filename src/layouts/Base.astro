@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { company } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Keybridge IT — Secure IT. Protected data. Smarter ways of working.",
+  description = "Managed IT, cyber security and AI for recruitment agencies, law firms and accountancy practices. One accountable partner. 15 years. 200 organisations.",
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- GSAP for kinetic + scroll animation (islands only need this once) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+    <script is:inline>
+      (function () {
+        function showAll() {
+          document.querySelectorAll('.reveal').forEach(function (el) {
+            el.style.opacity = 1; el.style.transform = 'none';
+          });
+        }
+        // Hard fallback: if GSAP never loads, reveal everything after 1.2s.
+        var fallback = setTimeout(showAll, 1200);
+
+        window.addEventListener('load', function () {
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!window.gsap || reduce) { clearTimeout(fallback); showAll(); return; }
+          clearTimeout(fallback);
+          gsap.registerPlugin(ScrollTrigger);
+
+          gsap.utils.toArray('.reveal').forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            var inView = r.top < window.innerHeight * 0.92;
+            if (inView) {
+              // Already visible on load — animate in immediately, no scroll needed.
+              gsap.fromTo(el, { opacity: 0, y: 28 },
+                { opacity: 1, y: 0, duration: .8, ease: 'power3.out' });
+            } else {
+              gsap.fromTo(el, { opacity: 0, y: 28 },
+                { opacity: 1, y: 0, duration: .8, ease: 'power3.out',
+                  scrollTrigger: { trigger: el, start: 'top 88%' } });
+            }
+          });
+          ScrollTrigger.refresh();
+        });
+      })();
+    </script>
+  </body>
+</html>

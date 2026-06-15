@@ -1,0 +1,41 @@
+---
+// Animated "AI taking on tasks across the business" grid. Cells light up in sequence.
+interface Props { accent?: string }
+const { accent = "var(--lime)" } = Astro.props;
+---
+<div class="gridviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI handling tasks across the business">
+    <g class="cells">
+      {Array.from({ length: 15 }).map((_, i) => {
+        const col = i % 5, row = Math.floor(i / 5);
+        return (
+          <rect x={10 + col * 58} y={14 + row * 58} width="46" height="46" rx="9"
+            fill="var(--ac)" fill-opacity="0.06" stroke="var(--ac)" stroke-opacity="0.25" stroke-width="1.5"
+            style={`--d:${i * 0.22}s`} />
+        );
+      })}
+    </g>
+    <g class="ticks" stroke="var(--ac)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      {Array.from({ length: 15 }).map((_, i) => {
+        const col = i % 5, row = Math.floor(i / 5);
+        const x = 10 + col * 58, y = 14 + row * 58;
+        return (
+          <path d={`M${x + 13} ${y + 24} L${x + 20} ${y + 31} L${x + 33} ${y + 16}`}
+            style={`--d:${i * 0.22}s`} />
+        );
+      })}
+    </g>
+  </svg>
+</div>
+<style>
+  .gridviz{width:100%;max-width:320px}
+  .gridviz svg{width:100%;height:auto;overflow:visible}
+  .cells rect{animation:cellglow 4.4s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes cellglow{0%,100%{fill-opacity:.04;stroke-opacity:.2}45%,60%{fill-opacity:.16;stroke-opacity:.7}}
+  .ticks path{stroke-dasharray:60;stroke-dashoffset:60;animation:tickdraw 4.4s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes tickdraw{0%,40%{stroke-dashoffset:60}55%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:60}}
+  @media(prefers-reduced-motion:reduce){
+    .cells rect,.ticks path{animation:none}
+    .ticks path{stroke-dashoffset:0}
+  }
+</style>

@@ -1,0 +1,212 @@
+---
+import Logo from "./Logo.astro";
+import { nav, company } from "../data/site";
+const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
+---
+<nav id="nav" aria-label="Primary">
+  <a href="/" class="brand" aria-label="Keybridge IT home">
+    <Logo variant="colour" size={36} withWordmark />
+  </a>
+
+  <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+  <div class="navlinks" id="navlinks">
+    <div class="navlinks-head">
+      <span class="navlinks-title">Menu</span>
+      <button class="navclose" id="navClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    {nav.map((item) =>
+      item.children ? (
+        <div class="hasmenu">
+          <a href={item.href}>{item.label} <span class="caret">▾</span></a>
+          <div class="submenu">
+            {item.children.map((c) => <a href={c.href}>{c.label}</a>)}
+          </div>
+        </div>
+      ) : (
+        <a href={item.href}>{item.label}</a>
+      )
+    )}
+
+    <span class="nav-sep" aria-hidden="true"></span>
+    <a href="/support" class="navutil">
+      <svg class="navutil-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/>
+        <line x1="4.9" y1="4.9" x2="9.4" y2="9.4"/><line x1="14.6" y1="14.6" x2="19.1" y2="19.1"/>
+        <line x1="14.6" y1="9.4" x2="19.1" y2="4.9"/><line x1="4.9" y1="19.1" x2="9.4" y2="14.6"/>
+      </svg>
+      Support
+    </a>
+    <a href="/contact" class="navutil nav-mobile">Contact</a>
+
+    <a href="/it-review" class="navcta">Book a Free IT Review</a>
+
+    <div class="navlinks-foot">
+      <span class="navfoot-label">Need a hand?</span>
+      {company?.phoneUK && <a href={`tel:${telUK}`}>{company.phoneUK}</a>}
+      {company?.email && <a href={`mailto:${company.email}`}>{company.email}</a>}
+    </div>
+  </div>
+</nav>
+<style>
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px var(--pad-x);
+    transition:background .4s ease, backdrop-filter .4s ease, padding .4s ease, border-color .4s;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);padding:14px var(--pad-x);border-bottom-color:var(--line)}
+  /* a backdrop-filter makes the nav the containing block for the fixed menu panel,
+     which breaks it when scrolled — drop the blur while the menu is open */
+  nav.menu-open{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .brand{text-decoration:none;color:var(--ink);flex:0 0 auto;display:flex;align-items:center}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;transition:color .2s}
+  .navlinks a:hover{color:var(--ink)}
+
+  /* subtle utility group */
+  .nav-sep{width:1px;height:18px;background:var(--line);flex:0 0 auto}
+  .navlinks a.navutil{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}
+  .navlinks a.navutil:hover{color:var(--ink)}
+  .navutil-ic{opacity:.8;transition:opacity .2s}
+  .navlinks a.navutil:hover .navutil-ic{opacity:1}
+  .navlinks a.nav-mobile{display:none} /* shown only in the mobile menu */
+
+  .navcta{background:var(--purple);color:#fff!important;padding:10px 18px;border-radius:8px;font-weight:600;font-family:var(--display);white-space:nowrap;transition:transform .2s,background .2s}
+  .navcta:hover{background:var(--purple-deep);transform:translateY(-1px)}
+  .hasmenu{position:relative}
+  .caret{font-size:10px}
+  .submenu{
+    position:absolute;top:130%;left:-14px;min-width:220px;
+    background:rgba(17,17,20,.96);backdrop-filter:blur(14px);
+    border:1px solid var(--line);border-radius:12px;padding:8px;
+    display:flex;flex-direction:column;gap:2px;
+    opacity:0;visibility:hidden;transform:translateY(6px);transition:all .25s;
+  }
+  .hasmenu:hover .submenu{opacity:1;visibility:visible;transform:translateY(0)}
+  .submenu a{padding:10px 14px;border-radius:8px}
+  .submenu a:hover{background:rgba(255,255,255,.05)}
+
+  /* mobile-only chrome, hidden on desktop */
+  .burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px;z-index:110;transition:opacity .25s ease}
+  .burger span{display:block;width:26px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s ease, opacity .3s ease}
+  .nav-backdrop,.navlinks-head,.navlinks-foot{display:none}
+
+  @media(max-width:1120px){
+    .burger{display:flex}
+
+    .nav-backdrop{display:block;position:fixed;inset:0;z-index:90;
+      background:rgba(5,4,8,.55);backdrop-filter:blur(4px);
+      opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s}
+    .nav-backdrop.show{opacity:1;visibility:visible}
+
+    .navlinks{
+      position:fixed;inset:0 0 0 auto;width:min(392px,87vw);z-index:100;
+      background:linear-gradient(180deg,#16121e,#0c0a12);
+      flex-direction:column;align-items:stretch;gap:0;
+      padding:22px 26px 30px;overflow-y:auto;
+      transform:translateX(100%);transition:transform .42s cubic-bezier(.4,0,.2,1);
+      border-left:1px solid var(--line);box-shadow:-34px 0 70px -22px rgba(0,0,0,.75);
+    }
+    .navlinks.open{transform:translateX(0)}
+
+    .navlinks-head{display:flex;align-items:center;justify-content:space-between;
+      padding-bottom:16px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+    .navlinks-title{font-family:var(--display);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--muted)}
+    .navclose{background:none;border:1px solid var(--line);color:var(--ink);width:38px;height:38px;border-radius:10px;
+      font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,border-color .2s}
+    .navclose:hover{background:rgba(255,255,255,.06);border-color:var(--muted)}
+
+    .navlinks a{font-size:18px;font-weight:600;color:var(--ink);padding:15px 2px;border-bottom:1px solid rgba(255,255,255,.06);white-space:normal}
+    .navlinks a:hover{color:var(--purple)}
+    .hasmenu{border-bottom:1px solid rgba(255,255,255,.06)}
+    .hasmenu > a{display:flex;align-items:center;justify-content:space-between;border-bottom:none;padding:15px 2px;cursor:pointer}
+    .caret{display:grid;place-items:center;flex:0 0 auto;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;font-size:13px;color:var(--ink);transition:transform .3s ease, background .2s ease, border-color .2s ease}
+    .hasmenu > a:hover .caret{border-color:var(--muted)}
+    .hasmenu.open > a .caret{transform:rotate(180deg);background:rgba(255,255,255,.07);border-color:var(--muted)}
+    .submenu{position:static;opacity:1;visibility:visible;transform:none;background:none;border:none;backdrop-filter:none;
+      display:flex;flex-direction:column;gap:0;
+      max-height:0;overflow:hidden;padding:0 0 0 4px;
+      transition:max-height .32s ease, padding .3s ease}
+    .hasmenu.open .submenu{max-height:260px;padding:0 0 12px 4px}
+    .submenu a{font-size:15px;font-weight:500;color:var(--muted);padding:9px 0;border:none}
+    .submenu a:hover{background:none;color:var(--ink)}
+
+    .nav-sep{display:none}
+    .navlinks a.nav-mobile{display:block}
+    .navlinks a.navutil{font-size:18px;color:var(--ink)}
+    .navutil-ic{width:18px;height:18px}
+
+    .navcta{margin-top:18px;text-align:center;padding:15px;font-size:15px;border-radius:10px;border-bottom:none}
+
+    .navlinks-foot{display:flex;flex-direction:column;gap:7px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+    .navfoot-label{font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted)}
+    .navlinks-foot a{font-size:15px;color:var(--ink);padding:0;border:none}
+    .navlinks-foot a:hover{color:var(--purple)}
+
+    /* hide the burger while the panel is open — the panel has its own close button */
+    .burger.open{opacity:0;visibility:hidden;pointer-events:none}
+
+    /* staggered entrance */
+    .navlinks > *{opacity:0;transform:translateX(18px);transition:opacity .45s ease, transform .45s ease}
+    .navlinks.open > *{opacity:1;transform:none}
+    .navlinks.open > *:nth-child(1){transition-delay:.03s}
+    .navlinks.open > *:nth-child(2){transition-delay:.07s}
+    .navlinks.open > *:nth-child(3){transition-delay:.11s}
+    .navlinks.open > *:nth-child(4){transition-delay:.15s}
+    .navlinks.open > *:nth-child(5){transition-delay:.19s}
+    .navlinks.open > *:nth-child(6){transition-delay:.23s}
+    .navlinks.open > *:nth-child(7){transition-delay:.27s}
+    .navlinks.open > *:nth-child(8){transition-delay:.31s}
+    .navlinks.open > *:nth-child(9){transition-delay:.35s}
+    .navlinks.open > *:nth-child(10){transition-delay:.39s}
+    .navlinks.open > *:nth-child(11){transition-delay:.43s}
+    .navlinks.open > *:nth-child(12){transition-delay:.47s}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .navlinks,.navlinks > *,.burger span{transition:none}
+  }
+</style>
+<script>
+  const navEl = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navlinks');
+  const backdrop = document.getElementById('navBackdrop');
+  const closeBtn = document.getElementById('navClose');
+
+  const onScroll = () => navEl?.classList.toggle('scrolled', window.scrollY > 60);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open) => {
+    links?.classList.toggle('open', open);
+    backdrop?.classList.toggle('show', open);
+    burger?.classList.toggle('open', open);
+    navEl?.classList.toggle('menu-open', open);
+    burger?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  burger?.addEventListener('click', () => setOpen(!links?.classList.contains('open')));
+  closeBtn?.addEventListener('click', () => setOpen(false));
+  backdrop?.addEventListener('click', () => setOpen(false));
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  // Industries (and any submenu) collapses to an accordion on mobile
+  const mq = window.matchMedia('(max-width:1120px)');
+  links?.querySelectorAll('.hasmenu > a').forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      if (mq.matches) { e.preventDefault(); toggle.parentElement?.classList.toggle('open'); }
+    });
+  });
+  // Close the panel when a real navigation link is tapped (but not the accordion toggle)
+  links?.querySelectorAll('a').forEach((a) => {
+    if (a.parentElement?.classList.contains('hasmenu')) return;
+    a.addEventListener('click', () => setOpen(false));
+  });
+</script>

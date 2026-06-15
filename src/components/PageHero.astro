@@ -1,0 +1,22 @@
+---
+interface Props { eyebrow: string; title: string; lead?: string; stats?: string }
+const { eyebrow, title, lead, stats } = Astro.props;
+---
+<header class="phero">
+  <div class="grid-bg"></div>
+  <div class="glow pg"></div>
+  <div class="wrap pinner">
+    <div class="eyebrow reveal"><span class="dot"></span> {eyebrow}</div>
+    <h1 class="reveal">{title}</h1>
+    {lead && <p class="lead phlead reveal">{lead}</p>}
+    {stats && <p class="pstats reveal">{stats}</p>}
+  </div>
+</header>
+<style>
+  .phero{position:relative;overflow:hidden;padding:160px 0 70px}
+  .pinner{position:relative;z-index:2}
+  .pg{width:520px;height:520px;background:var(--purple);top:-160px;left:-60px;opacity:.22}
+  .phlead{max-width:60ch;margin-top:24px}
+  .pstats{margin-top:30px;font-family:var(--display);font-size:13px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  h1{max-width:18ch}
+</style>

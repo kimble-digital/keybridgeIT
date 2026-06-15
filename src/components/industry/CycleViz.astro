@@ -1,0 +1,82 @@
+---
+// Recruitment cycle — filled stage chips around a hub, directional arrows,
+// active stage highlights as it cycles. Built for a LIGHT background.
+interface Props { accent?: string }
+const accent = Astro.props.accent ?? "var(--teal)";
+const stages = [
+  "Identify needs",
+  "Source candidates",
+  "Review & shortlist",
+  "Interview",
+  "Select",
+  "Make an offer",
+];
+const cx = 250, cy = 250, R = 175;
+const pts = stages.map((s, i) => {
+  const a = (i / stages.length) * Math.PI * 2 - Math.PI / 2;
+  return { s, i, x: cx + R * Math.cos(a), y: cy + R * Math.sin(a), a };
+});
+// arc arrows between consecutive nodes (slightly inset gap)
+const arcs = pts.map((p, i) => {
+  const n = pts[(i + 1) % pts.length];
+  const gap = 0.34; // radians trimmed at each end
+  const a1 = p.a + gap, a2 = n.a - gap;
+  return {
+    x1: cx + R * Math.cos(a1), y1: cy + R * Math.sin(a1),
+    x2: cx + R * Math.cos(a2), y2: cy + R * Math.sin(a2),
+    mx: cx + R * Math.cos(a2 - 0.001), my: cy + R * Math.sin(a2 - 0.001),
+    a2,
+  };
+});
+---
+<div class="cycleviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The recruitment cycle">
+    <!-- directional arcs between stages -->
+    {arcs.map((arc, i) => {
+      // arrowhead angle: tangent at a2 (perpendicular + direction of travel)
+      const ang = (arc.a2 + Math.PI / 2) * 180 / Math.PI;
+      return (
+        <g class="arc" style={`--d:${i * 1.5}s`}>
+          <path d={`M${arc.x1} ${arc.y1} A ${R} ${R} 0 0 1 ${arc.x2} ${arc.y2}`}
+            fill="none" stroke="var(--ac)" stroke-opacity=".28" stroke-width="2.5"/>
+          <path d="M-6 -4 L0 0 L-6 4" fill="none" stroke="var(--ac)" stroke-opacity=".55"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            transform={`translate(${arc.x2} ${arc.y2}) rotate(${ang})`}/>
+        </g>
+      );
+    })}
+
+    <!-- travelling highlight pulse -->
+    <circle r="7" fill="var(--ac)" class="pulse">
+      <animateMotion dur="9s" repeatCount="indefinite"
+        path={`M${cx} ${cy - R} A ${R} ${R} 0 1 1 ${cx - 0.01} ${cy - R} Z`} />
+    </circle>
+
+    <!-- centre hub -->
+    <circle cx={cx} cy={cy} r="76" fill="var(--ac)" fill-opacity=".12" stroke="var(--ac)" stroke-width="2.5"/>
+    <text x={cx} y={cy - 6} text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="18" fill="var(--ac)">Recruitment</text>
+    <text x={cx} y={cy + 18} text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="18" fill="var(--ac)">cycle</text>
+
+    <!-- stage chips -->
+    {pts.map((p) => (
+      <g class="stage" style={`--d:${p.i * 1.5}s`}>
+        <circle cx={p.x} cy={p.y} r="22" fill="var(--ac)" class="chip-bg"/>
+        <text x={p.x} y={p.y + 6} text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="16" fill="#fff">{p.i + 1}</text>
+        <text x={p.x} y={p.y + (p.y > cy + 5 ? 44 : (p.y < cy - 5 ? -32 : 6))}
+          dx={Math.abs(p.x - cx) < 10 ? 0 : (p.x > cx ? 34 : -34)}
+          text-anchor={Math.abs(p.x - cx) < 10 ? "middle" : (p.x > cx ? "start" : "end")}
+          font-family="var(--display)" font-weight="600" font-size="14" fill="var(--light-ink)">{p.s}</text>
+      </g>
+    ))}
+  </svg>
+</div>
+<style>
+  .cycleviz{width:100%;max-width:460px}
+  .cycleviz svg{width:100%;height:auto;overflow:visible}
+  .pulse{filter:drop-shadow(0 0 7px var(--ac))}
+  .stage .chip-bg{transform-box:fill-box;transform-origin:center;animation:chip 9s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes chip{0%,100%{fill-opacity:.32}9%,17%{fill-opacity:1;transform:scale(1.14)}}
+  .arc{animation:arcfade 9s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes arcfade{0%,100%{opacity:.5}9%,20%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){.pulse,.stage .chip-bg,.arc{animation:none}.stage .chip-bg{fill-opacity:1}}
+</style>

@@ -1,0 +1,58 @@
+---
+// Animated "proactive monitoring" network visual. Pure SVG + CSS animation.
+interface Props { accent?: string }
+const { accent = "var(--teal)" } = Astro.props;
+---
+<div class="netviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proactive network monitoring">
+    <!-- connection lines -->
+    <g stroke="var(--line-strong)" stroke-width="1">
+      <line x1="80" y1="80" x2="230" y2="60"/>
+      <line x1="230" y1="60" x2="380" y2="100"/>
+      <line x1="80" y1="80" x2="160" y2="180"/>
+      <line x1="230" y1="60" x2="160" y2="180"/>
+      <line x1="160" y1="180" x2="300" y2="200"/>
+      <line x1="380" y1="100" x2="300" y2="200"/>
+      <line x1="300" y1="200" x2="230" y2="280"/>
+      <line x1="160" y1="180" x2="230" y2="280"/>
+    </g>
+    <!-- pulse travelling along a path -->
+    <circle r="4" fill="var(--ac)" class="pulse">
+      <animateMotion dur="3.4s" repeatCount="indefinite"
+        path="M80,80 L230,60 L380,100 L300,200 L160,180 Z"/>
+    </circle>
+    <!-- nodes -->
+    <g class="nodes">
+      <circle cx="80" cy="80" r="9"/>
+      <circle cx="230" cy="60" r="11"/>
+      <circle cx="380" cy="100" r="9"/>
+      <circle cx="160" cy="180" r="13"/>
+      <circle cx="300" cy="200" r="10"/>
+      <circle cx="230" cy="280" r="9"/>
+    </g>
+    <!-- heartbeat monitor line -->
+    <g class="ecg" transform="translate(0,300)">
+      <polyline points="0,0 90,0 110,-22 130,16 150,0 240,0 260,-30 280,22 300,0 460,0"
+        fill="none" stroke="var(--ac)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </g>
+  </svg>
+</div>
+<style>
+  .netviz{width:100%;max-width:520px}
+  .netviz svg{width:100%;height:auto;overflow:visible}
+  .nodes circle{fill:var(--bg);stroke:var(--ac);stroke-width:2}
+  .nodes circle{animation:nodepulse 3s ease-in-out infinite}
+  .nodes circle:nth-child(2){animation-delay:.4s}
+  .nodes circle:nth-child(3){animation-delay:.8s}
+  .nodes circle:nth-child(4){animation-delay:1.2s}
+  .nodes circle:nth-child(5){animation-delay:1.6s}
+  .nodes circle:nth-child(6){animation-delay:2s}
+  .pulse{filter:drop-shadow(0 0 6px var(--ac))}
+  .ecg polyline{stroke-dasharray:1000;stroke-dashoffset:1000;animation:trace 4s linear infinite;opacity:.7}
+  @keyframes nodepulse{0%,100%{stroke-opacity:.45}50%{stroke-opacity:1}}
+  @keyframes trace{0%{stroke-dashoffset:1000}60%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+  @media(prefers-reduced-motion:reduce){
+    .nodes circle,.pulse,.ecg polyline{animation:none}
+    .ecg polyline{stroke-dashoffset:0}
+  }
+</style>

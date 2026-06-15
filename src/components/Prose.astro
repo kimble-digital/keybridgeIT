@@ -1,0 +1,19 @@
+---
+interface Props { eyebrow?: string; title?: string; align?: "left" | "center" }
+const { eyebrow, title, align = "left" } = Astro.props;
+---
+<section class={`section prose ${align}`}>
+  <div class="wrap">
+    {eyebrow && <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> {eyebrow}</div>}
+    {title && <h2 class="reveal" style="margin-bottom:28px;max-width:20ch">{title}</h2>}
+    <div class="body reveal"><slot /></div>
+  </div>
+</section>
+<style>
+  .prose .body{max-width:68ch;color:var(--muted);font-size:1.06rem;line-height:1.75}
+  .prose .body :global(p){margin-bottom:18px}
+  .prose .body :global(p b),.prose .body :global(strong){color:var(--ink)}
+  .prose.center{text-align:center}
+  .prose.center .body{margin-inline:auto}
+  .prose.center :global(.eyebrow){justify-content:center}
+</style>

@@ -1,0 +1,16 @@
+---
+// Logo.astro — Keybridge logo lockup (SVGs in /public/images).
+// `variant` picks the artwork, `size` sets the logo HEIGHT in px.
+interface Props { variant?: "mono" | "colour"; size?: number; withWordmark?: boolean }
+const { variant = "mono", size = 30 } = Astro.props;
+const src = variant === "colour"
+  ? "/images/keybridge-logo-col-white.svg"
+  : "/images/keybridge-white.svg";
+---
+<span class="logo">
+  <img src={src} alt="Keybridge IT" style={`height:${size}px`} />
+</span>
+<style>
+  .logo{display:inline-flex;align-items:center}
+  .logo img{width:auto;display:block}
+</style>

@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Prose from "../../components/Prose.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const cases = [
+  { t:"Candidate Registration", d:"Reduce the time spent processing applications and preparing candidate records, so consultants can focus on engaging the strongest candidates." },
+  { t:"Recruitment CRM Automation", d:"Keep candidate and client records up to date automatically, reducing administration and improving data quality." },
+  { t:"Compliance Management", d:"Monitor documents, expiry dates and compliance requirements without relying on manual checks." },
+  { t:"Timesheet Chasing", d:"Automate reminders and follow-up activity, freeing consultants from repetitive back-office tasks." },
+  { t:"Interview Scheduling", d:"Coordinate calendars, confirmations and reminders without endless email chains and diary management." },
+];
+const faqs = [
+  { q:"Will AI work with our CRM?", a:"Usually, but it depends on the CRM. Some platforms support AI and automation far better than others. We'll assess your systems, explain what's realistically achievable and recommend the most practical route." },
+  { q:"Is candidate data safe?", a:"Yes. We design governance, permissions and security controls before anything goes live, ensuring data only goes where it's supposed to." },
+  { q:"Where should we start?", a:"Usually with the process creating the most administrative overhead — often candidate registration, compliance administration, application handling or timesheet chasing." },
+  { q:"Will AI replace recruiters?", a:"No. Recruitment remains a people business. AI is most effective when it removes repetitive administration and lets recruiters spend more time with candidates and clients." },
+];
+---
+<Base title="AI for Recruitment Agencies — Keybridge IT" description="Give recruiters more time to recruit. Security-first AI that automates the admin consuming the working week.">
+  <PageHero
+    eyebrow="AI FOR RECRUITMENT"
+    title="Give recruiters more time to recruit"
+    lead="Recruitment runs on relationships and speed, yet most consultants lose hours every week to administration that has nothing to do with either. AI agents can automate repetitive operational tasks, improve data quality and reduce the workload that quietly consumes the working week."
+    stats="15 Years Supporting Recruitment · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+  />
+
+  <Prose eyebrow="WHERE AI CREATES VALUE" title="Most agencies don't need more recruiters">
+    <p>They need their existing recruiters spending more time on the activities that generate revenue. As application volumes increase and compliance requirements grow, consultants often find themselves buried in administration rather than speaking to candidates and clients.</p>
+    <p>AI agents are particularly effective at taking ownership of this operational workload — helping recruiters spend more time winning jobs, building relationships and making placements.</p>
+  </Prose>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid-3">
+        {cases.map((c,i) => (
+          <article class={`card reveal ${["v-purple","v-teal","v-orange","v-lime","v-purple"][i]}`}>
+            <div class="bartop"></div>
+            <h3>{c.t}</h3><p>{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Prose eyebrow="THE VOLUME PROBLEM" title="Recruitment has an application volume problem">
+    <p>For many agencies, the challenge isn't finding candidates — it's dealing with the volume arriving every day. Hundreds of CVs can arrive against a single role, creating a backlog, inconsistent communication and candidates who never receive a response.</p>
+    <p>AI can help by identifying relevant experience, highlighting candidates that meet defined criteria, drafting communications and supporting the review process. The goal isn't to replace recruiter judgement — it's to process applications more consistently.</p>
+  </Prose>
+
+  <Prose eyebrow="HUMAN OVERSIGHT" title="AI should support decisions, not make them">
+    <p>One of the biggest concerns around AI in recruitment is bias. We believe recruitment decisions should always remain with people. AI can organise information, identify patterns and reduce administration, but hiring decisions require judgement, context and accountability.</p>
+    <p>That's why we build AI to support recruiters, not replace them — helping agencies improve efficiency without creating unnecessary compliance or discrimination risks.</p>
+  </Prose>
+
+  <Faq items={faqs} />
+  <CtaBand title="Book an AI discovery session" body="We'll identify the administrative work consuming the most consultant time and show you where AI can create genuine value." btn="Book a Discovery Session" />
+</Base>

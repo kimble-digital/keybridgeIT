@@ -1,0 +1,130 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import DeadlineViz from "../../components/industry/DeadlineViz.astro";
+import BigQuote from "../../components/shared/BigQuote.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--emerald)";
+
+const services = [
+  { name: "Managed IT", href: "/managed-it", label: "Managed IT Services", body: "A dependable technology foundation that keeps your practice running smoothly. From Microsoft 365 and cloud services through to devices, support and proactive monitoring, we help ensure technology never becomes the reason work is delayed or deadlines are missed." },
+  { name: "Cyber Security", href: "/cyber-security", label: "Cyber Security Services", body: "Client financial information is among the most valuable data any business holds. We help firms protect it properly through security controls, monitoring, governance and Cyber Essentials certification that stands up to real-world scrutiny." },
+  { name: "AI Enablement", href: "/ai-enablement", label: "AI for Accountancy Firms", body: "Many of the operational bottlenecks inside an accountancy practice are repetitive by nature. Collecting information, chasing documents, supporting onboarding, organising knowledge and assisting with reporting are all areas where AI can help reduce administration and free up qualified people to focus on client work." },
+];
+
+const faqs = [
+  { q: "Can you keep us running through busy season?", a: "That's exactly what we build for. Proactive monitoring, preventative maintenance and genuine 24/7 support help identify and resolve issues before they impact the firm, reducing the risk of disruption during critical periods." },
+  { q: "Is our clients' financial data secure?", a: "Yes. We design permissions, security controls and governance around sensitive information from the outset, ensuring financial data remains protected and accessible only to authorised users." },
+  { q: "Do you understand AML and professional obligations?", a: "Yes. We build systems and processes with oversight, accountability and auditability in mind. Technology should support professional obligations, not create additional risk." },
+  { q: "Will costs jump around as our team changes?", a: "No. We provide predictable pricing based on your team size and service requirements, helping firms budget accurately without unexpected charges." },
+  { q: "Where does AI help an accountancy firm?", a: "AI is particularly effective in the recurring administration surrounding client work, including information collection, document management, onboarding, knowledge sharing and reporting support." },
+  { q: "Will AI replace accountants?", a: "No. Accountancy remains a profession built on expertise, judgement and trust. AI is most effective when it removes repetitive administration and allows qualified people to spend more time advising clients." },
+];
+---
+<Base title="IT Support for Accountancy Firms — Keybridge IT" description="Technology that's reliable when the pressure is highest and secure every day of the year. Managed IT, cyber security and AI for accountancy practices.">
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="ACCOUNTANCY FIRMS"
+    title={`Trusted IT support for <span class="hl">accountancy firms</span>`}
+    lead="Accountancy firms operate under a unique kind of pressure. Deadlines don't move. Filing dates don't wait. And when clients finally send the information you've been chasing for weeks, your systems need to be ready to handle the workload."
+    tickerId="acc-ticker"
+  />
+
+  <!-- The rhythm of a practice (LIGHT) -->
+  <section class="section sec-light">
+    <div class="wrap und-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> THE RHYTHM</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">We understand the rhythm of a practice</h2>
+        <p style="line-height:1.75;margin-bottom:18px">Most industries experience peaks and troughs. Accountancy firms live by them. The weeks leading up to filing deadlines often place enormous pressure on teams, systems and processes. Information arrives late, workloads compress and qualified people find themselves spending valuable time chasing records rather than advising clients.</p>
+        <p style="line-height:1.75;margin-bottom:18px">At the same time, firms hold highly sensitive financial information and operate under professional and AML obligations that leave little room for error.</p>
+        <p style="line-height:1.75;color:var(--light-ink);font-weight:500">We've built our services around those realities: reliable systems when pressure is highest, security that never switches off and technology that helps reduce administration throughout the year.</p>
+      </div>
+      <div class="reveal viz-wrap"><DeadlineViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Everything your firm needs (DARK, 3 cards) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> ONE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">Everything your firm needs from one partner</h2>
+      <div class="svc-cards">
+        {services.map((s) => (
+          <a href={s.href} class="svc-card reveal">
+            <div class="svc-bar"></div>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="svc-more">{s.label} &#8594;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology under deadline pressure (LIGHT) -->
+  <section class="section sec-light2">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> UNDER PRESSURE</div>
+      <h2 class="reveal" style="max-width:22ch;margin-bottom:24px">Technology that holds up under deadline pressure</h2>
+      <div class="press-grid">
+        <p class="reveal" style="line-height:1.75">The true test of an IT provider isn't a quiet Tuesday in February. It's the weeks before filing deadlines when the entire practice is under pressure. Systems need to remain available. Documents need to be accessible. Email needs to work. Support needs to be responsive.</p>
+        <p class="reveal" style="line-height:1.75">Our proactive approach is designed to identify and resolve issues before they affect users, helping firms avoid the disruption that can quickly become expensive during busy periods. When deadlines are approaching, your technology should help the team stay productive rather than becoming another problem to manage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why accountancy firms choose Keybridge (DARK) -->
+  <section class="section sec-tint">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why accountancy firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink);margin-bottom:0">Adopting technology in an accountancy practice isn't really a technology challenge. It's a governance, security and process challenge with technology sitting in the middle.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That's the part many providers underplay. We've spent fifteen years helping organisations protect sensitive information and operate securely. As a Microsoft Solutions Partner, we understand the balance between productivity, compliance and risk that professional-services firms have to manage every day.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Clients benefit from reliable systems, built-in security, responsive support and a dedicated UK-based account manager who understands their firm and remains accountable for the relationship.</p>
+        <p style="color:var(--ink);line-height:1.6;font-weight:500">We're large enough to deliver enterprise-grade expertise, yet small enough to know our clients personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent={AC}
+    quote="A real partner to our business."
+    name="Peter Thompson"
+  />
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll review how your firm's technology performs under pressure, identify any risks around security, resilience or productivity, and show you where improvements could be made."
+    btn="Book a Free IT Review"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .und-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .press-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+  .svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .svc-card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .svc-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .svc-bar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--emerald);transition:width .5s}
+  .svc-card:hover .svc-bar{width:100%}
+  .svc-card h3{margin-bottom:14px;font-size:1.4rem}
+  .svc-card p{color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .svc-more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--emerald)}
+
+  @media(max-width:900px){
+    .und-split,.why-split,.press-grid,.svc-cards{grid-template-columns:1fr;gap:30px}
+  }
+</style>

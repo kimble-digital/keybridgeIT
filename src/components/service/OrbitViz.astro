@@ -1,0 +1,66 @@
+---
+// "Why Keybridge" — a credibility hub. Keybridge at centre, proof points orbiting.
+// Gentle continuous rotation; labels stay upright (counter-rotate).
+interface Props { accent?: string }
+const { accent = "var(--lime)" } = Astro.props;
+const nodes = [
+  "Microsoft Partner",
+  "200 organisations",
+  "15 years",
+  "AI practice",
+  "Security-first",
+];
+const cx = 200, cy = 200, r = 132;
+---
+<div class="orbitviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Keybridge AI credentials">
+    <!-- orbit rings -->
+    <circle cx={cx} cy={cy} r={r} stroke="var(--ac)" stroke-opacity=".18" stroke-width="1.5" fill="none"/>
+    <circle cx={cx} cy={cy} r={r - 34} stroke="var(--ac)" stroke-opacity=".1" stroke-width="1.5" fill="none"/>
+
+    <!-- rotating group of spokes + nodes -->
+    <g class="rotor" style={`transform-origin:${cx}px ${cy}px`}>
+      {nodes.map((n, i) => {
+        const a = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
+        const x = cx + r * Math.cos(a);
+        const y = cy + r * Math.sin(a);
+        return (
+          <g>
+            <line x1={cx} y1={cy} x2={x} y2={y} stroke="var(--ac)" stroke-opacity=".22" stroke-width="1.5"/>
+            <g class="node" style={`--nx:${x}px;--ny:${y}px`}>
+              <circle cx={x} cy={y} r="6" fill="var(--ac)"/>
+              <g class="lbl" style={`transform-origin:${x}px ${y}px`}>
+                <rect x={x - 62} y={y - 13} width="124" height="26" rx="13"
+                  fill="var(--bg2)" stroke="var(--ac)" stroke-opacity=".4"/>
+                <text x={x} y={y + 4} text-anchor="middle" font-family="var(--display)"
+                  font-weight="600" font-size="12" fill="var(--ac)">{n}</text>
+              </g>
+            </g>
+          </g>
+        );
+      })}
+    </g>
+
+    <!-- centre hub -->
+    <circle cx={cx} cy={cy} r="42" fill="var(--ac)" fill-opacity=".1" stroke="var(--ac)" stroke-width="2" class="hub"/>
+    <text x={cx} y={cy + 4} text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="12" fill="var(--ac)">KEYBRIDGE</text>
+  </svg>
+</div>
+<style>
+  .orbitviz{width:100%;max-width:420px}
+  .orbitviz svg{width:100%;height:auto;overflow:visible}
+  .rotor{animation:rot 40s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+  /* counter-rotate labels so text stays upright */
+  .lbl{animation:counter 40s linear infinite}
+  @keyframes counter{to{transform:rotate(-360deg)}}
+  .hub{animation:hubpulse 4s ease-in-out infinite}
+  @keyframes hubpulse{0%,100%{stroke-opacity:.7}50%{stroke-opacity:1}}
+  .node circle{animation:nodeglow 4s ease-in-out infinite}
+  .node:nth-child(1) circle{animation-delay:0s}
+  .node:nth-child(2) circle{animation-delay:.8s}
+  @keyframes nodeglow{0%,100%{opacity:.6}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){
+    .rotor,.lbl,.hub,.node circle{animation:none}
+  }
+</style>

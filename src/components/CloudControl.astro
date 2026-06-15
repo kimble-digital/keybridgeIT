@@ -1,0 +1,299 @@
+---
+// Live "Cloud Control" security-operations dashboard — its own page section.
+// Self-maintaining: reads the live UK date each load, builds the year up from
+// 1 Jan, resets every New Year, and applies steady month-on-month growth.
+---
+<section class="section cc-sec">
+  <div class="wrap cc-grid">
+    <div class="reveal cc-copy">
+      <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--lime);box-shadow:0 0 12px var(--lime)"></span> LIVE SECURITY OPERATIONS</div>
+      <h2 style="max-width:18ch;margin-bottom:24px">Protection you can watch working</h2>
+      <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Behind every client sits our security operations, monitoring thousands of devices, blocking threats and quarantining spam around the clock.</p>
+      <p style="color:var(--muted);line-height:1.75">This is a live snapshot of what that protection looks like across the firms we support.</p>
+    </div>
+
+    <div class="reveal cc-cardwrap">
+      <div class="wr-card">
+        <div class="wr-brand">
+          <span class="wr-mark">K</span>
+          <span class="wr-name">Keybridge IT <span class="grad">Cloud Control</span></span>
+          <span class="wr-live"><span class="wr-pulse"></span> LIVE</span>
+        </div>
+        <div class="wr-subhead">
+          <span class="wr-titletxt">Security Operations</span>
+          <span class="wr-clock"><span id="wrClock">--:--:--</span> · <span id="wrDate">—</span></span>
+        </div>
+
+        <div class="wr-hero-stat">
+          <div class="wr-label"><span class="bdot" style="background:var(--orange)"></span> Threats blocked · today</div>
+          <div class="wr-big" id="wrThreats">0</div>
+          <div class="wr-flow"><span class="fdotlive"></span> Analysing <b id="wrFlow">1,300</b> events/sec across <span id="wrDev1">5,017</span> endpoints</div>
+        </div>
+
+        <div class="wr-sub">
+          <div class="wr-subrow"><span>Intrusion attempts denied <i>· today</i></span><b id="wrIntr">0</b></div>
+          <div class="wr-subrow"><span>Spam &amp; junk quarantined <i>· today</i></span><b id="wrEmails">0</b></div>
+          <div class="wr-subrow"><span>Endpoints online <i>· <span id="wrDev2">5,017</span> monitored</i></span><b id="wrEndpoints" class="sig">100%</b></div>
+        </div>
+
+        <div class="wr-kpis wr-annual">
+          <div class="wr-kpi"><b id="wrYear">0</b><small>Blocked · <span id="wrYearLabel">2026</span></small></div>
+          <div class="wr-kpi"><b id="wrMonthPhish">0</b><small>Phishing · month</small></div>
+          <div class="wr-kpi"><b id="wrMonthRansom">0</b><small>Ransomware · month</small></div>
+        </div>
+
+        <div class="wr-feed" id="wrFeed" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cc-sec{border-top:1px solid var(--line)}
+  .cc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:60px;align-items:center}
+  .cc-copy{align-self:center}
+  .cc-cardwrap{display:flex;justify-content:flex-end}
+
+  .wr-card{
+    --alert:#e0566b;        /* soft palette red — sits between magenta & orange */
+    --alert-2:#f0a6b0;      /* lighter rose for text */
+    width:100%;max-width:460px;
+    border:1px solid var(--line);border-radius:18px;
+    background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+    backdrop-filter:blur(6px);
+    padding:16px 20px 16px;
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+
+  .wr-brand{display:flex;align-items:center;gap:10px;padding-bottom:12px}
+  .wr-mark{width:22px;height:22px;border-radius:6px;flex:0 0 auto;display:grid;place-items:center;
+    font-family:var(--display);font-weight:800;font-size:13px;color:#fff;
+    background:linear-gradient(135deg,#3aa0ff,var(--teal));box-shadow:0 4px 14px -6px rgba(31,182,201,.85)}
+  .wr-name{font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:-.01em;color:#fff;white-space:nowrap}
+  .wr-name .grad{background:linear-gradient(90deg,#3aa0ff,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .wr-live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;color:var(--lime);font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.12em}
+  .wr-pulse{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(160,230,90,.6);animation:wrPulse 1.8s infinite}
+  @keyframes wrPulse{0%{box-shadow:0 0 0 0 rgba(160,230,90,.55)}70%{box-shadow:0 0 0 8px rgba(160,230,90,0)}100%{box-shadow:0 0 0 0 rgba(160,230,90,0)}}
+  .wr-subhead{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line);
+    font-family:var(--display);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .wr-titletxt{color:var(--muted);font-weight:600}
+  .wr-clock{margin-left:auto;color:var(--muted);font-weight:500;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+  .wr-hero-stat{padding:14px 0 4px}
+  .wr-label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;letter-spacing:.04em;margin-bottom:6px}
+  .wr-label .bdot{width:7px;height:7px;border-radius:50%}
+  .wr-big{font-family:var(--display);font-weight:800;font-size:clamp(38px,4.6vw,48px);line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums;transition:color .18s ease}
+  .wr-big.flash{color:var(--lime)}
+  .wr-flow{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;margin-top:8px}
+  .wr-flow b{font-family:var(--display);font-weight:700;color:#e9e6ef;font-variant-numeric:tabular-nums}
+  .fdotlive{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(160,230,90,.6);animation:wrPulse 1.8s infinite;flex:0 0 auto}
+
+  .wr-sub{padding-top:6px;margin-top:10px;border-top:1px solid var(--line)}
+  .wr-subrow{display:flex;align-items:baseline;justify-content:space-between;padding:6px 0}
+  .wr-subrow span{color:var(--muted);font-size:12.5px}
+  .wr-subrow span i{font-style:normal;opacity:.65}
+  .wr-subrow b{font-family:var(--display);font-weight:700;font-size:17px;font-variant-numeric:tabular-nums}
+  .wr-subrow b.sig{color:var(--lime)}
+
+  .wr-annual{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 0 2px;margin-top:4px;border-top:1px solid var(--line)}
+  .wr-annual .wr-kpi{display:flex;flex-direction:column;gap:3px}
+  .wr-annual b{font-family:var(--display);font-weight:700;font-size:15px;line-height:1;color:#d7d2e0;font-variant-numeric:tabular-nums}
+  .wr-annual small{color:var(--muted);font-size:10px;letter-spacing:.03em;text-transform:uppercase;line-height:1.3}
+
+  .wr-feed{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;height:104px;overflow:hidden}
+
+  @media(max-width:900px){
+    .cc-grid{grid-template-columns:1fr;gap:36px}
+    .cc-cardwrap{justify-content:flex-start}
+    .wr-card{max-width:none}
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener('load', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (id) => document.getElementById(id);
+    const nf = (n) => Math.floor(n).toLocaleString('en-GB');
+
+    const elYear = $('wrYear'), elYearLabel = $('wrYearLabel');
+    const elMP = $('wrMonthPhish'), elMR = $('wrMonthRansom');
+    const elT = $('wrThreats'), elI = $('wrIntr'), elEm = $('wrEmails');
+    const elEnd = $('wrEndpoints'), elFlow = $('wrFlow');
+    const elDev1 = $('wrDev1'), elDev2 = $('wrDev2');
+    const elClock = $('wrClock'), elDate = $('wrDate');
+    const feedEl = $('wrFeed');
+    if (!elT) return;
+
+    // ===================== TUNING KNOBS =====================
+    const DAY_THREATS = 73000;   // threats blocked / day
+    const DAY_PHISH   = 15500;   // phishing + malware caught / day
+    const DAY_RANSOM  = 6;       // ransomware — deliberately rare
+    const DAY_INTR    = 5400;    // intrusion attempts denied / day
+    const DAY_EMAILS  = 264000;  // spam/junk quarantined / day
+    const DEVICES_0   = 5017;    // devices/endpoints at launch (deliberately un-round)
+
+    const VOL_GROWTH  = 0.03;    // +3% / month — threats, spam, phishing, etc.
+    const ANCHOR      = Date.UTC(2026, 5, 9, 12);  // 9 Jun 2026 = baseline ("now")
+    const ANCHOR_DAY  = Date.UTC(2026, 5, 9);      // device onboarding baseline
+    // =======================================================
+
+    const MONTH_MS = 1000*60*60*24*30.4375;
+    const monthsSince = (y, mo, d) => (Date.UTC(y, mo - 1, d, 12) - ANCHOR) / MONTH_MS;
+    const volF = (y, mo, d) => Math.pow(1 + VOL_GROWTH, monthsSince(y, mo, d));
+
+    const mulberry32 = (a) => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    const deviceCount = (y, mo, d) => {
+      const idx = Math.floor((Date.UTC(y, mo - 1, d) - ANCHOR_DAY) / 86400000);
+      let dev = DEVICES_0;
+      for (let i = 1; i <= idx; i++) {
+        const r = mulberry32((i * 2654435761) >>> 0);
+        if (r() < 0.035) dev += 20 + Math.floor(r() * 60);
+        if (r() < 0.006) dev += 120 + Math.floor(r() * 80);
+        if (r() < 0.15)  dev += Math.floor(r() * 2);
+      }
+      return dev;
+    };
+
+    const TZ = 'Europe/London';
+    const ukParts = () => {
+      const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+        timeZone: TZ, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
+      }).formatToParts(new Date()).map(x => [x.type, x.value]));
+      return { h: +p.hour % 24, m: +p.minute, s: +p.second };
+    };
+    const ukYMD = () => {
+      const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+        timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+      }).formatToParts(new Date()).map(x => [x.type, x.value]));
+      return { y: +p.year, mo: +p.month, d: +p.day };
+    };
+    const ukTimeStr = () => new Date().toLocaleTimeString('en-GB', { timeZone: TZ, hour12: false });
+    const ukDateStr = () => new Date().toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', month: 'short', year: 'numeric' });
+
+    const ymd = ukYMD();
+    elYearLabel.textContent = ymd.y;
+
+    const DEVICES = deviceCount(ymd.y, ymd.mo, ymd.d);
+    elDev1.textContent = nf(DEVICES);
+    elDev2.textContent = nf(DEVICES);
+
+    const todayMs = Date.UTC(ymd.y, ymd.mo - 1, ymd.d, 12);
+    let yearBase = 0, monthPhishBase = 0, monthRansomBase = 0;
+    for (let dt = new Date(Date.UTC(ymd.y, 0, 1, 12)); dt.getTime() < todayMs; dt.setUTCDate(dt.getUTCDate() + 1)) {
+      const yy = dt.getUTCFullYear(), mm = dt.getUTCMonth() + 1, dd = dt.getUTCDate();
+      const f = volF(yy, mm, dd);
+      yearBase += DAY_THREATS * f;
+      if (mm === ymd.mo) { monthPhishBase += DAY_PHISH * f; monthRansomBase += DAY_RANSOM * f; }
+    }
+
+    const t0  = ukParts();
+    const sod = t0.h*3600 + t0.m*60 + t0.s;
+    const fT  = volF(ymd.y, ymd.mo, ymd.d);
+    let threats = Math.floor(sod * (DAY_THREATS*fT/86400)) + 1500;
+    let phish   = Math.floor(sod * (DAY_PHISH*fT/86400))   + 220;
+    let ransom  = Math.floor(sod * (DAY_RANSOM*fT/86400));
+    let intr    = Math.floor(sod * (DAY_INTR*fT/86400))    + 260;
+    let emails  = Math.floor(sod * (DAY_EMAILS*fT/86400))  + 600;
+    let sig     = 99.8;
+    const FLOW_BASE = Math.round(DEVICES * 0.26);
+
+    const render = () => {
+      elT.textContent  = nf(threats);
+      elI.textContent  = nf(intr);
+      elEm.textContent = nf(emails);
+      elYear.textContent = nf(yearBase + threats);
+      elMP.textContent   = nf(monthPhishBase + phish);
+      elMR.textContent   = nf(monthRansomBase + ransom);
+      elEnd.textContent  = sig.toFixed(1) + '%';
+    };
+    render();
+
+    const tick = () => { elClock.textContent = ukTimeStr(); elDate.textContent = ukDateStr(); };
+    tick();
+
+    const flowTick = () => { elFlow.textContent = nf(FLOW_BASE - 150 + Math.floor(Math.random()*430)); };
+    flowTick();
+
+    const signal = () => {
+      sig += (Math.random() - 0.45) * 0.5;
+      if (Math.random() < 0.04) sig -= 0.5 + Math.random()*0.7;
+      if (sig > 100) sig = 100;
+      if (sig < 98.2) sig = 98.2;
+      elEnd.textContent = sig.toFixed(1) + '%';
+      elEnd.style.color = sig < 99 ? 'var(--orange)' : 'var(--lime)';
+    };
+
+    const pool = [
+      ['Ransomware signature blocked','var(--alert)','client server', true],
+      ['Brute-force login stopped','var(--alert)','law firm', true],
+      ['Malware quarantined','var(--alert)','managed endpoint', true],
+      ['DDoS traffic mitigated','var(--alert)','edge network', true],
+      ['Unauthorised access denied','var(--alert)','VPN gateway', true],
+      ['Phishing attempt blocked','var(--orange)','recruitment client', false],
+      ['Malicious attachment removed','var(--orange)','law firm', false],
+      ['Suspicious sign-in flagged','var(--teal)','accountancy practice', false],
+      ['Spam wave filtered','var(--teal)','email gateway', false],
+      ['Credential-stuffing blocked','var(--teal)','client portal', false],
+      ['Risky device isolated','var(--teal)','managed endpoint', false],
+      ['Patch deployed','var(--lime)','fleet update', false],
+      ['Backup verified','var(--lime)','client server', false],
+    ];
+    const addRow = (e) => {
+      if (!feedEl) return;
+      const t = ukTimeStr();
+      const txtColor = e[3] ? 'var(--alert-2)' : '#e9e6ef';
+      const row = document.createElement('div');
+      row.style.cssText = 'display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;font-size:12px';
+      row.innerHTML =
+          `<span style="width:6px;height:6px;border-radius:50%;background:${e[1]};flex:0 0 auto"></span>`
+        + `<span style="color:${txtColor};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e[0]} <em style="font-style:normal;color:var(--muted)">· ${e[2]}</em></span>`
+        + `<span style="color:var(--muted);font-variant-numeric:tabular-nums;font-size:11px">${t}</span>`;
+      feedEl.prepend(row);
+      while (feedEl.children.length > 5) feedEl.removeChild(feedEl.lastChild);
+      if (window.gsap) gsap.from(row, { opacity: 0, duration: .45, ease: 'power2.out' });
+    };
+    const pick = (arr) => arr[Math.floor(Math.random()*arr.length)];
+    const burstPool = pool.filter(e => e[1] !== 'var(--lime)');
+    for (let i = 0; i < 4; i++) addRow(pick(pool));
+
+    if (reduce) return;
+
+    setInterval(tick, 1000);
+
+    const bump = () => {
+      threats += 1 + (Math.random() < .28 ? 1 : 0) + (Math.random() < .06 ? 2 : 0);
+      elT.textContent = nf(threats);
+      elYear.textContent = nf(yearBase + threats);
+      elT.classList.add('flash');
+      setTimeout(() => elT.classList.remove('flash'), 160);
+      setTimeout(bump, 620 + Math.random()*620);
+    };
+    setTimeout(bump, 700);
+
+    setInterval(flowTick, 450);
+    setInterval(() => { emails += 1 + Math.floor(Math.random()*3); elEm.textContent = nf(emails); }, 600);
+    setInterval(() => { intr += (Math.random() < .4 ? 1 : 0); elI.textContent = nf(intr); }, 4200);
+    setInterval(() => { phish += (Math.random() < .55 ? 1 : 0); elMP.textContent = nf(monthPhishBase + phish); }, 2600);
+    setInterval(() => { if (Math.random() < .12) { ransom += 1; elMR.textContent = nf(monthRansomBase + ransom); } }, 9000);
+    setInterval(signal, 2200);
+
+    const runEvent = () => {
+      if (Math.random() < 0.16) {
+        const e = pick(burstPool);
+        let n = 2 + Math.floor(Math.random() * 2);
+        if (Math.random() < 0.22) n = 4 + Math.floor(Math.random() * 2);
+        let k = 0;
+        const fire = () => {
+          addRow(e);
+          if (++k < n) setTimeout(fire, 650 + Math.random() * 550);
+          else setTimeout(runEvent, 2400 + Math.random() * 2000);
+        };
+        fire();
+      } else {
+        addRow(pick(pool));
+        setTimeout(runEvent, 2000 + Math.random() * 1600);
+      }
+    };
+    setTimeout(runEvent, 2600);
+  });
+</script>

@@ -1,0 +1,145 @@
+---
+import Base from "../layouts/Base.astro";
+import ServiceHero from "../components/service/ServiceHero.astro";
+import NetworkViz from "../components/service/NetworkViz.astro";
+import BigQuote from "../components/shared/BigQuote.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Faq from "../components/Faq.astro";
+
+const included = [
+  "24/7 help desk and remote support",
+  "Proactive monitoring and maintenance",
+  "Managed laptops, desktops and mobiles",
+  "Networks, Wi-Fi and firewalls",
+  "Microsoft 365, Azure and cloud services",
+  "Backup and recovery",
+  "Business telephony",
+  "Hardware procurement and lifecycle management",
+  "A single point of contact for your IT suppliers",
+];
+
+const faqs = [
+  { q: "What's included in managed IT support?", a: "Everything from day-to-day support and monitoring through to security, Microsoft 365, cloud services, telephony, procurement and supplier management, all under one predictable monthly cost." },
+  { q: "Is your support really 24/7?", a: "Yes. During UK business hours you're supported by our UK team. Outside those hours, our experienced English-speaking colleagues in the Philippines take over, so there's always someone available when you need help." },
+  { q: "Can we keep our own IT person?", a: "Absolutely. Many clients use our co-managed service to give their internal IT team additional expertise, project support, security capability and cover when it's needed." },
+  { q: "How disruptive is switching to Keybridge?", a: "Very little. We plan the transition carefully, move everything in the background and keep your team working throughout the process. The whole point of changing provider is less disruption, not more." },
+  { q: "How is managed IT priced?", a: "A predictable monthly fee based on your team size and the services you need. No surprise invoices every time something breaks or your business changes." },
+  { q: "Why do clients move to Keybridge?", a: "Usually because something has changed. Their business has grown, their current provider isn't keeping up, they've become concerned about security, or they've experienced an incident that highlighted weaknesses in their existing IT support." },
+];
+---
+<Base title="Managed IT Services — Keybridge IT" description="Managed IT you can stop thinking about. Proactive monitoring, genuine 24/7 support, one accountable partner.">
+
+  <ServiceHero
+    accent="teal"
+    eyebrow="MANAGED IT"
+    title={`Managed IT you can <span class="hl">stop thinking about</span>`}
+    lead="Good IT support is a service you should you never have to think about. Email that's always there, a laptop ready on a new starter's first morning, a problem solved before it has the chance to spread. That dependable backbone is what we've provided for fifteen years."
+    tickerId="mit-ticker"
+  />
+
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--teal);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap approach-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> THE APPROACH</div>
+        <h2 style="max-width:18ch;margin-bottom:26px">Proactive, not reactive</h2>
+        <p class="lead" style="max-width:54ch">Most IT support firms wait for something to break, then charge you to fix it. We work the other way round. We monitor your systems continuously, apply updates and patches before they turn into weaknesses, and resolve issues quietly in the background. The result is less downtime, fewer surprises, and a predictable monthly cost rather than a bill every time something goes wrong.</p>
+      </div>
+      <div class="reveal viz-wrap">
+        <NetworkViz accent="var(--teal)" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> ONE ACCOUNTABLE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:24px">Everything covered, one accountable partner</h2>
+      <div class="cov-grid">
+        <div class="reveal">
+          <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">With Keybridge, everything sits under one roof and one accountable team. When something needs attention, there's one place to go and one team responsible for making it happen.</p>
+          <p style="color:var(--muted);line-height:1.75">We also handle the day-to-day tasks that keep businesses moving, from device management and software licensing to joiners, leavers and supplier coordination. It's all part of the service, because good IT should remove administration, not create more of it.</p>
+        </div>
+        <ul class="inclist reveal">
+          {included.map((i) => <li><span class="tick">&#10003;</span>{i}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent="var(--teal)"
+    quote="They catch problems before we even know they exist. We've stopped thinking about IT entirely, which is exactly the point."
+    name="Operations Director"
+    role="Recruitment firm, London (placeholder — to be updated)"
+  />
+
+  <section class="section sec-tint2">
+    <div class="wrap secure-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> SECURE BY DEFAULT</div>
+        <h2 style="max-width:16ch">Reliable and secure aren't two separate services here</h2>
+      </div>
+      <div class="reveal secure-body">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Every managed client sits on our minimum security standard from day one, so being looked after genuinely means being protected.</p>
+        <p style="color:var(--muted);line-height:1.75">When you want to go further, whether that's <a href="/cyber-security" style="color:var(--teal);text-decoration:underline">advanced cyber security</a> or <a href="/ai-enablement" style="color:var(--teal);text-decoration:underline">AI enablement</a>, everything builds on the same secure foundation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> AROUND THE CLOCK</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:24px">Real people, around the clock</h2>
+      <div class="cov-grid">
+        <p class="reveal" style="color:var(--muted);line-height:1.75">Support runs day and night, and it's always real people, never an automated line. During UK business hours you're looked after by our UK team. Outside those hours, our experienced English-speaking colleagues in the Philippines take over, so genuine 24/7 cover means someone is always there when you need them.</p>
+        <p class="reveal" style="color:var(--muted);line-height:1.75">Every client also has a dedicated UK-based account manager who understands their business, meets with them regularly and stays accountable for the service they receive. That combination of round-the-clock support and a genuine relationship is why we hold more than 130 five-star reviews and keep clients with us for years.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--teal);right:-140px;top:40%;transform:translateY(-50%)"></div>
+    <div class="wrap three-up">
+      <div class="upcard reveal">
+        <h3>Already have an IT person? We'll back them up</h3>
+        <p>Not every firm wants to outsource everything, and you don't have to. Our co-managed service works alongside your internal IT team, providing expertise, cover and additional capacity when it's needed.</p>
+      </div>
+      <div class="upcard reveal">
+        <h3>Switching is easier than you expect</h3>
+        <p>Moving provider sounds disruptive, but it rarely is. We map your environment, handle the transition in the background and keep your team working throughout the process.</p>
+      </div>
+      <div class="upcard reveal">
+        <h3>Who we support</h3>
+        <p>Recruitment, legal, accountancy and professional-services firms. Organisations that depend on technology, handle sensitive information and can't afford downtime.</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--teal)" />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll take a genuine look at how your IT is running today, identify any risks or opportunities, and show you what we'd improve if we were looking after it."
+    btn="Book a Free IT Review"
+    accent="var(--teal)"
+  />
+</Base>
+
+<style>
+  .approach-split{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .inclist{list-style:none;display:grid;gap:12px}
+  .inclist li{display:flex;gap:14px;align-items:flex-start;color:var(--muted);padding:11px 0;border-bottom:1px solid var(--line)}
+  .tick{color:var(--teal);font-weight:700;flex:0 0 auto}
+  .secure-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .secure-body{align-self:end}
+  .three-up{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .upcard{border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0))}
+  .upcard h3{margin-bottom:14px;font-size:1.3rem}
+  .upcard p{color:var(--muted);line-height:1.7}
+  @media(max-width:900px){
+    .approach-split,.cov-grid,.secure-split,.three-up{grid-template-columns:1fr;gap:30px}
+  }
+</style>

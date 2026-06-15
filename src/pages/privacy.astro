@@ -1,0 +1,89 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { company } from "../data/site";
+const updated = new Date().toLocaleDateString('en-GB', { year:'numeric', month:'long', day:'numeric' });
+const ADDRESS = "75 King William Street, London EC4N 7BE";
+const PHONE = "0330 335 4444";
+const CO_NUMBER = "07444390";
+---
+<Base title="Privacy Policy — Keybridge IT" description="How Keybridge IT Solutions collects, uses and protects your personal data under UK GDPR.">
+  <PageHero eyebrow="LEGAL" title="Privacy Policy" lead={`Last updated ${updated}. This policy explains how we collect, use and protect personal data.`} />
+  <section class="section"><div class="wrap legal">
+
+    <p>This privacy policy explains how {company.name} ("Keybridge", "we", "us" or "our") collects, uses and protects personal data when you visit our website, make an enquiry or use our services. We are committed to handling personal data responsibly and in line with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
+
+    <h2>Who we are</h2>
+    <p>{company.name} is the data controller responsible for your personal data. We provide managed IT, cyber security and AI services to professional-services firms.</p>
+    <ul>
+      <li>Registered office: {ADDRESS}</li>
+      <li>Company registration number: {CO_NUMBER}</li>
+      <li>Email: {company.email}</li>
+      <li>Telephone: {PHONE}</li>
+    </ul>
+
+    <h2>The personal data we collect</h2>
+    <p>We collect only the data we need for the purposes set out below.</p>
+    <ul>
+      <li><strong>Enquiry and contact details</strong> you provide when you contact us, request a review or correspond with us, typically your name, company, job role, email address, telephone number and the content of your message.</li>
+      <li><strong>Client and service data</strong> we process when delivering services under a contract, which may include the contact details of your staff and information needed to support and secure your systems.</li>
+      <li><strong>Website and analytics data</strong> collected automatically when you use our website, such as a truncated IP address, device and browser type, the pages you view and how you arrived at the site. This is collected through Google Analytics. See our <a href="/cookies">Cookie Policy</a> for details.</li>
+    </ul>
+
+    <h2>How we use your data and our lawful bases</h2>
+    <p>Under UK GDPR we must have a lawful basis for using your personal data. We rely on the following.</p>
+    <ul>
+      <li><strong>Responding to your enquiry</strong> and taking steps at your request before entering into a contract. Lawful basis: legitimate interests and, where relevant, steps prior to a contract.</li>
+      <li><strong>Providing, managing and supporting our services.</strong> Lawful basis: performance of a contract.</li>
+      <li><strong>Meeting our legal, regulatory and security obligations.</strong> Lawful basis: legal obligation and legitimate interests.</li>
+      <li><strong>Understanding how our website is used</strong> so we can improve it, using Google Analytics. Lawful basis: legitimate interests. You can opt out at any time, as explained in our <a href="/cookies">Cookie Policy</a>.</li>
+      <li><strong>Sending occasional updates</strong> about our services where you have agreed to receive them or are an existing client. Lawful basis: consent or legitimate interests. You can opt out at any time.</li>
+    </ul>
+    <p>We do not sell your personal data and we do not use it for automated decision-making that produces legal or similarly significant effects.</p>
+
+    <h2>Who we share your data with</h2>
+    <p>We share personal data only where necessary, and we put appropriate agreements in place with the providers who process data on our behalf. They may include:</p>
+    <ul>
+      <li>our website hosting and infrastructure providers;</li>
+      <li>Google, which provides our website analytics;</li>
+      <li>email, communication and customer-management providers we use to operate the business;</li>
+      <li>professional advisers such as accountants, insurers and lawyers; and</li>
+      <li>regulators, law enforcement or other authorities where we are required to do so by law.</li>
+    </ul>
+
+    <h2>International transfers</h2>
+    <p>Some of our providers, including Google, may process data outside the UK. Where data is transferred internationally, we rely on appropriate safeguards such as UK adequacy regulations or the International Data Transfer Agreement or Addendum, so that your data continues to receive an equivalent level of protection.</p>
+
+    <h2>How long we keep your data</h2>
+    <p>We keep personal data only for as long as we need it. Enquiry correspondence is generally retained for up to 24 months unless it leads to a contract. Client and service records are retained for the duration of our engagement and for a reasonable period afterwards to meet legal, tax and regulatory obligations. Analytics data is retained in line with the settings described in our Cookie Policy.</p>
+
+    <h2>How we protect your data</h2>
+    <p>As a cyber security business, protecting information is central to how we operate. We apply technical and organisational measures appropriate to the risk, including access controls, encryption where appropriate, monitoring and staff training, to keep personal data secure.</p>
+
+    <h2>Your rights</h2>
+    <p>Under UK GDPR you have the right to access your personal data, to have it corrected or erased, to restrict or object to its use, to data portability, and to withdraw consent at any time where we rely on consent. To exercise any of these rights, contact us at {company.email}. We will respond within one month.</p>
+    <p>If you are unhappy with how we have handled your data, you can complain to the Information Commissioner's Office (ICO), Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF, telephone 0303 123 1113, ico.org.uk. We would, however, appreciate the chance to address your concerns first.</p>
+
+    <h2>Cookies</h2>
+    <p>Our website uses cookies and similar technologies. Please see our <a href="/cookies">Cookie Policy</a> for full details and how to manage your preferences.</p>
+
+    <h2>Children</h2>
+    <p>Our website and services are intended for businesses and are not directed at children. We do not knowingly collect personal data relating to children.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. The date at the top of this page shows when it was last revised. Any significant changes will be reflected here.</p>
+
+    <h2>Contact us</h2>
+    <p>For any questions about this policy or your personal data, contact us at {company.email}, call {PHONE}, or write to us at {ADDRESS}.</p>
+
+  </div></section>
+</Base>
+<style>
+  .legal{max-width:72ch}
+  .legal h2{font-size:1.4rem;margin:38px 0 12px;color:var(--ink, #fff)}
+  .legal p{color:var(--muted);line-height:1.75;margin-bottom:14px}
+  .legal ul{margin:0 0 16px 22px;color:var(--muted);line-height:1.75}
+  .legal li{margin-bottom:8px}
+  .legal a{color:var(--teal, #1fb6c9);text-decoration:underline;text-underline-offset:2px}
+  .legal strong{color:#e7e7ee;font-weight:600}
+</style>

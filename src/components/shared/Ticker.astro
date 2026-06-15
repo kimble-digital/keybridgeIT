@@ -1,0 +1,26 @@
+---
+import { stats } from "../../data/site";
+interface Props { id?: string }
+const { id = "ticker" } = Astro.props;
+---
+<div class="ticker-wrap">
+  <div class="ticker" id={id}>
+    {[0,1].map(() => stats.map((s) => (
+      <span class="item"><span class="bdot" style={`background:${s.color}`}></span>{s.value} <small>{s.label}</small></span>
+    )))}
+  </div>
+</div>
+<style>
+  .ticker-wrap{position:relative;z-index:2;flex:0 0 auto;border-block:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.012)}
+  .ticker{display:flex;white-space:nowrap;will-change:transform}
+  .ticker .item{display:inline-flex;align-items:center;gap:14px;padding:18px 38px;font-family:var(--display);font-weight:600;font-size:15px;border-right:1px solid var(--line)}
+  .ticker .item small{color:var(--muted);font-weight:400;font-family:var(--body)}
+  .ticker .item .bdot{width:6px;height:6px;border-radius:50%}
+</style>
+<script define:vars={{ id }}>
+  window.addEventListener('load', () => {
+    if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.to('#' + id, { xPercent: -50, duration: 26, ease: 'none', repeat: -1 });
+    }
+  });
+</script>

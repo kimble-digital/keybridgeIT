@@ -1,0 +1,58 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Prose from "../../components/Prose.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const cases = [
+  { t:"Client Onboarding & Compliance", d:"Gather information, support AML processes, prepare onboarding and engagement documentation, and keep new matters moving without unnecessary delays." },
+  { t:"Matter Administration", d:"Support matter creation, record management, workflow tracking and routine administration throughout the lifecycle of a matter." },
+  { t:"Document Review", d:"Review large volumes of documents, identify key dates, clauses and points of interest, and flag items requiring legal review." },
+  { t:"Knowledge Search", d:"Help teams find relevant precedents, guidance, policies and past work without interrupting colleagues." },
+  { t:"Meeting Notes & Action Tracking", d:"Capture key decisions, actions and follow-ups automatically so matters continue progressing between meetings." },
+];
+const faqs = [
+  { q:"Is client confidentiality protected?", a:"Yes. We define what each AI agent can access, restrict permissions appropriately and ensure sensitive information remains governed and secure." },
+  { q:"Will AI replace legal judgement?", a:"No. AI is designed to support lawyers, not replace them. Legal judgement, professional responsibility and client advice remain with qualified professionals." },
+  { q:"Can AI help with onboarding and compliance?", a:"Yes. AI is particularly effective at supporting information gathering, onboarding workflows, AML processes, engagement documentation and other routine administrative tasks." },
+  { q:"Will AI work with our existing systems?", a:"It depends on the systems you're using. Some platforms support AI and automation more effectively than others. We'll assess your environment and explain what's realistically achievable." },
+  { q:"Where should we start?", a:"Most firms begin with an area that creates significant administrative overhead, such as client onboarding, matter administration, document review or knowledge management." },
+];
+---
+<Base title="AI for Law Firms — Keybridge IT" description="Give fee earners more time to focus on client work. Security-first AI built around confidentiality and privilege.">
+  <PageHero
+    eyebrow="AI FOR LAW FIRMS"
+    title="Give fee earners more time to focus on client work"
+    lead="Clients expect fast responses, rigorous attention to detail and complete confidentiality — yet fee earners are often pulled into administrative tasks that don't require legal expertise. From onboarding to document review, AI agents can take ownership of the repetitive processes that pull lawyers away from client work."
+    stats="15 Years Supporting Professional Services · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+  />
+
+  <Prose eyebrow="CONFIDENTIALITY ISN'T OPTIONAL" title="AI cannot simply be switched on and left to run">
+    <p>Legal practices handle some of the most sensitive information any organisation can hold. Client confidentiality, legal privilege, SRA obligations and reputational risk mean AI needs proper governance.</p>
+    <p>That's why we approach AI as a security-first technology. Every agent is governed around what it can see, what it can access and what actions it can take. The goal is simple: improve efficiency without compromising confidentiality.</p>
+  </Prose>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> WHERE AI CREATES VALUE</div>
+      <h2 class="reveal" style="margin-bottom:40px;max-width:22ch">The most expensive people in a firm shouldn't spend their day on routine admin</h2>
+      <div class="grid-3">
+        {cases.map((c,i) => (
+          <article class={`card reveal ${["v-teal","v-purple","v-orange","v-lime","v-teal"][i]}`}>
+            <div class="bartop"></div>
+            <h3>{c.t}</h3><p>{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Prose eyebrow="JUDGEMENT STAYS HUMAN" title="Lawyers should focus on legal judgement">
+    <p>The challenge for many firms isn't a lack of legal expertise — it's that too much of that expertise gets consumed by the processes surrounding it. Onboarding, compliance checks, document review, action tracking: none of it replaces legal judgement, but all of it takes time.</p>
+    <p>Legal advice requires judgement, context and professional responsibility. AI can organise information and automate routine processes, but responsibility must always remain with qualified professionals. That's why we build AI to support lawyers, not replace them.</p>
+  </Prose>
+
+  <Faq items={faqs} />
+  <CtaBand title="Book an AI discovery session" body="We'll identify the operational work pulling fee earners away from client matters and show you where AI can create genuine value." btn="Book a Discovery Session" />
+</Base>

@@ -1,0 +1,56 @@
+---
+// Accountancy workload rhythm: a curve rising to deadline peaks then resetting.
+// Shows the "peaks and troughs / busy season" pressure. For LIGHT backgrounds.
+interface Props { accent?: string }
+const accent = Astro.props.accent ?? "var(--emerald)";
+---
+<div class="dlviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 460 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workload through the year with deadline peaks">
+    <!-- baseline grid -->
+    <line x1="30" y1="230" x2="440" y2="230" stroke="var(--light-line)" stroke-width="2"/>
+    <g stroke="var(--light-line)" stroke-width="1" stroke-dasharray="2 5" opacity=".7">
+      <line x1="30" y1="170" x2="440" y2="170"/>
+      <line x1="30" y1="110" x2="440" y2="110"/>
+      <line x1="30" y1="50" x2="440" y2="50"/>
+    </g>
+
+    <!-- area under workload curve -->
+    <path class="area"
+      d="M30 220 C70 215 90 150 130 60 C150 110 165 215 200 218 C245 214 270 130 320 55 C345 110 360 214 400 218 L440 220 L440 230 L30 230 Z"
+      fill="var(--ac)" fill-opacity=".1"/>
+
+    <!-- workload curve -->
+    <path class="curve"
+      d="M30 220 C70 215 90 150 130 60 C150 110 165 215 200 218 C245 214 270 130 320 55 C345 110 360 214 400 218 L440 220"
+      fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- deadline peak markers -->
+    <g class="peaks">
+      <g style="--d:1.3s"><circle cx="130" cy="60" r="6" fill="var(--ac)"/></g>
+      <g style="--d:2.7s"><circle cx="320" cy="55" r="6" fill="var(--ac)"/></g>
+    </g>
+    <text x="130" y="42" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="11" fill="var(--ac)">FILING</text>
+    <text x="320" y="37" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="11" fill="var(--ac)">FILING</text>
+
+    <!-- month-ish ticks -->
+    <g font-family="var(--body)" font-size="10" fill="var(--light-muted)" text-anchor="middle">
+      <text x="80" y="252">Quiet</text>
+      <text x="200" y="252">Busy season</text>
+      <text x="370" y="252">Year end</text>
+    </g>
+  </svg>
+</div>
+<style>
+  .dlviz{width:100%;max-width:480px}
+  .dlviz svg{width:100%;height:auto;overflow:visible}
+  .curve{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 6s ease-in-out infinite}
+  .area{opacity:0;animation:areafade 6s ease-in-out infinite}
+  @keyframes draw{0%{stroke-dashoffset:900}55%,92%{stroke-dashoffset:0}100%{stroke-dashoffset:900}}
+  @keyframes areafade{0%,30%{opacity:0}65%,92%{opacity:1}100%{opacity:0}}
+  .peaks g circle{animation:pulse 6s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes pulse{0%,100%{opacity:0;r:6}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){
+    .curve,.area,.peaks g circle{animation:none}
+    .curve{stroke-dashoffset:0}.area{opacity:1}.peaks g circle{opacity:1}
+  }
+</style>

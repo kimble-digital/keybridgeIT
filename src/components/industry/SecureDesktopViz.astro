@@ -1,0 +1,51 @@
+---
+// Azure Virtual Desktop concept: devices connect to a secure central desktop;
+// data stays in the cloud, never on the device. For law firms. LIGHT background.
+// Taller layout to fill vertical space in a feature row.
+interface Props { accent?: string }
+const accent = Astro.props.accent ?? "var(--indigo)";
+---
+<div class="sdviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 460 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Secure cloud desktop access">
+    <!-- central secure cloud desktop -->
+    <g>
+      <!-- cloud cap -->
+      <path d="M188 92 a26 26 0 0 1 52 -8 a22 22 0 0 1 20 16 H188 Z" fill="var(--ac)" fill-opacity=".16" stroke="var(--ac)" stroke-width="2.5"/>
+      <rect x="158" y="104" width="156" height="112" rx="12" fill="var(--ac)" fill-opacity=".1" stroke="var(--ac)" stroke-width="3"/>
+      <rect x="178" y="124" width="116" height="62" rx="5" fill="#fff" stroke="var(--ac)" stroke-opacity=".4"/>
+      <!-- lock glyph -->
+      <circle cx="236" cy="150" r="12" fill="none" stroke="var(--ac)" stroke-width="2.5"/>
+      <path d="M228 150 V143 a8 8 0 0 1 16 0 V150" stroke="var(--ac)" stroke-width="2.5" fill="none"/>
+      <rect x="226" y="150" width="20" height="16" rx="3" fill="var(--ac)"/>
+      <text x="236" y="206" text-anchor="middle" font-family="var(--display)" font-weight="700" font-size="13" fill="var(--ac)">SECURE DESKTOP</text>
+    </g>
+
+    <!-- connecting lines to devices -->
+    <g stroke="var(--ac)" stroke-opacity=".3" stroke-width="2" stroke-dasharray="5 6">
+      <line x1="158" y1="180" x2="70" y2="330"/>
+      <line x1="314" y1="180" x2="400" y2="330"/>
+      <line x1="236" y1="216" x2="236" y2="360"/>
+    </g>
+
+    <!-- data pulses travelling toward the centre -->
+    <circle r="5" fill="var(--ac)" class="dp"><animateMotion dur="2.8s" repeatCount="indefinite" path="M70 330 L158 180"/></circle>
+    <circle r="5" fill="var(--ac)" class="dp"><animateMotion dur="2.8s" begin="0.95s" repeatCount="indefinite" path="M400 330 L314 180"/></circle>
+    <circle r="5" fill="var(--ac)" class="dp"><animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M236 360 L236 216"/></circle>
+
+    <!-- devices -->
+    <g fill="none" stroke="var(--ac)" stroke-width="2.5">
+      <g><rect x="38" y="318" width="64" height="42" rx="4" fill="#fff"/><line x1="30" y1="366" x2="110" y2="366"/></g>
+      <g><rect x="366" y="316" width="64" height="48" rx="4" fill="#fff"/></g>
+      <g><rect x="216" y="366" width="40" height="56" rx="5" fill="#fff"/></g>
+    </g>
+    <text x="70" y="388" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--light-muted)">Laptop</text>
+    <text x="398" y="388" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--light-muted)">Home PC</text>
+    <text x="236" y="438" text-anchor="middle" font-family="var(--body)" font-size="12" fill="var(--light-muted)">Any device</text>
+  </svg>
+</div>
+<style>
+  .sdviz{width:100%;max-width:520px}
+  .sdviz svg{width:100%;height:auto;overflow:visible}
+  .dp{filter:drop-shadow(0 0 5px var(--ac))}
+  @media(prefers-reduced-motion:reduce){.dp{display:none}}
+</style>

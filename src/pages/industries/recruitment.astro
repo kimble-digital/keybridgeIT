@@ -1,0 +1,117 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import BusinessCycle from "../../components/industry/BusinessCycle.astro";
+import BigQuote from "../../components/shared/BigQuote.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const services = [
+  { name: "Managed IT", href: "/managed-it", body: "Reliable systems, responsive support and proactive management that keep consultants productive and agencies operating smoothly. From devices and Microsoft 365 to cloud services and day-to-day support, we keep the technology running so your team can focus on billing." },
+  { name: "Cyber Security", href: "/cyber-security", body: "Candidate data is one of your most valuable assets and one of your biggest responsibilities. We help agencies protect it properly, meeting the expectations of clients, insurers and regulators while reducing the risk of costly incidents." },
+  { name: "AI Enablement", href: "/ai-enablement", body: "Recruitment businesses generate huge amounts of administration. AI can help automate repetitive processes, improve data quality and give consultants more time to focus on candidates, clients and placements." },
+];
+
+const faqs = [
+  { q: "Do you understand recruitment systems such as Bullhorn?", a: "Yes. We understand the workflows and operational challenges recruitment businesses face. Where specialist CRM implementation or migration support is required, we work alongside trusted partners while managing the wider IT, security and AI environment." },
+  { q: "Will you charge us for every joiner and leaver?", a: "No. User setup and offboarding are part of our managed service because constant headcount movement is normal in recruitment. We don't believe agencies should be penalised for operating the way the industry works." },
+  { q: "Is our candidate data safe?", a: "Yes. Protecting candidate information is central to how we work. We implement security controls, governance and monitoring designed to reduce risk and support GDPR compliance." },
+  { q: "Can you support remote and multi-site recruitment teams?", a: "Yes. Many recruitment businesses now operate across multiple offices, hybrid teams and remote workers. We provide secure access, device management and support wherever your consultants are based." },
+  { q: "Can you support us outside normal office hours?", a: "Yes. Our UK team supports clients during business hours, while our experienced English-speaking colleagues in the Philippines provide overnight and weekend cover, ensuring genuine 24/7 support." },
+  { q: "How does pricing work?", a: "A predictable monthly fee based on your team size and the services you require. No surprise invoices every time something breaks or your headcount changes." },
+];
+---
+<Base title="IT Support for Recruitment Agencies — Keybridge IT" description="Recruitment is where Keybridge began. Managed IT, cyber security and AI built for the way agencies actually operate.">
+
+  <ServiceHero
+    accent="teal"
+    eyebrow="RECRUITMENT AGENCIES"
+    title={`Shit hot IT support for <span class="hl">recruitment agencies</span>`}
+    lead="Recruitment is where Keybridge began. Before founding the business, our founder spent eleven years running IT inside recruitment firms. Fifteen years later, we still support the industry we came from, helping agencies across the UK and Europe with fully managed IT support, cyber security and AI enablement."
+    tickerId="rec-ticker"
+  />
+
+  <!-- Understand how an agency runs (LIGHT) -->
+  <section class="section sec-light">
+    <div class="wrap und-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> WE GET IT</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">We understand how an agency really runs</h2>
+        <p style="line-height:1.75;margin-bottom:18px">Recruitment puts demands on technology that most industries don't face. Headcount changes constantly, so joiners and leavers are a weekly occurrence rather than an occasional event. When systems go down, consultants can't place candidates and the business stops earning, making uptime a revenue issue rather than an inconvenience.</p>
+        <p style="line-height:1.75;margin-bottom:18px">At the same time, agencies hold large volumes of sensitive candidate data with significant GDPR obligations and a highly competitive market where cost control matters.</p>
+        <p style="line-height:1.75;color:var(--light-ink);font-weight:500">We've built our service around those realities because we've experienced them first-hand.</p>
+      </div>
+      <div class="reveal viz-wrap"><BusinessCycle accent="var(--teal)" /></div>
+    </div>
+  </section>
+
+  <!-- Everything your agency needs (DARK, 3 cards) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> ONE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">Everything your agency needs from one partner</h2>
+      <div class="svc-cards">
+        {services.map((s) => (
+          <a href={s.href} class="svc-card reveal">
+            <div class="svc-bar"></div>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="svc-more">{s.name === "AI Enablement" ? "AI for Recruitment Agencies" : `${s.name} Services`} &#8594;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why recruitment agencies choose Keybridge (LIGHT) -->
+  <section class="section sec-light2">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why recruitment agencies choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--light-ink);margin-bottom:24px">Most IT providers support recruitment agencies. Few were built inside one.</p>
+      </div>
+      <div class="reveal">
+        <p style="line-height:1.75;margin-bottom:18px">Our roots in recruitment mean we understand the difference between a consultant's productive hour and an hour lost to administration, downtime or inefficient systems. That understanding influences everything we do, from how we structure support to how we approach automation and security.</p>
+        <p style="line-height:1.75;margin-bottom:18px">Alongside that industry experience, clients benefit from a Microsoft Solutions Partner, genuine 24/7 support, built-in cyber security and a dedicated UK-based account manager who understands their business and remains accountable for the relationship.</p>
+        <p style="line-height:1.6;color:var(--light-ink);font-weight:500">We're large enough to deliver enterprise-grade expertise, yet small enough to know our clients personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent="var(--teal)"
+    quote="Fast, knowledgeable and reliable. I'd highly recommend them, in particular for recruitment and HR consultancies."
+    name="David Bishop"
+  />
+
+  <Faq items={faqs} accent="var(--teal)" />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll review how your agency's technology is operating today and identify opportunities to improve security, reliability, efficiency and support."
+    btn="Book a Free IT Review"
+    accent="var(--teal)"
+  />
+</Base>
+
+<style>
+  .und-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+
+  .svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .svc-card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .svc-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .svc-bar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--teal);transition:width .5s}
+  .svc-card:hover .svc-bar{width:100%}
+  .svc-card h3{margin-bottom:14px;font-size:1.4rem}
+  .svc-card p{color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .svc-more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--teal)}
+
+  .ind-quote{position:relative;overflow:hidden;padding-block:clamp(70px,10vw,130px);background:var(--bg)}
+
+  @media(max-width:900px){
+    .und-split,.why-split,.svc-cards{grid-template-columns:1fr;gap:30px}
+  }
+</style>

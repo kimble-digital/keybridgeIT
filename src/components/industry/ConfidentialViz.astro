@@ -1,0 +1,113 @@
+---
+// Confidentiality visual — a bold shield + padlock at the centre of a live
+// secure perimeter (protection pulses, an orbiting scan dot, access-granted
+// checks and one blocked node). Pure SVG + CSS. Built for a LIGHT section.
+interface Props { accent?: string; blocked?: string }
+const {
+  accent  = "var(--indigo, #4453d6)",
+  blocked = "var(--alert, #e0566b)",
+} = Astro.props;
+
+const cx = 220, cy = 210, R = 182;
+const N = 5;
+const types = ["ok", "ok", "block", "ok", "ok"];
+const nodes = types.map((t, i) => {
+  const a = (-90 + i * (360 / N)) * Math.PI / 180;
+  return { t, x: cx + R * Math.cos(a), y: cy + R * Math.sin(a) };
+});
+const ringPath = `M ${cx} ${cy - R} A ${R} ${R} 0 1 1 ${cx - 0.01} ${cy - R}`;
+---
+<div class="confviz" style={`--ac:${accent};--blk:${blocked}`}>
+  <svg viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+       aria-label="Confidential information protected inside a secure perimeter">
+    <defs>
+      <linearGradient id="cvShield" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5b6be6"/>
+        <stop offset="1" stop-color="#3a48bf"/>
+      </linearGradient>
+      <filter id="cvGlow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="3.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="cvShadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#1a2150" flood-opacity="0.24"/>
+      </filter>
+    </defs>
+
+    <!-- expanding protection pulses -->
+    <g fill="none" stroke="var(--ac)">
+      <circle cx={cx} cy={cy} r="96" stroke-width="1.5">
+        <animate attributeName="r" values="96;182" dur="3.8s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.35;0" dur="3.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx={cx} cy={cy} r="96" stroke-width="1.5">
+        <animate attributeName="r" values="96;182" dur="3.8s" begin="1.27s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.35;0" dur="3.8s" begin="1.27s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx={cx} cy={cy} r="96" stroke-width="1.5">
+        <animate attributeName="r" values="96;182" dur="3.8s" begin="2.54s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-opacity" values="0.35;0" dur="3.8s" begin="2.54s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- perimeter rings -->
+    <circle cx={cx} cy={cy} r={R} stroke="var(--ac)" stroke-opacity=".14" stroke-width="1.5"/>
+    <circle cx={cx} cy={cy} r={R} stroke="var(--ac)" stroke-opacity=".38" stroke-width="1.5"
+            stroke-dasharray="3 10" class="spin" style={`transform-origin:${cx}px ${cy}px`}/>
+
+    <!-- orbiting scan dot -->
+    <circle r="6" fill="var(--ac)" filter="url(#cvGlow)" class="scan">
+      <animateMotion dur="9s" repeatCount="indefinite" path={ringPath}/>
+    </circle>
+
+    <!-- bold shield -->
+    <g class="shield" filter="url(#cvShadow)">
+      <path d="M220 112 L302 146 V214 C302 270 266 305 220 324 C174 305 138 270 138 214 V146 Z"
+            fill="url(#cvShield)"/>
+      <path d="M220 112 L302 146 V214 C302 270 266 305 220 324 C174 305 138 270 138 214 V146 Z"
+            fill="none" stroke="#ffffff" stroke-opacity=".18" stroke-width="1.5"/>
+      <!-- padlock -->
+      <path d="M204 204 v-13 a16 16 0 0 1 32 0 v13" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <rect x="197" y="204" width="46" height="40" rx="9" fill="#fff"/>
+      <circle cx="220" cy="221" r="5" fill="var(--ac)"/>
+      <rect x="217.6" y="222" width="4.8" height="11" rx="2.2" fill="var(--ac)"/>
+    </g>
+
+    <!-- access nodes -->
+    {nodes.map((n) => (
+      <g class="node">
+        <circle cx={n.x} cy={n.y} r="17"
+          fill={n.t === "ok" ? "var(--ac)" : "#fff"}
+          stroke={n.t === "ok" ? "none" : "var(--blk)"} stroke-width="2.4"/>
+        {n.t === "ok" ? (
+          <path d={`M${n.x - 6} ${n.y + 0.5} l4 4.4 l8 -9`} fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        ) : (
+          <g stroke="var(--blk)" stroke-width="2.8" stroke-linecap="round">
+            <line x1={n.x - 5} y1={n.y - 5} x2={n.x + 5} y2={n.y + 5}/>
+            <line x1={n.x + 5} y1={n.y - 5} x2={n.x - 5} y2={n.y + 5}/>
+          </g>
+        )}
+      </g>
+    ))}
+  </svg>
+</div>
+
+<style>
+  .confviz{width:100%;max-width:480px;margin:0 auto}
+  .confviz svg{width:100%;height:auto;overflow:visible}
+  .spin{animation:cvSpin 60s linear infinite}
+  @keyframes cvSpin{to{transform:rotate(360deg)}}
+  .scan{opacity:.95}
+  .shield{transform-origin:220px 218px;animation:cvFloat 5s ease-in-out infinite}
+  @keyframes cvFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .node{animation:cvNode 3.4s ease-in-out infinite}
+  .node:nth-child(7){animation-delay:.4s}
+  .node:nth-child(8){animation-delay:.8s}
+  .node:nth-child(9){animation-delay:1.2s}
+  .node:nth-child(10){animation-delay:1.6s}
+  @keyframes cvNode{0%,100%{opacity:.85}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){
+    .spin,.scan,.shield,.node{animation:none}
+    .confviz circle animate{display:none}
+  }
+</style>

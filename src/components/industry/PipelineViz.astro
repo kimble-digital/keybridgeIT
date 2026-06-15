@@ -1,0 +1,55 @@
+---
+// Candidate pipeline: dots flow through stages. For recruitment industry page.
+// Designed to sit on a LIGHT background (uses accent + dark-on-light strokes).
+interface Props { accent?: string }
+const { accent = "var(--teal)" } = Astro.props;
+const stages = ["Source", "Screen", "Place"];
+---
+<div class="pipeviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 460 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Candidate pipeline">
+    <!-- track -->
+    <line x1="60" y1="100" x2="400" y2="100" stroke="var(--light-line)" stroke-width="2"/>
+
+    <!-- stage stations -->
+    {stages.map((s, i) => {
+      const x = 60 + i * 170;
+      return (
+        <g>
+          <circle cx={x} cy="100" r="26" fill="#fff" stroke="var(--ac)" stroke-width="2.5"/>
+          <text x={x} y="146" text-anchor="middle" font-family="var(--display)" font-weight="600"
+            font-size="13" fill="var(--light-ink)">{s}</text>
+        </g>
+      );
+    })}
+
+    <!-- candidate dots flowing left to right -->
+    <circle r="6" fill="var(--ac)" class="cand c1">
+      <animateMotion dur="4s" repeatCount="indefinite" path="M60 100 H400"/>
+    </circle>
+    <circle r="6" fill="var(--ac)" class="cand c2" opacity=".7">
+      <animateMotion dur="4s" begin="1.3s" repeatCount="indefinite" path="M60 100 H400"/>
+    </circle>
+    <circle r="6" fill="var(--ac)" class="cand c3" opacity=".5">
+      <animateMotion dur="4s" begin="2.6s" repeatCount="indefinite" path="M60 100 H400"/>
+    </circle>
+
+    <!-- person glyphs inside stations -->
+    {stages.map((_, i) => {
+      const x = 60 + i * 170;
+      return (
+        <g fill="var(--ac)" class="glyph" style={`--d:${i * 0.5}s`}>
+          <circle cx={x} cy="93" r="5"/>
+          <path d={`M${x - 8} 112 a8 8 0 0 1 16 0 Z`}/>
+        </g>
+      );
+    })}
+  </svg>
+</div>
+<style>
+  .pipeviz{width:100%;max-width:480px}
+  .pipeviz svg{width:100%;height:auto;overflow:visible}
+  .cand{filter:drop-shadow(0 0 4px var(--ac))}
+  .glyph{animation:pop 4s ease-in-out infinite;animation-delay:var(--d);transform-origin:center}
+  @keyframes pop{0%,100%{opacity:.5}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){.glyph{animation:none}}
+</style>

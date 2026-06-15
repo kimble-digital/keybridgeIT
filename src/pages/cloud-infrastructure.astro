@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const blocks = [
+  { v:"v-teal", t:"Microsoft 365", items:["Licensing & administration","Outlook & Exchange Online","Microsoft Teams","SharePoint & OneDrive","User management & permissions","Security & compliance controls","Copilot readiness & adoption"] },
+  { v:"v-purple", t:"Azure & Cloud", items:["Azure management","Cloud infrastructure","Virtual servers","Secure cloud storage","Azure Virtual Desktop","Identity & access management","Cloud migrations"] },
+  { v:"v-orange", t:"Secure Remote Working", items:["Azure Virtual Desktop","Secure remote access","Hybrid working environments","BYOD strategies","Multi-factor authentication","Device security & management"] },
+  { v:"v-lime", t:"Devices & Lifecycle", items:["Laptops & desktops","Mobile device management","Hardware procurement","New starter setup","Leaver management","Asset tracking","Secure disposal & recycling"] },
+  { v:"v-teal", t:"Networks & Connectivity", items:["Business networks","Wi-Fi infrastructure","Firewalls","Internet connectivity","VPN solutions","Network monitoring","Multi-site connectivity"] },
+  { v:"v-orange", t:"Backup & Recovery", items:["Automated backups","Cloud backup solutions","Immutable backups","Disaster recovery planning","Business continuity","Recovery testing"] },
+  { v:"v-purple", t:"Business Telephony", items:["VoIP systems","Microsoft Teams Phone","Call routing & management","Mobile integration","Contact centre solutions","Telephony migrations"] },
+  { v:"v-lime", t:"Supplier Management", items:["Single point of contact","Supplier coordination","Issue ownership","Internet providers","Software vendors","Telecoms & hardware"] },
+  { v:"v-lime", t:"Applied AI", items:["Microsoft Copilot adoption","AI readiness assessments","AI security & governance","Process & task automation","AI agent development","Productivity & decision support"] },
+];
+---
+<Base title="IT Infrastructure & Cloud Services — Keybridge IT" description="Microsoft 365, Azure, networks, telephony, devices and backups — one partner responsible for keeping everything working together.">
+  <PageHero
+    eyebrow="INFRASTRUCTURE & CLOUD"
+    title="The technology that keeps your business connected, secure and productive"
+    lead="From Microsoft 365 and Azure to networks, telephony, devices and backups, we manage the platforms that support your day-to-day operations. Instead of multiple suppliers and disconnected systems, you have one partner responsible for keeping everything working together."
+    stats="Microsoft Solutions Partner · 5,000 Devices Managed · 200 Organisations · 24/7 Support"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid-3">
+        {blocks.map((b) => (
+          <article class={`card reveal ${b.v}`}>
+            <div class="bartop"></div>
+            <h3>{b.t}</h3>
+            <ul class="svclist">{b.items.map((i) => <li>{i}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Book a free IT review" body="We'll review your existing technology estate, identify any risks or gaps, and show you where improvements could be made." />
+</Base>
+
+<style>
+  .svclist{list-style:none;color:var(--muted)}
+  .svclist li{padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .svclist li:last-child{border-bottom:none}
+</style>

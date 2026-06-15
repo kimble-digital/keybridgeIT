@@ -1,0 +1,301 @@
+---
+// src/components/ContactForm.astro
+// One form, two layouts. variant="simple" (contact / IT review) or
+// variant="support" (full IT intake + screenshot uploads).
+// Posts JSON to /api/contact; loading / success / error states; field
+// highlighting; a reference the user can quote; images sent as attachments.
+interface Props {
+  subject?: string;
+  accent?: string;
+  cta?: string;
+  variant?: "simple" | "support";
+  qualify?: boolean;   // show Industry + Team size (lead qualifying) — simple variant only
+}
+const {
+  subject = "General enquiry",
+  accent = "var(--purple, #b8328f)",
+  cta = "Send message",
+  variant = "simple",
+  qualify = false,
+} = Astro.props;
+
+const categories = [
+  "Hardware (laptop, PC, device)",
+  "Microsoft 365 & email",
+  "Software / application",
+  "Internet & connectivity",
+  "Printing & scanning",
+  "Phones & VoIP",
+  "Security & access (passwords, MFA, accounts)",
+  "Something else",
+];
+const systems = [
+  "Outlook / email",
+  "Microsoft Teams",
+  "Word / Excel / PowerPoint",
+  "SharePoint / OneDrive",
+  "Windows PC / laptop",
+  "Internet / Wi-Fi",
+  "Printer / scanner / copier",
+  "Phone system",
+  "Line-of-business application",
+  "Not sure / other",
+];
+const severities = [
+  "Critical — the business has stopped, nobody can work",
+  "High — major disruption to a team or service",
+  "Medium — affects one person, or there's a workaround",
+  "Low — a question or a request, not urgent",
+];
+const affected = ["Just me", "A few people", "A whole team or site", "Everyone / company-wide"];
+const industries = ["Recruitment", "Legal / law firm", "Accountancy", "Consultancy", "Professional services", "Other"];
+const teamSizes = ["1–10", "11–25", "26–50", "51–100", "100+"];
+const reasons = [
+  "I'm worried my data and devices aren't secure",
+  "I'm keen to explore how AI could help my business",
+  "I'm looking for a cost-effective outsourced IT partner",
+  "I'm not happy with my current IT provider",
+  "Something else",
+];
+---
+<form class="cf" data-cf novalidate style={`--cf-ac:${accent}`}>
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="kind" value={variant === "support" ? "support" : "enquiry"} />
+  <div class="cf-hp" aria-hidden="true">
+    <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  {variant === "support" ? (
+    <>
+      <div class="cf-row">
+        <label class="cf-field"><span>Company *</span><input type="text" name="company" autocomplete="organization" required /></label>
+        <label class="cf-field"><span>Site / location</span><input type="text" name="site" placeholder="e.g. London office, home, client site" /></label>
+      </div>
+      <div class="cf-row">
+        <label class="cf-field"><span>Your name *</span><input type="text" name="name" autocomplete="name" required /></label>
+        <label class="cf-field"><span>Email *</span><input type="email" name="email" autocomplete="email" required /></label>
+      </div>
+      <div class="cf-row">
+        <label class="cf-field"><span>Phone</span><input type="tel" name="phone" autocomplete="tel" /></label>
+        <label class="cf-field"><span>People affected</span>
+          <select name="users"><option value="">Select…</option>{affected.map((o) => <option value={o}>{o}</option>)}</select>
+        </label>
+      </div>
+      <div class="cf-row">
+        <label class="cf-field"><span>Issue type *</span>
+          <select name="category" required><option value="">Select…</option>{categories.map((o) => <option value={o}>{o}</option>)}</select>
+        </label>
+        <label class="cf-field"><span>Affected app / system</span>
+          <select name="system"><option value="">Select…</option>{systems.map((o) => <option value={o}>{o}</option>)}</select>
+        </label>
+      </div>
+      <div class="cf-row">
+        <label class="cf-field"><span>Severity *</span>
+          <select name="severity" required><option value="">Select…</option>{severities.map((o) => <option value={o}>{o}</option>)}</select>
+        </label>
+        <label class="cf-field"><span>When did it start?</span><input type="text" name="started" placeholder="e.g. this morning, after an update, ongoing" /></label>
+      </div>
+      <label class="cf-field">
+        <span>Describe the issue *</span>
+        <textarea name="message" rows="5" required placeholder="What's happening, any error messages word-for-word, what you were doing when it started, and anything you've already tried."></textarea>
+      </label>
+      <label class="cf-field cf-file">
+        <span>Screenshots (optional)</span>
+        <input type="file" name="screenshots" accept="image/png,image/jpeg,image/gif,image/webp" multiple data-files />
+        <small class="cf-hint" data-filehint>Up to 5 images, 2MB each. A screenshot of the error helps us a lot.</small>
+      </label>
+    </>
+  ) : (
+    <>
+      {qualify && (
+        <div class="cf-field cf-reasons">
+          <span>What's prompting your review? <i class="cf-multi">select all that apply</i></span>
+          <div class="cf-reason-list">
+            {reasons.map((r) => (
+              <label class="cf-reason">
+                <input type="checkbox" name="reason" value={r} />
+                <span>{r}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+      <div class="cf-row">
+        <label class="cf-field"><span>Name *</span><input type="text" name="name" autocomplete="name" required /></label>
+        <label class="cf-field"><span>Email *</span><input type="email" name="email" autocomplete="email" required /></label>
+      </div>
+      <div class="cf-row">
+        <label class="cf-field"><span>Company</span><input type="text" name="company" autocomplete="organization" /></label>
+        <label class="cf-field"><span>Job title</span><input type="text" name="role" autocomplete="organization-title" /></label>
+      </div>
+      {qualify && (
+        <div class="cf-row">
+          <label class="cf-field"><span>Industry</span>
+            <select name="industry"><option value="">Select…</option>{industries.map((o) => <option value={o}>{o}</option>)}</select>
+          </label>
+          <label class="cf-field"><span>Team size</span>
+            <select name="teamsize"><option value="">Select…</option>{teamSizes.map((o) => <option value={o}>{o}</option>)}</select>
+          </label>
+        </div>
+      )}
+      <label class="cf-field"><span>Phone</span><input type="tel" name="phone" autocomplete="tel" /></label>
+      <label class="cf-field"><span>How can we help? *</span><textarea name="message" rows="5" required></textarea></label>
+    </>
+  )}
+
+  <div class="cf-actions">
+    <button type="submit" class="cf-btn">{cta}</button>
+    <p class="cf-status" role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+<style>
+  .cf{display:flex;flex-direction:column;gap:18px;max-width:680px}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .cf-field{display:flex;flex-direction:column;gap:7px}
+  .cf-field span{font-family:var(--display, sans-serif);font-size:13px;font-weight:600;color:#d7d7de;letter-spacing:.02em}
+  .cf input,.cf textarea,.cf select{
+    width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line, #26262d);
+    border-radius:10px;padding:13px 14px;color:var(--ink, #fff);font:inherit;font-size:15px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .cf select{appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,#9a9aa6 50%),linear-gradient(135deg,#9a9aa6 50%,transparent 50%);
+    background-position:calc(100% - 18px) 19px,calc(100% - 13px) 19px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:38px}
+  .cf select option{background:#141418;color:#fff}
+  .cf input:focus,.cf textarea:focus,.cf select:focus{outline:none;border-color:var(--cf-ac);box-shadow:0 0 0 3px color-mix(in srgb, var(--cf-ac) 28%, transparent)}
+  .cf textarea{resize:vertical;min-height:120px}
+  .cf [aria-invalid="true"]{border-color:#e0566b;box-shadow:0 0 0 3px rgba(224,86,107,.22)}
+
+  .cf-file input[type=file]{padding:11px 14px;cursor:pointer}
+  .cf-file input[type=file]::file-selector-button{margin-right:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#e7e7ee;font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer}
+  .cf-hint{font-size:12.5px;color:var(--muted, #9a9aa6);line-height:1.5}
+
+  .cf-reasons{gap:10px}
+  .cf-reason-list{display:flex;flex-direction:column;gap:8px}
+  .cf-reason{display:flex;align-items:center;gap:12px;border:1px solid var(--line, #26262d);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .2s, background .2s}
+  .cf-reason:hover{border-color:var(--muted, #9a9aa6)}
+  .cf-multi{font-style:normal;font-weight:400;font-size:12px;color:var(--muted, #9a9aa6)}
+  .cf-reason input{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:0;border:2px solid var(--line, #26262d);border-radius:5px;flex:0 0 auto;position:relative;cursor:pointer;transition:border-color .2s, background .2s}
+  .cf-reason input:checked{border-color:var(--cf-ac);background:var(--cf-ac)}
+  .cf-reason input:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .cf-reason input:focus-visible{outline:2px solid var(--cf-ac);outline-offset:2px}
+  .cf-reason:has(input:checked){border-color:var(--cf-ac);background:color-mix(in srgb, var(--cf-ac) 9%, transparent)}
+  .cf-reason > span{font-size:15px;color:#e7e7ee;line-height:1.4}
+
+  .cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  .cf-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}
+  .cf-btn{font-family:var(--display, sans-serif);font-weight:700;font-size:15px;letter-spacing:.01em;
+    background:var(--cf-ac);color:#fff;border:none;border-radius:10px;padding:14px 26px;cursor:pointer;
+    transition:transform .15s, filter .15s, opacity .15s}
+  .cf-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .cf-btn[disabled]{opacity:.6;cursor:progress;transform:none}
+
+  .cf-status{font-size:14px;margin:0;line-height:1.5}
+  .cf-status.ok{color:#a0e65a}
+  .cf-status.err{color:#f0a6b0}
+
+  @media(max-width:640px){.cf-row{grid-template-columns:1fr}}
+</style>
+
+<script is:inline>
+  (() => {
+    const MAX_FILES = 5;
+    const MAX_EACH = 2 * 1024 * 1024;   // 2MB per image
+    const MAX_TOTAL = 3 * 1024 * 1024;  // keep request comfortably under serverless limit
+    const toBase64 = (file) => new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(String(r.result).split(',')[1]);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+
+    document.querySelectorAll('form[data-cf]').forEach((form) => {
+      const btn = form.querySelector('.cf-btn');
+      const status = form.querySelector('.cf-status');
+      const fileInput = form.querySelector('input[data-files]');
+      const fileHint = form.querySelector('[data-filehint]');
+      const defaultHint = fileHint ? fileHint.textContent : '';
+      const setStatus = (msg, kind) => { status.textContent = msg; status.className = 'cf-status' + (kind ? ' ' + kind : ''); };
+      const clearInvalid = () => form.querySelectorAll('[aria-invalid="true"]').forEach((el) => el.removeAttribute('aria-invalid'));
+
+      if (fileInput && fileHint) {
+        fileInput.addEventListener('change', () => {
+          const files = [...(fileInput.files || [])];
+          if (!files.length) { fileHint.textContent = defaultHint; return; }
+          const names = files.map((f) => f.name).join(', ');
+          fileHint.textContent = `${files.length} file${files.length > 1 ? 's' : ''} selected: ${names}`;
+        });
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        clearInvalid();
+
+        // collect non-file fields
+        const payload = {};
+        for (const [k, v] of new FormData(form).entries()) {
+          if (typeof v === 'string') payload[k] = v;
+        }
+        // multi-select reasons → one comma-joined value
+        const checkedReasons = [...form.querySelectorAll('input[name="reason"]:checked')].map((el) => el.value);
+        if (checkedReasons.length) payload.reason = checkedReasons.join(', ');
+
+        // attach images (if any)
+        if (fileInput && fileInput.files && fileInput.files.length) {
+          const files = [...fileInput.files];
+          if (files.length > MAX_FILES) { setStatus(`Please attach no more than ${MAX_FILES} images.`, 'err'); return; }
+          let total = 0;
+          for (const f of files) {
+            if (f.size > MAX_EACH) { setStatus(`"${f.name}" is too large — keep each image under 2MB.`, 'err'); return; }
+            total += f.size;
+          }
+          if (total > MAX_TOTAL) { setStatus('Those images are a bit large all together. Please keep the total under 3MB, or email them to us.', 'err'); return; }
+          try {
+            payload.attachments = await Promise.all(files.map(async (f) => ({
+              filename: f.name, contentType: f.type, content: await toBase64(f),
+            })));
+          } catch (_) { setStatus('We had trouble reading one of those images. Please try again.', 'err'); return; }
+        }
+
+        setStatus('Sending…', '');
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Sending…';
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+
+          if (res.ok && data.ok) {
+            form.reset();
+            if (fileHint) fileHint.textContent = defaultHint;
+            setStatus(`Thanks, that's logged and on its way to our team. Reference ${data.ref}. We'll be in touch shortly.`, 'ok');
+          } else {
+            if (Array.isArray(data.fields)) {
+              data.fields.forEach((name) => {
+                const el = form.querySelector(`[name="${name}"]`);
+                if (el) el.setAttribute('aria-invalid', 'true');
+              });
+            }
+            const ref = data.ref ? ` (ref ${data.ref})` : '';
+            setStatus((data.error || 'Something went wrong. Please try again.') + ref, 'err');
+            console.error('[contact] submit failed', { status: res.status, data });
+          }
+        } catch (err) {
+          setStatus('We could not reach the server. Please check your connection and try again.', 'err');
+          console.error('[contact] network error', err);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = original;
+        }
+      });
+    });
+  })();
+</script>

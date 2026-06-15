@@ -1,0 +1,65 @@
+---
+import Logo from "./Logo.astro";
+import { company, nav } from "../data/site";
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap finner">
+    <div class="fbrand">
+      <Logo variant="mono" size={34} withWordmark />
+      <p class="ftag">Secure IT. Protected data. Smarter ways of working.</p>
+      <div class="phones">
+        <span>UK <b>{company.phoneUK}</b></span>
+        <span>USA <b>{company.phoneUSA}</b></span>
+        <span>PAC <b>{company.phonePAC}</b></span>
+      </div>
+    </div>
+    <div class="fcols">
+      <div>
+        <h4>Services</h4>
+        <a href="/managed-it">Managed IT</a>
+        <a href="/cyber-security">Cyber Security</a>
+        <a href="/ai-enablement">AI Enablement</a>
+        <a href="/cloud-infrastructure">Cloud & Infrastructure</a>
+      </div>
+      <div>
+        <h4>Industries</h4>
+        <a href="/industries/recruitment">Recruitment</a>
+        <a href="/industries/law-firms">Law Firms</a>
+        <a href="/industries/accountancy">Accountancy</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/support">Support</a>
+        <a href="/contact">Contact</a>
+        <a href="/it-review">Book an IT Review</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap fbar">
+    <span>© {year} {company.name}. All rights reserved.</span>
+    <nav class="flegal" aria-label="Legal">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/cookies">Cookies</a>
+    </nav>
+    <span>Microsoft Solutions Partner</span>
+  </div>
+</footer>
+<style>
+  footer{border-top:1px solid var(--line);background:var(--bg2)}
+  .finner{display:grid;grid-template-columns:1.2fr 2fr;gap:50px;padding-block:70px 50px}
+  .ftag{color:var(--muted);margin:18px 0;max-width:34ch}
+  .phones{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+  .phones b{color:var(--ink);font-weight:600}
+  .fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .fcols h4{font-family:var(--display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:16px}
+  .fcols a{display:block;color:var(--muted);text-decoration:none;font-size:15px;padding:5px 0;transition:color .2s}
+  .fcols a:hover{color:var(--ink)}
+  .fbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-block:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted2)}
+  .flegal{display:flex;gap:18px}
+  .flegal a{color:var(--muted2);text-decoration:none;transition:color .2s}
+  .flegal a:hover{color:var(--ink)}
+  @media(max-width:820px){.finner{grid-template-columns:1fr;gap:40px}.fcols{grid-template-columns:repeat(2,1fr)}.fbar{flex-direction:column;gap:8px}}
+</style>

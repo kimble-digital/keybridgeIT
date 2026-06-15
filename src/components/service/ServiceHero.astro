@@ -1,0 +1,61 @@
+---
+import Ticker from "../shared/Ticker.astro";
+interface Props {
+  eyebrow: string;
+  title: string;          // may contain <span class="hl">...</span> for accent
+  lead?: string;
+  accent?: "teal" | "orange" | "lime" | "purple";
+  accentVar?: string;     // raw CSS colour, e.g. "var(--emerald)" — overrides accent
+  tickerId?: string;
+}
+const { eyebrow, title, lead, accent = "teal", accentVar, tickerId = "svc-ticker" } = Astro.props;
+const styleVar = accentVar ? `--ac:${accentVar}` : undefined;
+---
+<header class={`svc-hero accent-${accent} ${accentVar ? "accent-custom" : ""}`} style={styleVar}>
+  <div class="grid-bg"></div>
+  <div class="glow sg"></div>
+  <div class="wrap svc-inner">
+    <div class="eyebrow shb"><span class="dot"></span> {eyebrow}</div>
+    <h1 class="sh-title" set:html={title}></h1>
+    {lead && <p class="lead sh-lead">{lead}</p>}
+  </div>
+  <Ticker id={tickerId} />
+</header>
+<style>
+  .svc-hero{min-height:88svh;display:flex;flex-direction:column;padding:128px 0 0;position:relative;overflow:hidden}
+  .svc-inner{position:relative;z-index:2;width:100%;flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+  .sg{width:540px;height:540px;top:-140px;left:-60px;opacity:.24}
+  .accent-teal .sg{background:var(--teal)}
+  .accent-orange .sg{background:var(--orange)}
+  .accent-lime .sg{background:var(--lime)}
+  .accent-purple .sg{background:var(--purple)}
+  .accent-custom .sg{background:var(--ac)}
+  .shb{margin-bottom:24px;opacity:0}
+  .sh-title{max-width:16ch;margin-bottom:24px;line-height:1.02}
+  .sh-title :global(.hl){color:var(--teal)}
+  .accent-orange .sh-title :global(.hl){color:var(--orange)}
+  .accent-lime .sh-title :global(.hl){color:var(--lime)}
+  .accent-purple .sh-title :global(.hl){color:var(--purple)}
+  .accent-custom .sh-title :global(.hl){color:var(--ac)}
+  .sh-lead{max-width:54ch;margin-bottom:46px;opacity:0}
+
+  /* bigger hero copy on mobile — more impact, better use of the space */
+  @media(max-width:760px){
+    .sh-lead{font-size:1.26rem;line-height:1.5;max-width:none}
+  }
+</style>
+<script>
+  window.addEventListener('load', () => {
+    if (!window.gsap) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const eyebrow = document.querySelector('.svc-hero .shb');
+    const title = document.querySelector('.svc-hero .sh-title');
+    const lead = document.querySelector('.svc-hero .sh-lead');
+    if (reduce) { [eyebrow, title, lead].forEach(el => el && (el.style.opacity = 1)); return; }
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to(eyebrow, { opacity: 1, y: 0, duration: .6 })
+      .from(title, { opacity: 0, y: 28, duration: .9 }, '-=.3')
+      .to(lead, { opacity: 1, duration: .8 }, '-=.4')
+      .from(lead, { y: 18, duration: .8 }, '<');
+  });
+</script>

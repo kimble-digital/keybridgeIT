@@ -1,0 +1,155 @@
+/* ============================================================
+   KEYBRIDGE IT — Design System
+   Dark, high-tech. Kinetic typography. Brand palette from logo.
+   ============================================================ */
+
+:root{
+  /* Surfaces */
+  --bg:#0A0A0A;
+  --bg2:#111114;
+  --bg3:#16161A;
+  --ink:#F4F2EF;
+  --muted:#9A9AA0;
+  --muted2:#6E6E76;
+
+  /* Brand (from logo) */
+  --purple:#9B3C87;
+  --purple-deep:#7A2E6B;
+  --orange:#E8842B;
+  --lime:#8DBF3F;
+  --teal:#1E6E82;
+  --indigo:#3D52A8;
+  --emerald:#1F8A6B;
+
+  /* Light surfaces (industry pages) */
+  --light:#F4F2EF;
+  --light2:#EAE7E1;
+  --light-ink:#16161A;
+  --light-muted:#5A5A62;
+  --light-line:rgba(0,0,0,.1);
+
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.16);
+
+  /* Type */
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+
+  /* Rhythm */
+  --pad-x:clamp(22px,5vw,48px);
+  --maxw:1180px;
+  --radius:14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--body);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--purple);color:#fff}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+/* ---- Layout helpers ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad-x)}
+.section{padding-block:clamp(72px,10vw,120px)}
+
+/* ---- Type scale ---- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.04}
+h1{font-size:clamp(2.6rem,7vw,6rem);line-height:.98}
+h2{font-size:clamp(2rem,4vw,3.2rem)}
+h3{font-size:1.5rem;letter-spacing:-.01em}
+.lead{font-size:clamp(1rem,1.6vw,1.22rem);color:var(--muted);line-height:1.6}
+.lead b{color:var(--ink);font-weight:600}
+.accent{color:var(--purple)}
+
+/* ---- Buttons ---- */
+.btn-primary{
+  background:var(--purple);color:#fff;padding:16px 30px;border-radius:10px;
+  font-family:var(--display);font-weight:600;font-size:16px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
+  transition:transform .2s, box-shadow .3s, background .2s;
+  box-shadow:0 8px 30px -8px rgba(155,60,135,.6);
+}
+.btn-primary:hover{transform:translateY(-2px);background:var(--purple-deep);box-shadow:0 14px 40px -8px rgba(155,60,135,.7)}
+.btn-ghost{
+  color:var(--ink);text-decoration:none;font-weight:500;font-size:16px;
+  padding:16px 6px;border-bottom:1px solid transparent;transition:border-color .2s;
+}
+.btn-ghost:hover{border-color:var(--purple)}
+
+/* ---- Cards (services / use-cases) ---- */
+.card{
+  text-decoration:none;color:inherit;
+  position:relative;border:1px solid var(--line);border-radius:var(--radius);
+  padding:34px 30px 30px;overflow:hidden;
+  display:flex;flex-direction:column;height:100%;
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));
+  transition:border-color .3s, transform .3s;
+}
+.card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+.card .bartop{position:absolute;top:0;left:0;height:3px;width:0;transition:width .5s ease}
+.card:hover .bartop{width:100%}
+.card h3{margin:18px 0 12px}
+.card p{color:var(--muted);font-size:15px;margin-bottom:22px}
+.card .more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.card .more .arr{transition:transform .25s}
+.card:hover .more .arr{transform:translateX(5px)}
+.card .ic{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:16px}
+
+/* accent variants */
+.v-teal .bartop{background:var(--teal)} .v-teal .more{color:var(--teal)} .v-teal .ic{background:rgba(30,110,130,.16);color:var(--teal)}
+.v-orange .bartop{background:var(--orange)} .v-orange .more{color:var(--orange)} .v-orange .ic{background:rgba(232,132,43,.16);color:var(--orange)}
+.v-lime .bartop{background:var(--lime)} .v-lime .more{color:var(--lime)} .v-lime .ic{background:rgba(141,191,63,.16);color:var(--lime)}
+.v-purple .bartop{background:var(--purple)} .v-purple .more{color:var(--purple)} .v-purple .ic{background:rgba(155,60,135,.18);color:#d98ac7}
+
+/* ---- Grid utilities ---- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+
+/* ---- Atmosphere ---- */
+/* Section background variants for alternating rhythm */
+.sec-tint{background:var(--bg2)}
+.sec-tint2{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+/* Light section (industry pages): flips ink/muted/line within */
+.sec-light{background:var(--light);color:var(--light-ink)}
+.sec-light h1,.sec-light h2,.sec-light h3,.sec-light h4{color:var(--light-ink)}
+.sec-light p{color:var(--light-muted)}
+.sec-light .eyebrow{color:var(--light-muted)}
+.sec-light2{background:var(--light2);color:var(--light-ink)}
+.sec-light2 h1,.sec-light2 h2,.sec-light2 h3,.sec-light2 h4{color:var(--light-ink)}
+.sec-light2 p{color:var(--light-muted)}
+.sec-light2 .eyebrow{color:var(--light-muted)}
+.sec-band{position:relative;overflow:hidden;border-block:1px solid var(--line)}
+.sec-band .band-glow{position:absolute;z-index:0;border-radius:50%;filter:blur(130px);opacity:.1;pointer-events:none;width:600px;height:600px}
+.sec-band > .wrap{position:relative;z-index:2}
+.grid-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 30% 40%,#000,transparent 75%);
+  mask-image:radial-gradient(ellipse 80% 60% at 30% 40%,#000,transparent 75%);
+  opacity:.6;
+}
+.glow{position:absolute;z-index:0;border-radius:50%;filter:blur(120px);pointer-events:none}
+
+/* ---- Scroll reveal base ----
+   Hidden ONLY when JS is active (html.js). Without JS, content shows.
+   This prevents content ever being stuck invisible if GSAP fails to load. */
+html.js .reveal{opacity:0;transform:translateY(28px)}
+
+/* ---- Accessibility ---- */
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  html.js .reveal{opacity:1;transform:none}
+}

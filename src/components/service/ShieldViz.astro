@@ -1,0 +1,53 @@
+---
+// Animated "security holds up when tested" shield visual. Pure SVG + CSS.
+interface Props { accent?: string }
+const { accent = "var(--orange)" } = Astro.props;
+---
+<div class="shieldviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 420 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Layered security protection">
+    <defs>
+      <clipPath id="shieldClip">
+        <path d="M210 30 L340 78 L340 190 C340 268 285 312 210 338 C135 312 80 268 80 190 L80 78 Z"/>
+      </clipPath>
+    </defs>
+
+    <!-- outer concentric rings (layers) -->
+    <g class="rings" stroke="var(--ac)" fill="none">
+      <path d="M210 16 L356 70 L356 192 C356 280 295 328 210 356 C125 328 64 280 64 192 L64 70 Z" stroke-opacity=".22"/>
+      <path d="M210 30 L340 78 L340 190 C340 268 285 312 210 338 C135 312 80 268 80 190 L80 78 Z" stroke-opacity=".4"/>
+    </g>
+
+    <!-- shield body -->
+    <path d="M210 44 L324 86 L324 188 C324 256 276 296 210 320 C144 296 96 256 96 188 L96 86 Z"
+      fill="var(--ac)" fill-opacity=".06" stroke="var(--ac)" stroke-width="2"/>
+
+    <!-- scanning sweep clipped to shield -->
+    <g clip-path="url(#shieldClip)">
+      <rect class="scan" x="80" y="30" width="260" height="46" fill="var(--ac)" opacity=".18"/>
+    </g>
+
+    <!-- tick / checkmark -->
+    <path class="tick" d="M168 192 L198 222 L256 156" stroke="var(--ac)" stroke-width="7"
+      stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- orbiting dot -->
+    <circle class="orbit-dot" r="5" fill="var(--ac)"/>
+  </svg>
+</div>
+<style>
+  .shieldviz{width:100%;max-width:440px}
+  .shieldviz svg{width:100%;height:auto;overflow:visible}
+  .scan{animation:scan 3.4s ease-in-out infinite}
+  @keyframes scan{0%{transform:translateY(0)}50%{transform:translateY(250px)}100%{transform:translateY(0)}}
+  .tick{stroke-dasharray:200;stroke-dashoffset:200;animation:draw 3.4s ease-in-out infinite}
+  @keyframes draw{0%,40%{stroke-dashoffset:200}60%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:200}}
+  .rings path{animation:ringpulse 3.4s ease-in-out infinite}
+  .rings path:nth-child(1){animation-delay:.3s}
+  @keyframes ringpulse{0%,100%{stroke-opacity:.15}50%{stroke-opacity:.5}}
+  .orbit-dot{filter:drop-shadow(0 0 6px var(--ac));offset-path:path("M210 44 L324 86 L324 188 C324 256 276 296 210 320 C144 296 96 256 96 188 L96 86 Z");animation:orbit 6s linear infinite}
+  @keyframes orbit{from{offset-distance:0%}to{offset-distance:100%}}
+  @media(prefers-reduced-motion:reduce){
+    .scan,.tick,.rings path,.orbit-dot{animation:none}
+    .tick{stroke-dashoffset:0}
+  }
+</style>

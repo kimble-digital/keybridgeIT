@@ -1,0 +1,73 @@
+---
+// Animated "agent runs the work" automation flow. Pure SVG + CSS.
+interface Props { accent?: string; compact?: boolean }
+const { accent = "var(--lime)", compact = false } = Astro.props;
+---
+<div class={`flowviz ${compact ? "compact" : ""}`} style={`--ac:${accent}`}>
+  <svg viewBox="0 0 460 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI agent automating tasks">
+    <!-- connecting paths -->
+    <g stroke="var(--line-strong)" stroke-width="1.5" fill="none">
+      <path d="M40 100 H170"/>
+      <path d="M250 100 C300 100 300 40 360 40"/>
+      <path d="M250 100 H360"/>
+      <path d="M250 100 C300 100 300 160 360 160"/>
+    </g>
+
+    <!-- flowing pulses -->
+    <circle r="4" fill="var(--ac)" class="p p1">
+      <animateMotion dur="2.6s" repeatCount="indefinite" path="M40 100 H170"/>
+    </circle>
+    <circle r="4" fill="var(--ac)" class="p p2">
+      <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M250 100 C300 100 300 40 360 40"/>
+    </circle>
+    <circle r="4" fill="var(--ac)" class="p p3">
+      <animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite" path="M250 100 H360"/>
+    </circle>
+    <circle r="4" fill="var(--ac)" class="p p4">
+      <animateMotion dur="2.6s" begin="1.7s" repeatCount="indefinite" path="M250 100 C300 100 300 160 360 160"/>
+    </circle>
+
+    <!-- trigger -->
+    <circle cx="40" cy="100" r="14" fill="var(--bg)" stroke="var(--ac)" stroke-width="2" class="trigger"/>
+    <text x="40" y="105" text-anchor="middle" font-size="13" fill="var(--ac)" font-family="monospace">&#9889;</text>
+
+    <!-- agent hub -->
+    <rect x="172" y="72" width="78" height="56" rx="12" fill="var(--ac)" fill-opacity=".1" stroke="var(--ac)" stroke-width="2"/>
+    <text x="211" y="98" text-anchor="middle" font-size="12" fill="var(--ac)" font-family="var(--display)" font-weight="700">AGENT</text>
+    <g class="cog">
+      <circle cx="211" cy="112" r="7" fill="none" stroke="var(--ac)" stroke-width="2"/>
+      <circle cx="211" cy="112" r="2.5" fill="var(--ac)"/>
+    </g>
+
+    <!-- output task nodes -->
+    <g class="tasks">
+      <rect x="360" y="28" width="84" height="24" rx="6" fill="var(--bg2)" stroke="var(--ac)" stroke-opacity=".5"/>
+      <rect x="360" y="88" width="84" height="24" rx="6" fill="var(--bg2)" stroke="var(--ac)" stroke-opacity=".5"/>
+      <rect x="360" y="148" width="84" height="24" rx="6" fill="var(--bg2)" stroke="var(--ac)" stroke-opacity=".5"/>
+    </g>
+    <g fill="var(--ac)" class="checks" font-size="13" font-family="monospace">
+      <text x="372" y="45">&#10003;</text>
+      <text x="372" y="105">&#10003;</text>
+      <text x="372" y="165">&#10003;</text>
+    </g>
+  </svg>
+</div>
+<style>
+  .flowviz{width:100%;max-width:460px}
+  .flowviz.compact{max-width:300px}
+  .flowviz svg{width:100%;height:auto;overflow:visible}
+  .p{filter:drop-shadow(0 0 5px var(--ac))}
+  .trigger{animation:trigpulse 2.6s ease-in-out infinite}
+  @keyframes trigpulse{0%,100%{stroke-opacity:.5}40%{stroke-opacity:1}}
+  .cog{transform-origin:211px 112px;animation:spin 5s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .checks text{opacity:0;animation:pop 2.6s ease-in-out infinite}
+  .checks text:nth-child(1){animation-delay:1.6s}
+  .checks text:nth-child(2){animation-delay:1.8s}
+  .checks text:nth-child(3){animation-delay:2s}
+  @keyframes pop{0%,55%{opacity:0}70%,95%{opacity:1}100%{opacity:0}}
+  @media(prefers-reduced-motion:reduce){
+    .p,.trigger,.cog,.checks text{animation:none}
+    .checks text{opacity:1}
+  }
+</style>

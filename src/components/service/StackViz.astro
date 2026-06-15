@@ -1,0 +1,52 @@
+---
+// "Built on the right foundations" — a labelled, solid stack that builds from the base up,
+// with the agent layer landing on top. Equal-width layers = a deliberate, solid base.
+interface Props { accent?: string }
+const { accent = "var(--lime)" } = Astro.props;
+const layers = [
+  { label: "15 years of IT", k: "base" },
+  { label: "Security", k: "" },
+  { label: "Governance", k: "" },
+];
+---
+<div class="stackviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 340 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agents built on secure, governed foundations">
+    <!-- foundation layers (build bottom-up) -->
+    <g class="layers">
+      {layers.map((l, i) => (
+        <g class="layer" style={`--d:${(layers.length - 1 - i) * 0.7}s`}>
+          <rect x="50" y={196 - i * 46} width="240" height="38" rx="8"
+            fill="var(--ac)" fill-opacity={0.05 + i * 0.04} stroke="var(--ac)" stroke-width="1.5" stroke-opacity=".55"/>
+          <text x="170" y={196 - i * 46 + 24} text-anchor="middle" font-family="var(--display)" font-weight="600"
+            font-size="14" fill="var(--ac)" fill-opacity=".9">{l.label}</text>
+        </g>
+      ))}
+    </g>
+
+    <!-- agent layer lands on top -->
+    <g class="agent">
+      <rect x="96" y="50" width="148" height="46" rx="10"
+        fill="var(--ac)" fill-opacity=".16" stroke="var(--ac)" stroke-width="2"/>
+      <circle cx="120" cy="73" r="6" fill="var(--ac)"/>
+      <text x="160" y="78" text-anchor="middle" font-family="var(--display)" font-weight="700"
+        font-size="15" fill="var(--ac)">AGENT</text>
+    </g>
+
+    <!-- connecting spine -->
+    <line x1="170" y1="96" x2="170" y2="158" stroke="var(--ac)" stroke-width="1.5" stroke-dasharray="3 4" class="spine"/>
+  </svg>
+</div>
+<style>
+  .stackviz{width:100%;max-width:440px}
+  .stackviz svg{width:100%;height:auto;overflow:visible}
+  .layer{transform-box:fill-box;animation:rise 8s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes rise{0%{opacity:0;transform:translateY(14px)}10%,92%{opacity:1;transform:translateY(0)}100%{opacity:1;transform:translateY(0)}}
+  .agent{animation:land 8s ease-in-out infinite;animation-delay:2.4s}
+  @keyframes land{0%,24%{opacity:0;transform:translateY(-16px)}36%,92%{opacity:1;transform:translateY(0)}100%{opacity:1}}
+  .spine{animation:spinefade 8s ease-in-out infinite;animation-delay:3s}
+  @keyframes spinefade{0%,34%{opacity:0}46%,92%{opacity:.6}100%{opacity:0}}
+  @media(prefers-reduced-motion:reduce){
+    .layer,.agent,.spine{animation:none;opacity:1;transform:none}
+    .spine{opacity:.6}
+  }
+</style>

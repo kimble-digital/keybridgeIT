@@ -1,0 +1,138 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import ServiceGrid from "../components/ServiceGrid.astro";
+import CloudControl from "../components/CloudControl.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { industries } from "../data/site";
+
+const switchReasons = [
+  "Their current provider has become reactive",
+  "Security concerns have started to grow",
+  "Support isn't keeping pace with the business",
+  "Remote and hybrid working has become difficult to manage",
+  "They want to explore AI but aren't sure where to start",
+  "They've simply outgrown their existing provider",
+];
+---
+<Base>
+  <Hero />
+
+  <!-- You shouldn't have to think about your IT -->
+  <section class="section">
+    <div class="wrap split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot"></span> THE STANDARD</div>
+        <h2>You shouldn't have to think about your IT & Security</h2>
+      </div>
+      <div class="reveal splitbody">
+        <p>When technology works properly, it fades into the background and your team simply gets on with the job. When it doesn't, it becomes a constant drain on productivity, security and peace of mind.</p>
+        <p>Too many providers settle for the bare minimum, leaving quiet gaps in security, charging for every small request and reassuring clients that everything is fine when it isn't.</p>
+        <p><b>We take a different approach.</b></p>
+        <p>Our job is to make technology one less thing for you to worry about. That means secure systems, proactive support, honest advice and a team that fixes problems before they become business risks.</p>
+        <p>That's the standard every client should expect. The difference is what comes next.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiceGrid />
+
+  <!-- Live security operations dashboard -->
+  <CloudControl />
+
+  <!-- Why Keybridge -->
+  <section class="section why">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> WHY KEYBRIDGE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:30px">Built inside recruitment. Trusted across professional services.</h2>
+      <div class="whygrid">
+        <div class="whycol reveal">
+          <p class="wlead">Before founding Keybridge, our founder spent eleven years running IT inside recruitment firms. That experience shaped how we approach technology today.</p>
+          <p>We understand what happens when systems fail in businesses that depend on people, information and client trust. We understand the pressure of deadlines, the importance of confidentiality and the reality that downtime costs money.</p>
+          <p>Fifteen years later, that same mindset helps us support recruitment agencies, law firms and accountancy practices across the UK.</p>
+        </div>
+        <div class="whycol reveal">
+          <p class="wlead">Alongside that industry experience, clients benefit from a team of 25 specialists, Microsoft Solutions Partner status, genuine 24/7 support and security built into everything we do. Every client also has a dedicated UK-based account manager who understands their business, meets with them regularly and remains accountable for the relationship.</p>
+          <p class="whyline">We're large enough to deliver enterprise-grade expertise, yet small enough to know our clients personally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why firms switch -->
+  <section class="section switch">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> WHY FIRMS SWITCH</div>
+      <h2 class="reveal" style="margin-bottom:24px;max-width:22ch">Why firms switch to Keybridge</h2>
+      <p class="reveal switchintro">Most clients don't start looking for a new IT partner because everything is working perfectly. They come to us because:</p>
+      <ul class="switchlist">
+        {switchReasons.map((r) => <li class="reveal"><span class="sdot"></span>{r}</li>)}
+      </ul>
+      <p class="reveal switchout">Whatever the reason, we start with an honest assessment of where things stand today and where improvements can be made.</p>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <div class="wrap reviews-link reveal">
+    <a href="https://www.google.com/search?si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOf2Jte0pM47elys1dtOuaIRE4nLGaSKu0SNCaQAe6ZHnwsY7AUD-0u3-P1g7eZUn7kxfm12Zi0wph50OBHiu_yhaiFfsfMs7MGlvIvI47_IO_4gqVQ%3D%3D&q=Keybridge+IT+Solutions+Reviews" target="_blank" rel="noopener noreferrer">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      See all our reviews on Google
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <!-- Who we help -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> WHO WE HELP</div>
+      <h2 class="reveal" style="margin-bottom:24px">Who we help</h2>
+      <p class="reveal" style="color:var(--muted);max-width:60ch;margin-bottom:46px;line-height:1.7">We specialise in organisations where security, reliability and confidentiality matter.</p>
+      <div class="grid-3">
+        {industries.map((ind, i) => (
+          <a href={ind.href} class={`card reveal ${["v-teal","v-orange","v-lime"][i]}`}>
+            <div class="bartop"></div>
+            <h3>{ind.title}</h3>
+            <p>{ind.blurb}</p>
+            <span class="more">Learn more <span class="arr">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Discover the Keybridge Difference"
+    body="Whether you're reviewing your current provider, strengthening your security or exploring how AI could create value inside your business, we're happy to start with an honest conversation."
+    note="<span>No sales pitch. No obligation. Just practical advice</span><br><span>from people who understand your world.</span>"
+  />
+</Base>
+
+<style>
+  .split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .splitbody p{color:var(--muted);margin-bottom:18px;line-height:1.75}
+  .splitbody b{color:var(--ink)}
+  .whygrid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+  .whycol{display:flex;flex-direction:column}
+  .whycol p{color:var(--muted);line-height:1.75;margin-bottom:20px}
+  .whycol p:last-child{margin-bottom:0}
+  .wlead{color:var(--ink)!important}
+  .whyline{margin-top:auto;padding-top:30px;font-family:var(--display);font-size:1.25rem;line-height:1.4;color:var(--ink)}
+  .why{border-top:1px solid var(--line)}
+  .switch{border-top:1px solid var(--line)}
+  .switchintro{color:var(--muted);max-width:60ch;line-height:1.7;margin-bottom:32px}
+  .switchlist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-bottom:36px}
+  .switchlist li{display:flex;gap:14px;align-items:flex-start;color:var(--ink);padding:14px 0;border-bottom:1px solid var(--line)}
+  .sdot{width:7px;height:7px;border-radius:50%;background:var(--purple);flex:0 0 auto;margin-top:9px}
+  .switchout{color:var(--muted);max-width:60ch;line-height:1.7}
+
+  .reviews-link{text-align:center;margin-top:-32px;padding-bottom:24px}
+  .reviews-link a{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .reviews-link a:hover{color:var(--ink)}
+  .reviews-link .stars{color:#f5b301;letter-spacing:2px;font-size:14px}
+  .reviews-link .arr{transition:transform .2s}
+  .reviews-link a:hover .arr{transform:translateX(3px)}
+
+  @media(max-width:900px){.split{grid-template-columns:1fr;gap:30px}.whygrid{grid-template-columns:1fr;gap:24px}.whyline{margin-top:8px;padding-top:0}.switchlist{grid-template-columns:1fr}}
+</style>

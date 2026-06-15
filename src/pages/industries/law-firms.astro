@@ -1,0 +1,141 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import ConfidentialViz from "../../components/industry/ConfidentialViz.astro";
+import SecureDesktopViz from "../../components/industry/SecureDesktopViz.astro";
+import BigQuote from "../../components/shared/BigQuote.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--indigo)";
+
+const services = [
+  { name: "Cyber Security", href: "/cyber-security", label: "Cyber Security Services", body: "We treat confidentiality as the starting point, not the small print. From Cyber Essentials and Cyber Essentials Plus through to advanced security controls, monitoring and governance, we help firms protect privileged information and meet the expectations of clients, insurers and regulators." },
+  { name: "Managed IT", href: "/managed-it", label: "Managed IT Services", body: "A dependable technology foundation that keeps the firm operating smoothly. From Microsoft 365 and cloud services through to devices, support and proactive maintenance, we keep systems secure, available and reliable so technology never becomes the reason work stops." },
+  { name: "AI Enablement", href: "/ai-enablement", label: "AI for Law Firms", body: "AI can help reduce the operational burden surrounding legal work. From client onboarding and matter administration through to document review and knowledge search, AI agents can support repetitive processes while keeping judgement, responsibility and legal advice where they belong, with your lawyers." },
+];
+
+const faqs = [
+  { q: "How do you protect client confidentiality and privilege?", a: "We control exactly who and what can access sensitive information, restrict permissions appropriately and ensure privileged material remains protected throughout its lifecycle. Any AI solutions are governed in the same way, with human oversight remaining wherever judgement or privilege is involved." },
+  { q: "Will this help with our SRA and compliance obligations?", a: "Yes. We build with governance, oversight and auditability in mind and are happy to work alongside your risk and compliance teams to ensure technology supports your professional obligations." },
+  { q: "Can your team work securely from home, court or their own devices?", a: "Yes. Many firms use Azure Virtual Desktop to provide secure access to applications and client information without storing data on personal devices. Fee earners can work from almost anywhere while confidential information remains governed and protected within a central environment." },
+  { q: "Will switching provider disrupt live matters?", a: "Very little. We plan transitions carefully, move systems methodically and handle the heavy lifting in the background so your team can continue working throughout the process." },
+  { q: "How does AI fit into a law firm safely?", a: "AI is most effective when supporting routine, repeatable work. Client onboarding, document review, knowledge search and matter administration are all areas where AI can help. Legal advice, judgement and professional responsibility remain with your lawyers." },
+  { q: "How is support delivered?", a: "Clients receive access to our help desk, proactive monitoring services and a dedicated UK-based account manager. Support is available around the clock, ensuring assistance is available whenever it's needed." },
+];
+---
+<Base title="IT Support for Law Firms — Keybridge IT" description="For a law firm, IT is a confidentiality question before it's anything else. Cyber security, managed IT and AI built for firms handling privileged information.">
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="LAW FIRMS"
+    title={`IT support for <span class="hl">law firms</span> with Security Built In`}
+    lead="For a law firm, IT is a confidentiality question before it's anything else. The information you hold is privileged, your obligations under the SRA are strict, and a breach is a reputational event as much as a technical one. At the same time, highly qualified fee earners often lose chargeable hours to administration that doesn't require legal expertise."
+    tickerId="law-ticker"
+  />
+
+  <!-- Pressures on a modern firm (LIGHT) -->
+  <section class="section sec-light">
+    <div class="wrap und-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> CONFIDENTIALITY FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">We understand the pressures on a modern firm</h2>
+        <p style="line-height:1.75;margin-bottom:18px">Two things shape technology in legal services. The first is confidentiality. Client privilege, SRA obligations and reputational risk mean nothing can be left exposed and nothing can be treated casually.</p>
+        <p style="line-height:1.75;margin-bottom:18px">The second is utilisation. Every hour a fee earner spends on matter administration, document handling or routine processes is an hour that cannot be billed.</p>
+        <p style="line-height:1.75;color:var(--light-ink);font-weight:500">A good technology partner protects the first and improves the second.</p>
+      </div>
+      <div class="reveal viz-wrap"><ConfidentialViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Everything your firm needs (DARK, 3 cards, Cyber first) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> ONE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">Everything your firm needs from one partner</h2>
+      <div class="svc-cards">
+        {services.map((s) => (
+          <a href={s.href} class="svc-card reveal">
+            <div class="svc-bar"></div>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="svc-more">{s.label} &#8594;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Azure Virtual Desktop feature section (LIGHT) -->
+  <section class="section sec-light2">
+    <div class="wrap avd-split">
+      <div class="reveal viz-wrap"><SecureDesktopViz accent={AC} /></div>
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> SECURE ANYWHERE</div>
+        <h2 style="max-width:22ch;margin-bottom:24px">Secure working from anywhere without compromising confidentiality</h2>
+        <p style="line-height:1.75;margin-bottom:18px">Modern legal work doesn't only happen in the office. Fee earners work from home, from court, from client sites and increasingly from their own devices. The challenge is obvious. Privileged client information cannot be left sitting on personal laptops or unsecured machines.</p>
+        <p style="line-height:1.75;margin-bottom:18px">That's where Azure Virtual Desktop comes in. Instead of storing data on the device being used, each person accesses a secure Windows desktop running inside Microsoft's cloud environment. The applications, documents and data stay inside the secure environment rather than being downloaded onto the machine in front of them.</p>
+        <p style="line-height:1.75;color:var(--light-ink);font-weight:500;margin-bottom:18px">The result is flexible working without losing control of confidential information.</p>
+        <p style="line-height:1.75">It's also a simpler alternative to many traditional remote-access solutions. There are no complex VPNs, gateway servers or ageing Citrix environments to maintain, and users benefit from a modern desktop experience that supports Teams, video conferencing and everyday legal work.</p>
+        <a href="/cloud-infrastructure" class="avd-link">Cloud &amp; Microsoft 365 Services &#8594;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why law firms choose Keybridge (DARK) -->
+  <section class="section sec-tint">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why law firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink);margin-bottom:0">In legal services, the real question isn't whether technology can help. It's whether it can be trusted near privileged and confidential information. That's the standard we build to.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We've spent fifteen years helping organisations protect highly sensitive information. Combined with our Microsoft partnership and dedicated AI practice, that experience allows us to approach technology differently from many providers. Confidentiality, governance and oversight aren't features bolted on afterwards. They're the starting point.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Clients benefit from enterprise-grade security, genuine 24/7 support and a dedicated UK-based account manager who understands their firm and remains accountable for the relationship.</p>
+        <p style="color:var(--ink);line-height:1.6;font-weight:500">We're large enough to protect you properly, yet small enough to know your business personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent={AC}
+    quote="An IT support team that actually cares about my needs."
+    name="Nicholas Clarkin"
+  />
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll review how your firm's technology is performing today, identify any risks around confidentiality, security or resilience, and show you where improvements could be made."
+    btn="Book a Free IT Review"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .und-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .avd-split{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+
+  /* larger body copy in the opening row + avoid single-word orphan lines */
+  .und-split p{font-size:1.16rem;text-wrap:pretty}
+
+  .svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .svc-card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .svc-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .svc-bar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--indigo);transition:width .5s}
+  .svc-card:hover .svc-bar{width:100%}
+  .svc-card h3{margin-bottom:14px;font-size:1.4rem}
+  .svc-card p{color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .svc-more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--indigo)}
+
+  .avd-link{display:inline-block;margin-top:22px;font-family:var(--display);font-weight:600;font-size:14px;color:var(--indigo);text-decoration:none}
+
+  @media(max-width:900px){
+    .und-split,.avd-split,.why-split,.svc-cards{grid-template-columns:1fr;gap:30px}
+    .avd-split .viz-wrap{order:-1}
+  }
+</style>

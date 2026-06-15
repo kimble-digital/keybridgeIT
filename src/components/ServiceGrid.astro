@@ -1,0 +1,27 @@
+---
+import { services } from "../data/site";
+---
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow reveal"><span class="dot"></span> WHAT WE DO</div>
+      <h2 class="reveal">Three services, one partner.</h2>
+    </div>
+    <div class="grid-3">
+      {services.map((s) => (
+        <article class={`card ${s.variant} reveal`}>
+          <div class="bartop"></div>
+          <div class="ic">{s.eyebrow}</div>
+          <h3>{s.title}</h3>
+          <p>{s.blurb}</p>
+          <a href={s.href} class="more">{s.cta} <span class="arr">→</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .sec-head{margin-bottom:56px}
+  .sec-head .eyebrow{margin-bottom:18px}
+  .sec-head h2{max-width:18ch}
+</style>

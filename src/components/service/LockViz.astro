@@ -1,0 +1,38 @@
+---
+// Governance / permissions visual: a padlock with toggling permission rows.
+interface Props { accent?: string }
+const { accent = "var(--lime)" } = Astro.props;
+---
+<div class="lockviz" style={`--ac:${accent}`}>
+  <svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Governed agent permissions">
+    <!-- padlock -->
+    <g class="lock">
+      <path d="M70 96 V74 a30 30 0 0 1 60 0 V96" stroke="var(--ac)" stroke-width="3" fill="none"/>
+      <rect x="56" y="96" width="88" height="74" rx="12" fill="var(--ac)" fill-opacity=".08" stroke="var(--ac)" stroke-width="3"/>
+      <circle cx="100" cy="128" r="8" fill="var(--ac)"/>
+      <rect x="97" y="132" width="6" height="20" rx="3" fill="var(--ac)"/>
+    </g>
+    <!-- permission rows -->
+    <g class="perms" font-family="var(--body)">
+      {[0,1,2].map((i) => (
+        <g style={`--d:${i * 0.5}s`} class="prow">
+          <rect x="180" y={68 + i * 42} width="118" height="30" rx="8" fill="var(--bg2)" stroke="var(--ac)" stroke-opacity=".3"/>
+          <rect x="190" y={76 + i * 42} width="40" height="14" rx="3" fill="var(--ac)" fill-opacity=".25"/>
+          <g class="tog">
+            <rect x="262" y={75 + i * 42} width="26" height="16" rx="8" fill="var(--ac)" fill-opacity=".25"/>
+            <circle cx="280" cy={83 + i * 42} r="6" fill="var(--ac)"/>
+          </g>
+        </g>
+      ))}
+    </g>
+  </svg>
+</div>
+<style>
+  .lockviz{width:100%;max-width:340px}
+  .lockviz svg{width:100%;height:auto;overflow:visible}
+  .lock{animation:lockpulse 3.5s ease-in-out infinite}
+  @keyframes lockpulse{0%,100%{opacity:.85}50%{opacity:1}}
+  .prow .tog circle{animation:toggle 3.5s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes toggle{0%,45%{transform:translateX(-14px);opacity:.5}55%,100%{transform:translateX(0);opacity:1}}
+  @media(prefers-reduced-motion:reduce){.lock,.prow .tog circle{animation:none}.prow .tog circle{transform:none}}
+</style>

@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Page not found — Keybridge IT">
+  <section class="nf">
+    <div class="grid-bg"></div>
+    <div class="glow nfg"></div>
+    <div class="wrap nfinner">
+      <div class="code">404</div>
+      <h1>That page has gone walkabout</h1>
+      <p class="lead" style="margin:20px 0 34px;max-width:42ch">The link may be broken or the page may have moved. Let's get you back on track.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="/" class="btn-primary">Back to home →</a>
+        <a href="/contact" class="btn-ghost">Contact us</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf{position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;padding:140px 0}
+  .nfg{width:500px;height:500px;background:var(--purple);top:0;left:30%;opacity:.16}
+  .nfinner{position:relative;z-index:2}
+  .code{font-family:var(--display);font-weight:700;font-size:clamp(4rem,14vw,9rem);color:var(--purple);line-height:1;letter-spacing:-.04em}
+</style>

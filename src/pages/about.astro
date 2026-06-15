@@ -1,0 +1,205 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+// Self-hosted video. Drop these files into  public/videos/  and they resolve at
+// the paths below (no Webflow CDN). Provide mp4 + webm + a poster frame.
+const VIDEO_MP4    = "/videos/keybridge-hero.mp4";
+const VIDEO_WEBM   = "/videos/keybridge-hero.webm";
+const VIDEO_POSTER = "/videos/keybridge-hero-poster.jpg";
+---
+<Base
+  title="About Keybridge IT — Fifteen Years of Dependable IT Support"
+  description="Keybridge began fifteen years ago with one belief: IT should be secure, reliable and genuinely useful. A team of 25 specialists supporting 200+ organisations across the UK."
+>
+  <div class="ab">
+
+    <!-- HERO -->
+    <header class="ab-hero">
+      <div class="ab-hero-text">
+        <div class="ab-eyebrow">About Keybridge</div>
+        <h1 class="ab-h1">Fifteen years of<br>dependable IT support</h1>
+        <p>Keybridge began with a simple frustration. Our founder had spent more than a decade running IT inside recruitment businesses and kept seeing the same pattern: companies that relied entirely on technology being supported by providers doing the bare minimum.</p>
+        <p>He believed it could be done properly, so he built a company to do exactly that.</p>
+        <div class="ab-cta-row">
+          <a href="/it-review" class="btn-primary">Book a Free IT Review →</a>
+          <a href="#what" class="btn-ghost">What We Do</a>
+        </div>
+      </div>
+      <div class="ab-leopard">
+        <video autoplay loop muted playsinline poster={VIDEO_POSTER}>
+          <source src={VIDEO_MP4} type="video/mp4" />
+          <source src={VIDEO_WEBM} type="video/webm" />
+        </video>
+      </div>
+    </header>
+
+    <!-- STATS -->
+    <div class="ab-stats">
+      <div class="ab-stats-inner">
+        <span>15 Years</span><span>25 Specialists</span><span>200+ Clients</span><span>5,000+ Devices</span><span>130+ Five-Star Reviews</span><span>Microsoft Partner</span>
+      </div>
+    </div>
+
+    <!-- INTRO continuation -->
+    <section class="ab-block" style="padding-bottom:40px">
+      <div class="wrap">
+        <p class="ab-lead">Today, Keybridge is a team of 25 specialists supporting more than 200 organisations across the UK. We've grown well beyond our recruitment roots and now work with law firms, accountancies, consultancies and professional-services businesses of all sizes.</p>
+        <p class="ab-lead ab-strong">What hasn't changed is the belief we started with: IT should be secure, reliable and genuinely useful, and the people behind it should actually know your name.</p>
+      </div>
+    </section>
+
+    <!-- WHAT WE DO -->
+    <section class="ab-block" id="what" style="padding-top:50px">
+      <div class="wrap">
+        <div class="ab-kicker">What We Do</div>
+        <h2 class="ab-h2">Three connected services, working as one system</h2>
+        <p class="ab-lead">We help professional-services firms stay secure, work smarter and keep their businesses running. Many providers specialise in one of these areas. We bring all three together, so your technology, security and automation work as a single system rather than a collection of disconnected services.</p>
+        <div class="ab-cards">
+          <a href="/managed-it" class="ab-card"><div class="ab-bar"></div><div class="ab-tag">Support</div><h3 class="ab-h3">Managed IT Services</h3><p>Reliable support, proactive monitoring and expert advice that keeps your technology working day and night.</p></a>
+          <a href="/cyber-security" class="ab-card"><div class="ab-bar"></div><div class="ab-tag">Cyber</div><h3 class="ab-h3">Cyber Security</h3><p>Protection that holds up when it's tested, helping you meet client expectations, regulatory obligations and cyber-insurance requirements.</p></a>
+          <a href="/ai-enablement" class="ab-card"><div class="ab-bar"></div><div class="ab-tag">AI</div><h3 class="ab-h3">AI Enablement</h3><p>Practical automation that removes repetitive work, streamlines processes and gives your team more time for higher-value activity.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE BELIEVE -->
+    <section class="ab-block">
+      <div class="wrap">
+        <div class="ab-kicker">What We Believe</div>
+        <h2 class="ab-h2">A few principles we won't compromise on</h2>
+        <div class="ab-beliefs">
+          <div class="ab-belief"><div class="ab-num">01</div><h3 class="ab-h3">We're honest, even when it costs us</h3><p>We'd rather lose a deal than recommend something a client doesn't need, or hand over a certificate that hasn't been properly earned. Our reputation depends on doing things properly, even when that means difficult conversations.</p></div>
+          <div class="ab-belief"><div class="ab-num">02</div><h3 class="ab-h3">We speak plainly</h3><p>Most of the people we work with aren't technical and don't want to be. We explain technology in plain English, give clear recommendations and help clients make informed decisions, without hiding behind jargon.</p></div>
+          <div class="ab-belief"><div class="ab-num">03</div><h3 class="ab-h3">We build security in by default</h3><p>Being looked after should mean being protected. Every client sits on a minimum security standard from day one, because good security shouldn't be an optional extra. It should be part of the service.</p></div>
+          <div class="ab-belief"><div class="ab-num">04</div><h3 class="ab-h3">We keep it personal</h3><p>Every client has a dedicated UK-based account manager who understands their business and meets them face to face. You're never just a ticket number. Large enough for enterprise-grade expertise, small enough to know you.</p></div>
+          <div class="ab-belief ab-span"><div class="ab-num">05</div><h3 class="ab-h3">We listen when things go wrong</h3><p>No business gets everything right all the time. That's why we actively encourage clients to tell us when we've fallen short, so we can fix it quickly. It's a large part of why we've earned more than 130 five-star reviews and why many clients have stayed with us for years.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM + WHO WE HELP -->
+    <section class="ab-block">
+      <div class="wrap ab-split">
+        <div>
+          <div class="ab-kicker">The Team Behind It</div>
+          <h2 class="ab-h2 ab-h2-sm">People first, credentials second</h2>
+          <p class="ab-lead ab-lead-sm">Keybridge is led by our founder and CEO and supported by a team of specialists across IT support, cyber security and AI. During business hours you'll work with our UK-based team. Outside those hours, our experienced English-speaking colleagues in the Philippines provide overnight and weekend support, so there is always a real person available when you need help.</p>
+          <p class="ab-lead ab-lead-sm">Those credentials matter, but our clients stay because of the people behind them. We build long-term relationships, take ownership of problems and genuinely care about helping businesses succeed.</p>
+          <div class="ab-chips">
+            <span class="ab-chip ab-chip-on">Microsoft Solutions Partner</span>
+            <span class="ab-chip">Cyber Essentials</span>
+            <span class="ab-chip">Cyber Essentials Plus</span>
+            <span class="ab-chip">10+ Years, No Client Ransomware Breach</span>
+          </div>
+        </div>
+        <div>
+          <div class="ab-kicker">Who We Help</div>
+          <h2 class="ab-h2 ab-h2-sm">Different sectors, the same challenges</h2>
+          <p class="ab-lead ab-lead-sm">We started in recruitment, an industry built on sensitive data, tight deadlines and relentless pace, and it's still a sector we know inside out. Today we support recruitment agencies, law firms, accountancies, consultancies and professional-services businesses across the UK.</p>
+          <p class="ab-lead ab-lead-sm">Confidential information needs protecting. Systems need to be available. Teams need support when something goes wrong. If your organisation depends on technology, handles confidential information and can't afford downtime, you're exactly the kind of business we're built to support.</p>
+          <div class="ab-chips">
+            <span class="ab-chip">Recruitment</span><span class="ab-chip">Legal</span><span class="ab-chip">Accountancy</span><span class="ab-chip">Consultancies</span><span class="ab-chip">Professional Services</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <CtaBand
+    accent="var(--purple)"
+    title="Book a free IT review"
+    body="Whether you're reviewing your current provider, strengthening your cyber security, exploring AI opportunities or simply want a second opinion, we'll take an honest look at how your technology is running, where risks exist, and how it could become more secure, more reliable and more useful to your business."
+  />
+</Base>
+
+<style>
+  /* palette scoped to this page; leans on brand tokens so it matches the rest */
+  .ab{
+    --ac:var(--purple, #7d2f8f);
+    --ac-hi:var(--purple-deep, #9a3bb0);
+    --glow:var(--teal, #46b6ff);
+    --abline:var(--line, #26262d);
+    --abpanel:var(--panel, #0d0d10);
+    --abbg:var(--bg, #000);
+    --abmuted:var(--muted, #a9a9b4);
+  }
+  /* match the rest of the site: display font, mixed case (NOT all-caps) */
+  .ab :is(h1,h2,h3){font-family:var(--display, sans-serif);letter-spacing:-.01em;line-height:1.05;font-weight:800}
+  .ab p{color:var(--abmuted);line-height:1.6}
+
+  /* HERO */
+  .ab-hero{position:relative;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;min-height:620px;overflow:hidden}
+  .ab-hero-text{padding:90px 0 90px 32px;max-width:560px}
+  .ab-h1{font-size:clamp(40px,5vw,68px);font-weight:900;margin-bottom:26px;color:var(--ink,#fff)}
+  .ab-hero-text p{font-size:17px;margin-bottom:18px;max-width:520px}
+  .ab-cta-row{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+
+  .ab-leopard{position:relative;align-self:stretch;min-height:620px}
+  .ab-leopard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+  /* fade the video edges into the ACTUAL page background, not pure black */
+  .ab-leopard::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to right,var(--abbg) 0%,transparent 34%,transparent 80%,var(--abbg) 100%),
+              linear-gradient(to bottom,var(--abbg) 0%,transparent 20%,transparent 80%,var(--abbg) 100%);
+    box-shadow:inset 0 0 130px 50px var(--abbg)}
+  .ab-leopard::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;box-shadow:inset 0 0 90px 30px var(--abbg)}
+
+  /* shared eyebrow / kicker — matches the dot-led labels used site-wide */
+  .ab-eyebrow,.ab-kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--display, sans-serif);text-transform:uppercase;letter-spacing:.22em;font-size:12px;font-weight:700;color:#d7d7de}
+  .ab-eyebrow{margin-bottom:22px}
+  .ab-kicker{margin-bottom:16px}
+  .ab-eyebrow::before,.ab-kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+
+  /* STATS */
+  .ab-stats{border-top:1px solid var(--abline);border-bottom:1px solid var(--abline);background:linear-gradient(180deg,rgba(255,255,255,.02),var(--abbg))}
+  .ab-stats-inner{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center;align-items:center;padding:22px 32px}
+  .ab-stats-inner span{font-family:var(--display, sans-serif);text-transform:uppercase;font-size:13px;font-weight:600;letter-spacing:.04em;color:#e7e7ee;display:flex;align-items:center;gap:30px}
+  .ab-stats-inner span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--ac)}
+  .ab-stats-inner span:last-child::after{display:none}
+
+  /* BLOCKS */
+  .ab-block{padding:96px 0}
+  .ab-h2{font-size:clamp(30px,3.6vw,46px);font-weight:800;margin-bottom:24px;max-width:760px;color:var(--ink,#fff)}
+  .ab-h2-sm{font-size:32px}
+  .ab-lead{font-size:18px;color:#cfcfd6;max-width:720px;margin-bottom:14px}
+  .ab-lead-sm{font-size:16px}
+  .ab-strong{color:var(--ink,#fff);font-weight:600}
+
+  /* WHAT WE DO cards */
+  .ab-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
+  .ab-card{display:block;background:var(--abpanel);border:1px solid var(--abline);border-radius:14px;padding:30px;transition:.25s;position:relative;overflow:hidden;color:inherit;text-decoration:none}
+  .ab-card :is(h3,p,.ab-tag){text-decoration:none}
+  .ab-card:hover{border-color:var(--ac);transform:translateY(-4px)}
+  .ab-tag{font-size:11px;font-family:var(--display, sans-serif);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ac-hi)}
+  .ab-h3{font-size:21px;margin:14px 0 12px;color:var(--ink,#fff)}
+  .ab-card p{font-size:15px}
+  .ab-bar{position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--ac),var(--glow));opacity:0;transition:.25s}
+  .ab-card:hover .ab-bar{opacity:1}
+
+  /* BELIEFS */
+  .ab-beliefs{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:46px;background:var(--abline);border:1px solid var(--abline);border-radius:14px;overflow:hidden}
+  .ab-belief{background:var(--abbg);padding:34px}
+  .ab-span{grid-column:1 / -1}
+  .ab-num{font-family:var(--display, sans-serif);font-weight:800;font-size:13px;color:var(--ac-hi);letter-spacing:.1em}
+  .ab-belief .ab-h3{font-size:20px;margin:10px 0 12px}
+  .ab-belief p{font-size:15px}
+
+  /* SPLIT */
+  .ab-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .ab-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .ab-chip{border:1px solid var(--abline);background:var(--abpanel);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600;color:#dcdce3}
+  .ab-chip-on{border-color:var(--ac);color:#fff}
+
+
+  @media(max-width:900px){
+    .ab-hero{grid-template-columns:1fr;min-height:auto}
+    .ab-hero-text{padding:64px 32px 30px}
+    .ab-leopard{min-height:380px;order:-1}
+    .ab-cards,.ab-beliefs,.ab-split{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .ab video{display:none}
+    .ab-leopard{background:var(--abbg)}
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+import Base from "../layouts/Base.astro";
+import ServiceHero from "../components/service/ServiceHero.astro";
+import ShieldViz from "../components/service/ShieldViz.astro";
+import BigQuote from "../components/shared/BigQuote.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Faq from "../components/Faq.astro";
+
+const layers = [
+  "Multi-factor authentication",
+  "Advanced threat detection",
+  "Email filtering",
+  "Immutable backups",
+  "Continuous monitoring",
+  "Staff security training",
+];
+
+const faqs = [
+  { q: "Do we really need Cyber Essentials?", a: "Increasingly, yes. Clients, contracts and insurers are starting to require it. We'll tell you honestly whether and when it's worth it for your firm." },
+  { q: "Do we need Cyber Essentials Plus or is Cyber Essentials enough?", a: "It depends on your clients, contracts and insurer requirements. We'll explain the difference and recommend the level that makes sense for your organisation." },
+  { q: "We already have antivirus. Isn't that enough?", a: "Antivirus is one layer, and on its own it's no longer enough. Most attacks today use a stolen password rather than a virus, so protection has to cover identity, email, backup and training too." },
+  { q: "What happens if we're attacked?", a: "We contain it, restore from clean backups, and explain in plain English what happened and how we'll stop it recurring." },
+  { q: "Will tighter security slow our team down?", a: "Almost none of it is visible day to day. Good security should support the way your team works, not get in the way of it." },
+];
+---
+<Base title="Cyber Security — Keybridge IT" description="Cyber security that holds up when it's tested. Real-world protection built around what insurers, clients and modern threats actually require.">
+
+  <ServiceHero
+    accent="orange"
+    eyebrow="CYBER SECURITY"
+    title={`Cyber security that <span class="hl">holds up when it's tested</span>`}
+    lead="Plenty of providers will sell you cyber security. Far fewer will give you the kind that holds up on the day you're attacked. That gap is where most businesses get caught out, with a certificate that was never properly earned, a firewall nobody reviews, and an assumption that buying the product is the same as being protected."
+    tickerId="cyb-ticker"
+  />
+
+  <!-- Most attacks log in + shield viz -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--orange);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap split-viz">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> THE REAL THREAT</div>
+        <h2 style="max-width:16ch;margin-bottom:26px">Most attacks don't break in. They log in.</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">The idea of a hacker forcing their way through a firewall is out of date. Today's attacks go after your people. Someone clicks a convincing fake, enters their password, and the attacker walks in through the front door with valid credentials. Many of the incidents we see start with a single compromised mailbox. From there an attacker can read everything, redirect payments and impersonate your staff.</p>
+        <p style="color:var(--ink);line-height:1.75;font-weight:500">That's why genuine protection is as much about people and process as it is about technology.</p>
+      </div>
+      <div class="reveal viz-wrap">
+        <ShieldViz accent="var(--orange)" />
+      </div>
+    </div>
+  </section>
+
+  <!-- What genuine protection looks like -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> LAYERED PROTECTION</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:24px">What genuine protection looks like</h2>
+      <div class="cov-grid">
+        <div class="reveal">
+          <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Security works in layers, and those layers have to be in place before an attack, not bolted on afterwards. Every organisation we protect sits on a minimum security standard from day one. We don't make it optional, and we won't take on a business that refuses it, because knowingly supporting an exposed organisation helps no one.</p>
+          <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">On that foundation we add the controls modern organisations need. The goal isn't to tick boxes. It's to stop attacks early, limit their impact and keep your business operating normally if something does get through.</p>
+          <p style="color:var(--muted);line-height:1.75">Around all of it, we train your people, because the strongest technical defences still depend on someone recognising when something doesn't look right.</p>
+        </div>
+        <ul class="layerlist reveal">
+          {layers.map((l) => <li><span class="tick">&#10003;</span>{l}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent="var(--orange)"
+    quote="We thought we were covered until Keybridge showed us what we actually had. Now we are genuinely protected, not just certified on paper."
+    name="Managing Partner"
+    role="Law firm, Manchester (placeholder — to be updated)"
+  />
+
+  <!-- Cyber Essentials -->
+  <section class="section sec-tint2">
+    <div class="wrap secure-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> CERTIFIED HONESTLY</div>
+        <h2 style="max-width:18ch">Cyber Essentials and Cyber Essentials Plus, certified honestly</h2>
+      </div>
+      <div class="reveal secure-body">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Cyber Essentials is the UK's baseline security certification. Increasingly, it's a requirement for winning contracts, satisfying clients and maintaining cyber insurance cover. The reality is that it isn't difficult to get a business certified without doing the work underneath. Unfortunately, many providers focus on getting clients over the line rather than making sure they're genuinely protected.</p>
+        <p style="color:var(--ink);line-height:1.75;font-weight:500;margin-bottom:18px">What we won't do is fake it.</p>
+        <p style="color:var(--muted);line-height:1.75">Whether you're pursuing Cyber Essentials or Cyber Essentials Plus, we focus on making sure the controls are genuinely in place and working as intended. We would rather lose the business than hand someone a certificate that won't survive a real attack. Honest certification is the only kind worth paying for, because the day it matters is the day you've been targeted.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurer band -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--orange);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> THE NEW REGULATOR</div>
+      <h2 class="reveal" style="max-width:18ch;margin-bottom:26px">Your insurer has become your regulator</h2>
+      <div class="cov-grid">
+        <p class="reveal" style="color:var(--muted);line-height:1.75">The biggest change in cyber security over the past few years hasn't come from a regulator. It's come from the insurance market. Cyber insurers increasingly expect organisations to have controls such as multi-factor authentication, endpoint protection, secure backups, incident response plans and staff training in place before they provide cover. Get them wrong, and a claim can be refused at exactly the moment you need it most.</p>
+        <p class="reveal" style="color:var(--muted);line-height:1.75">Most IT providers still treat cyber security as a technology problem. We build your security around what insurers, clients and modern threats actually require, so the protection you invest in stands up when it's tested.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- If the worst happens + who/why three-up -->
+  <section class="section">
+    <div class="wrap three-up">
+      <div class="upcard reveal">
+        <h3>If the worst happens, we're ready</h3>
+        <p>We monitor for threats around the clock, contain incidents quickly and restore from clean backups. No jargon, no blame and a clear plan to get you back up and running.</p>
+      </div>
+      <div class="upcard reveal">
+        <h3>Who we protect</h3>
+        <p>Recruitment, legal, accountancy and professional-services firms. Organisations that handle sensitive information and can't afford downtime.</p>
+      </div>
+      <div class="upcard reveal">
+        <h3>Why firms trust us</h3>
+        <p>24/7 support. Microsoft Solutions Partner. Security built for the real world, not just the audit.</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--orange)" />
+
+  <CtaBand
+    title="Book a free security review"
+    body="We'll tell you honestly where you stand, with no scare tactics and no obligation."
+    btn="Book a Security Review"
+    accent="var(--orange)"
+  />
+</Base>
+
+<style>
+  .split-viz{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .layerlist{list-style:none;display:grid;gap:12px}
+  .layerlist li{display:flex;gap:14px;align-items:flex-start;color:var(--muted);padding:11px 0;border-bottom:1px solid var(--line)}
+  .tick{color:var(--orange);font-weight:700;flex:0 0 auto}
+  .secure-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .secure-body{align-self:end}
+  .three-up{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .upcard{border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0))}
+  .upcard h3{margin-bottom:14px;font-size:1.3rem}
+  .upcard p{color:var(--muted);line-height:1.7}
+  @media(max-width:900px){
+    .split-viz,.cov-grid,.secure-split,.three-up{grid-template-columns:1fr;gap:30px}
+  }
+</style>

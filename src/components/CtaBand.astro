@@ -1,0 +1,28 @@
+---
+interface Props { title?: string; body?: string; btn?: string; href?: string; note?: string; accent?: string }
+const {
+  title = "Book a free IT review",
+  body = "No sales pitch. No obligation. Just practical advice from people who understand your world.",
+  btn = "Book a Free IT Review",
+  href = "/it-review",
+  note,
+  accent = "var(--purple)",
+} = Astro.props;
+---
+<section class="ctaband" style={`--ac:${accent}`}>
+  <div class="glow cg"></div>
+  <div class="wrap cinner reveal">
+    <h2>{title}</h2>
+    <p class="lead">{body}</p>
+    <a href={href} class="btn-primary">{btn} →</a>
+    {note && <p class="cnote" set:html={note}></p>}
+  </div>
+</section>
+<style>
+  .ctaband{position:relative;overflow:hidden;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--bg2))}
+  .cg{width:600px;height:600px;background:var(--ac);left:50%;top:50%;transform:translate(-50%,-50%);opacity:.16}
+  .cinner{position:relative;z-index:2;text-align:center;padding-block:clamp(70px,9vw,110px);max-width:720px}
+  .cinner .lead{margin:20px auto 34px}
+  .cnote{margin:32px auto 0;max-width:none;font-size:14px;color:var(--muted);line-height:1.7}
+  .cnote span{display:inline-block}
+</style>

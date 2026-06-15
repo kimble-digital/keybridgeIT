@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactForm from "../components/ContactForm.astro";
+const AC = "var(--purple)";
+
+const covers = [
+  { t: "Security and risk", b: "Where you're exposed, how your current protection stacks up against client, insurer and regulatory expectations, and the gaps worth closing first." },
+  { t: "Reliability and support", b: "How your systems and current provider are actually performing, and where downtime or slow support is quietly costing you." },
+  { t: "Cost and efficiency", b: "Whether you're paying for the right things, and where technology or automation could save time and money." },
+  { t: "AI opportunities", b: "Practical, safe ways AI could remove repetitive work without putting confidential information at risk." },
+];
+---
+<Base title="Book a Free IT Review — Keybridge IT" description="An honest, no-obligation review of how your technology is running, where the risks are, and how it could be more secure, reliable and useful.">
+  <PageHero eyebrow="FREE IT REVIEW" title="Book a free IT review" lead="An honest look at how your technology is running today, where risks exist, and how it could become more secure, more reliable and more useful to your business. No obligation, no hard sell." />
+
+  <section class="rev-support">
+    <div class="wrap">
+      <p>Looking for support? <a href="/support">Submit a ticket</a>.</p>
+    </div>
+  </section>
+
+  <section class="section"><div class="wrap rev-grid">
+    <div class="reveal">
+      <h2 class="rev-h2">What we look at</h2>
+      <div class="rev-list">
+        {covers.map((c, i) => (
+          <div class="rev-item">
+            <span class="rev-num">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{c.t}</h3>
+              <p>{c.b}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="rev-h2" style="margin-top:44px">What you get</h2>
+      <ul class="rev-get">
+        <li>A clear, plain-English summary of how your IT is performing.</li>
+        <li>A short list of the risks and quick wins that matter most.</li>
+        <li>Straight answers and recommendations, whether or not you work with us.</li>
+      </ul>
+    </div>
+
+    <div class="reveal rev-form">
+      <h2 class="rev-h2">Request your review</h2>
+      <p class="rev-sub">Tell us a little about your business and we'll be in touch to arrange a convenient time.</p>
+      <ContactForm subject="Free IT Review" accent={AC} cta="Request my review" qualify={true} />
+    </div>
+  </div></section>
+</Base>
+
+<style>
+  .rev-support{position:relative;z-index:10;margin-top:-44px}
+  .rev-support p{margin:0;font-size:14px;color:var(--muted)}
+  .rev-support a{color:#fff;text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+  .rev-support a:hover{color:var(--purple)}
+
+  .rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .rev-h2{font-size:clamp(1.4rem,2.4vw,1.8rem);margin-bottom:22px}
+  .rev-list{display:flex;flex-direction:column;gap:22px}
+  .rev-item{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .rev-num{font-family:var(--display, sans-serif);font-weight:800;font-size:14px;color:var(--purple);letter-spacing:.06em;padding-top:3px}
+  .rev-item h3{font-size:1.1rem;margin-bottom:6px}
+  .rev-item p{color:var(--muted);line-height:1.7;font-size:15px}
+  .rev-get{margin:0 0 0 18px;color:var(--muted);line-height:1.8}
+  .rev-get li{margin-bottom:8px}
+  .rev-sub{color:var(--muted);line-height:1.7;margin-bottom:24px}
+  @media(max-width:900px){.rev-grid{grid-template-columns:1fr;gap:44px}.rev-form{order:-1}}
+</style>
