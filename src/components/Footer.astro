@@ -1,6 +1,7 @@
 ---
 import Logo from "./Logo.astro";
 import SupportLinks from "./SupportLinks.astro";
+import Accreditations from "./shared/Accreditations.astro";
 import { company, nav } from "../data/site";
 const year = new Date().getFullYear();
 ---
@@ -28,6 +29,16 @@ const year = new Date().getFullYear();
         <a href="/industries/recruitment">Recruitment</a>
         <a href="/industries/law-firms">Law Firms</a>
         <a href="/industries/accountancy">Accountancy</a>
+        <a href="/industries/financial-services">Financial Services</a>
+        <a href="/industries/charities">Charities</a>
+      </div>
+      <div>
+        <h4>AI by Industry</h4>
+        <a href="/ai/recruitment">AI for Recruitment</a>
+        <a href="/ai/accountancy">AI for Accountancy</a>
+        <a href="/ai/law-firms">AI for Law Firms</a>
+        <a href="/ai/financial-services">AI for Financial Services</a>
+        <a href="/ai/charities">AI for Charities</a>
       </div>
       <div>
         <h4>Company</h4>
@@ -42,6 +53,9 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </div>
+  <div class="wrap faccreds">
+    <Accreditations withApsco={true} compact={true} eyebrow="" />
+  </div>
   <div class="wrap fbar">
     <span>© {year} {company.name}. All rights reserved.</span>
     <nav class="flegal" aria-label="Legal">
@@ -49,20 +63,21 @@ const year = new Date().getFullYear();
       <a href="/terms">Terms</a>
       <a href="/cookies">Cookies</a>
     </nav>
-    <span>Microsoft Solutions Partner</span>
+    <span>Microsoft Solutions Partner · Cyber Essentials · ISO 27001</span>
   </div>
 </footer>
 <style>
   footer{border-top:1px solid var(--line);background:var(--bg2)}
-  .finner{display:grid;grid-template-columns:1fr 2.4fr;gap:50px;padding-block:70px 50px}
+  .finner{display:grid;grid-template-columns:1fr 3fr;gap:44px;padding-block:70px 50px}
   .ftag{color:var(--muted);margin:18px 0;max-width:34ch}
   .phones{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
   .phones b{color:var(--ink);font-weight:600}
-  .fcols{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:30px}
+  .fcols{display:grid;grid-template-columns:1fr 1.1fr 1.2fr 1fr 1.3fr;gap:26px}
   .fsupport h4{margin-bottom:16px}
   .fcols h4{font-family:var(--display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:16px}
   .fcols a{display:block;color:var(--muted);text-decoration:none;font-size:15px;padding:5px 0;transition:color .2s}
   .fcols a:hover{color:var(--ink)}
+  .faccreds{padding-block:26px;border-top:1px solid var(--line)}
   .fbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-block:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted2)}
   .flegal{display:flex;gap:18px}
   .flegal a{color:var(--muted2);text-decoration:none;transition:color .2s}

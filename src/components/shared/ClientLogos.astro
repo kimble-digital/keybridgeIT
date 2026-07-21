@@ -1,0 +1,69 @@
+---
+// Client logo marquee. Logos extracted from the Keybridge welcome pack live in
+// /public/images/clients/{recruitment,other}. White chips, two counter-scrolling rows.
+interface Props {
+  set?: "recruitment" | "other" | "all";
+  eyebrow?: string;
+  title?: string;
+  accent?: string;
+}
+const { set = "all", eyebrow = "TRUSTED BY", title = "In good company", accent = "var(--purple)" } = Astro.props;
+
+const recruitment = [
+  "apsco-uk","ava-energy","barclay-simpson","day-webster","eames-group","elliott-scott","energize","european-recruitment",
+  "fields-rudd","focus-cloud","hc-group","keystream","love-recruitment","michael-bailey","niyaa-people","northstar-people",
+  "psd","qcs-staffing","remedy","reuben-sinclair","searchability","sf-recruitment","skills-alliance","socium",
+  "start-people","sphere","sa","fiser-group","tile-hill","veritas-education","vertex-solutions","vertus-partners",
+].map((f) => `/images/clients/recruitment/${f}.png`);
+
+const other = [
+  "asl","a-to-e-training","calm","cheltenham-town-fc","create-fertility",
+  "crosslight-advice","etc-venues","emb","elite-wealth-management","haigh",
+  "hardman-and-co","orca-computing","oxford-film-tv","prosper4-group","rebel",
+  "rocket-entertainment","rocket-sports","small-luxury-hotels","king-charles-fund","zenobe",
+].map((f) => `/images/clients/other/${f}.png`);
+
+const logos = set === "recruitment" ? recruitment : set === "other" ? other : [...recruitment, ...other];
+const mid = Math.ceil(logos.length / 2);
+const rowA = logos.slice(0, mid);
+const rowB = logos.slice(mid);
+---
+<section class="section clients" style={`--ac:${accent}`}>
+  <div class="wrap">
+    <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${accent};box-shadow:0 0 12px ${accent}`}></span> {eyebrow}</div>
+    <h2 class="reveal" style="margin-bottom:40px;max-width:22ch">{title}</h2>
+  </div>
+  <div class="logo-marquee reveal">
+    <div class="mrow ma">
+      {[0,1].map((copy) => rowA.map((src) => (
+        <span class={copy ? "chip dup" : "chip"} aria-hidden={copy ? "true" : undefined}><img src={src} alt="" loading="lazy" /></span>
+      )))}
+    </div>
+    <div class="mrow mb">
+      {[0,1].map((copy) => rowB.map((src) => (
+        <span class={copy ? "chip dup" : "chip"} aria-hidden={copy ? "true" : undefined}><img src={src} alt="" loading="lazy" /></span>
+      )))}
+    </div>
+  </div>
+</section>
+<style>
+  .clients{padding-block:clamp(60px,8vw,100px)}
+  .logo-marquee{display:grid;gap:18px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .mrow{display:flex;gap:18px;width:max-content}
+  .ma{animation:clientScroll 60s linear infinite}
+  .mb{animation:clientScroll 60s linear infinite reverse}
+  @keyframes clientScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .logo-marquee:hover .mrow{animation-play-state:paused}
+  .chip{flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    width:168px;height:86px;padding:16px 20px;border-radius:12px;
+    background:#fff;border:1px solid var(--line)}
+  .chip img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+  @media(prefers-reduced-motion:reduce){
+    .ma,.mb{animation:none}
+    .logo-marquee{mask-image:none;-webkit-mask-image:none}
+    .mrow{flex-wrap:wrap;width:auto}
+    .chip.dup{display:none} /* static fallback: first copy only */
+  }
+</style>

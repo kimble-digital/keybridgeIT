@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Keybridge IT · Social cards</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0A0A0A; --bg2:#111114; --bg3:#16161A; --ink:#F4F2EF; --muted:#9A9AA0;
+    --purple:#9B3C87; --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.18);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);padding:0 clamp(20px,4vw,56px) 100px;}
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:26px 0 16px;margin-bottom:10px;}
+  .wm{display:flex;align-items:center;gap:16px;}
+  .wm img{height:46px;width:auto;}
+  .wm-lbl{font-family:var(--display);text-transform:uppercase;letter-spacing:.2em;font-size:15px;color:var(--muted);}
+  header h1{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:34px;margin-top:14px;}
+  header p.note{color:var(--muted);font-size:14px;margin-top:8px;max-width:80ch;line-height:1.55;}
+  .filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .chip{background:transparent;color:var(--muted);border:1px solid var(--line-strong);border-radius:999px;
+    padding:7px 17px;font-family:var(--display);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    font-size:13px;cursor:pointer;transition:all .15s;}
+  .chip:hover{border-color:var(--purple);color:var(--ink);}
+  .chip.active{background:var(--purple);color:#fff;border-color:var(--purple);}
+  .fmt-toggle{margin-left:auto;display:flex;gap:6px;align-items:center;}
+  .fmt-toggle .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-family:var(--display);}
+  section{margin-top:46px;}
+  section>h2{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+    font-size:22px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:24px;
+    display:flex;align-items:center;gap:12px;}
+  section>h2 .cnt{font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.04em;}
+  .row{display:flex;flex-wrap:wrap;gap:26px;}
+  figure{width:340px;}
+  .frame{border-radius:10px;overflow:hidden;background:#000;box-shadow:0 14px 40px rgba(0,0,0,.55);
+    border:1px solid var(--line);position:relative;}
+  .frame iframe{border:0;display:block;pointer-events:none;}
+  /* square thumb */
+  .sq .frame{width:340px;height:340px;}
+  .sq .frame iframe{width:1280px;height:1280px;transform:scale(.265625);transform-origin:top left;}
+  /* og thumb */
+  .og .frame{width:340px;height:178.5px;}
+  .og .frame iframe{width:1200px;height:630px;transform:scale(.28333);transform-origin:top left;}
+  figcaption{display:flex;justify-content:space-between;align-items:center;margin-top:11px;gap:10px;}
+  figcaption .t{font-size:13px;color:var(--ink);font-weight:500;font-family:var(--display);}
+  figcaption .t .dim{color:var(--muted);font-weight:400;font-size:11px;letter-spacing:.06em;}
+  .acts a{font-family:var(--display);font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    font-size:12px;color:var(--purple);text-decoration:none;margin-left:12px;white-space:nowrap;}
+  .acts a:hover{text-decoration:underline;}
+  .hidden{display:none!important;}
+  footer.tip{margin-top:60px;color:var(--muted);font-size:13px;line-height:1.7;max-width:90ch;
+    border-top:1px solid var(--line);padding-top:22px;}
+  footer.tip code{background:var(--bg3);padding:2px 7px;border-radius:5px;color:var(--ink);font-size:12px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wm"><img src="keybridge-logo.svg" alt="Keybridge IT" /><span class="wm-lbl">Social cards</span></div>
+    <h1>Keybridge IT · Social cards</h1>
+    <p class="note">Each card renders at two sizes. <b>OG 1200×630</b> is the link-preview image (set as <code>og:image</code>; used automatically by messaging apps, Facebook, X and LinkedIn link previews). <b>Square 1280×1280</b> is for native LinkedIn / Instagram image posts you upload by hand.</p>
+    <div class="filter">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="home">Homepage</button>
+      <button class="chip" data-filter="pillar">Pillars</button>
+      <button class="chip" data-filter="industry">Industries</button>
+      <button class="chip" data-filter="mkt">Marketing</button>
+      <span class="fmt-toggle">
+        <span class="lbl">Show:</span>
+        <button class="chip fc active" data-fmt="both">Both</button>
+        <button class="chip fc" data-fmt="og">OG only</button>
+        <button class="chip fc" data-fmt="square">Square only</button>
+      </span>
+    </div>
+  </header>
+
+  <div id="grid"></div>
+
+  <footer class="tip">
+    <b>Paths:</b> cards load from <code>BASE</code> below; set to <code>/socials/</code> for your live site. Change it if you deploy this folder somewhere else (use <code>'./'</code> for opening straight off disk).<br/>
+    <b>Export:</b> open any card and use the on-canvas <code>PNG 2×</code> button, or click a <code>PNG ⬇</code> link below to auto-download. Toggle <code>Square / OG</code> on the card itself too.<br/>
+    <b>Add / reorder cards:</b> edit the <code>CARDS</code> array in the script below; order here is export order.<br/>
+    <b>Logo:</b> replace <code>keybridge-logo.svg</code> in this folder with the real brand mark (keep the filename).
+  </footer>
+
+  <script>
+    // Where these card files are served from on your site. They live in /socials/.
+    // Set to './' if you're opening index.html directly off disk instead of via the site.
+    const BASE = '/socials/';
+
+    const CARDS = [
+      { group:'home',     file:'card-home.html',          title:'Homepage' },
+
+      { group:'pillar',   file:'card-managed-it.html',    title:'Managed IT' },
+      { group:'pillar',   file:'card-cyber.html',         title:'Cyber Security' },
+      { group:'pillar',   file:'card-ai.html',            title:'AI Enablement' },
+
+      { group:'industry', file:'card-recruitment.html',   title:'Recruitment' },
+      { group:'industry', file:'card-law-firms.html',     title:'Law Firms' },
+      { group:'industry', file:'card-accountancy.html',   title:'Accountancy' },
+
+      { group:'mkt',      file:'card-mkt-proof.html',     title:'Proof / Stats' },
+      { group:'mkt',      file:'card-mkt-switch.html',    title:'Why firms switch' },
+      { group:'mkt',      file:'card-mkt-review.html',    title:'Free IT Review (CTA)' },
+      { group:'mkt',      file:'card-mkt-ops.html',       title:'24/7 Live Security Ops' },
+      { group:'mkt',      file:'card-mkt-roots.html',     title:'Built inside recruitment' },
+      { group:'mkt',      file:'card-mkt-microsoft.html', title:'Microsoft Solutions Partner' },
+    ];
+    const GROUPS = [
+      { key:'home',     label:'Homepage' },
+      { key:'pillar',   label:'Pillar pages' },
+      { key:'industry', label:'Industry pages' },
+      { key:'mkt',      label:'Marketing' },
+    ];
+
+    function thumb(c, fmt){
+      const dims = fmt==='og' ? '1200×630' : '1280×1280';
+      const url = BASE + c.file + '?f=' + fmt;
+      return `
+        <figure class="thumb ${fmt==='og'?'og':'sq'}" data-fmt="${fmt}">
+          <div class="frame"><iframe src="${url}&embed=1" loading="lazy" scrolling="no" tabindex="-1"></iframe></div>
+          <figcaption>
+            <span class="t">${c.title} <span class="dim">${dims}</span></span>
+            <span class="acts">
+              <a href="${url}" target="_blank" rel="noopener">Open</a>
+              <a href="${url}&dl=2" target="_blank" rel="noopener">PNG ⬇</a>
+            </span>
+          </figcaption>
+        </figure>`;
+    }
+
+    document.getElementById('grid').innerHTML = GROUPS.map(g => {
+      const items = CARDS.filter(c => c.group === g.key);
+      if(!items.length) return '';
+      const figs = items.map(c => thumb(c,'og') + thumb(c,'square')).join('');
+      return `<section data-group="${g.key}"><h2>${g.label} <span class="cnt">${items.length} card${items.length>1?'s':''} · 2 sizes each</span></h2><div class="row">${figs}</div></section>`;
+    }).join('');
+
+    // group filter
+    const gchips = document.querySelectorAll('.chip[data-filter]');
+    gchips.forEach(c => c.addEventListener('click', () => {
+      gchips.forEach(x => x.classList.remove('active')); c.classList.add('active');
+      const f = c.dataset.filter;
+      document.querySelectorAll('section[data-group]').forEach(s =>
+        s.classList.toggle('hidden', f !== 'all' && s.dataset.group !== f));
+    }));
+    // format filter
+    const fchips = document.querySelectorAll('.chip[data-fmt]');
+    fchips.forEach(c => c.addEventListener('click', () => {
+      fchips.forEach(x => x.classList.remove('active')); c.classList.add('active');
+      const f = c.dataset.fmt;
+      document.querySelectorAll('figure.thumb').forEach(fig =>
+        fig.classList.toggle('hidden', f !== 'both' && fig.dataset.fmt !== f));
+    }));
+  </script>
+</body>
+</html>

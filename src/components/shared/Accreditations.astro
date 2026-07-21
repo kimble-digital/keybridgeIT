@@ -1,0 +1,43 @@
+---
+// Accreditation logo strip. MS Solutions Partner, Cyber Essentials, ISO 27001,
+// and optionally APSCo Trusted Partner (recruitment contexts).
+interface Props {
+  variant?: "dark" | "light";   // dark = default site sections, light = sec-light sections
+  withApsco?: boolean;
+  eyebrow?: string;             // optional label above the strip; pass "" to hide
+  compact?: boolean;            // smaller logos (footer)
+}
+const { variant = "dark", withApsco = false, eyebrow = "Accreditations & Partnerships", compact = false } = Astro.props;
+const ms = variant === "dark"
+  ? "/images/accreditations/ms-solutions-partner-white.png"
+  : "/images/accreditations/ms-solutions-partner.png";
+---
+<div class={`accreds ${variant} ${compact ? "compact" : ""}`}>
+  {eyebrow && <span class="accreds-label">{eyebrow}</span>}
+  <div class="accreds-row">
+    <img src={ms} alt="Microsoft Solutions Partner" class="acc-ms" loading="lazy" />
+    <img src="/images/accreditations/cyber-essentials.png" alt="Cyber Essentials certified" class="acc-ce" loading="lazy" />
+    <img src="/images/accreditations/iso-27001.png" alt="ISO 27001:2022 certified, Citation ISO Certification" class="acc-iso" loading="lazy" />
+    {withApsco && <img src="/images/accreditations/apsco-trusted-partner.png" alt="APSCo Trusted Partner" class="acc-apsco" loading="lazy" />}
+  </div>
+</div>
+<style>
+  .accreds{display:flex;flex-direction:column;gap:18px}
+  .accreds-label{font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)}
+  .light .accreds-label{color:var(--light-muted)}
+  .accreds-row{display:flex;align-items:center;gap:clamp(26px,4vw,46px);flex-wrap:wrap}
+  .accreds-row img{width:auto}
+  .acc-ms{height:44px}
+  .acc-ce{height:56px}
+  .acc-iso{height:56px}
+  .acc-apsco{height:34px}
+  .light .acc-apsco{filter:invert(1) opacity(.75)}
+  .compact .acc-ms{height:30px}
+  .compact .acc-ce{height:40px}
+  .compact .acc-iso{height:40px}
+  .compact .acc-apsco{height:24px}
+  @media(max-width:600px){
+    .accreds-row{gap:22px}
+    .acc-ms{height:34px}.acc-ce{height:46px}.acc-iso{height:46px}
+  }
+</style>

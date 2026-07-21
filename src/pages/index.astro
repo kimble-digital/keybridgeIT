@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import ServiceGrid from "../components/ServiceGrid.astro";
 import CloudControl from "../components/CloudControl.astro";
 import Testimonials from "../components/Testimonials.astro";
+import ClientLogos from "../components/shared/ClientLogos.astro";
 import CtaBand from "../components/CtaBand.astro";
 import SupportLinks from "../components/SupportLinks.astro";
 import { industries } from "../data/site";
@@ -17,7 +18,7 @@ const switchReasons = [
   "They've simply outgrown their existing provider",
 ];
 ---
-<Base>
+<Base image="/images/card-home-og.png">
   <Hero />
 
   <!-- You shouldn't have to think about your IT -->
@@ -74,6 +75,12 @@ const switchReasons = [
     </div>
   </section>
 
+  <ClientLogos
+    set="all"
+    eyebrow="TRUSTED BY 200 ORGANISATIONS"
+    title="In good company"
+  />
+
   <Testimonials />
 
   <div class="wrap reviews-link reveal">
@@ -92,7 +99,7 @@ const switchReasons = [
       <p class="reveal" style="color:var(--muted);max-width:60ch;margin-bottom:46px;line-height:1.7">We specialise in organisations where security, reliability and confidentiality matter.</p>
       <div class="grid-3">
         {industries.map((ind, i) => (
-          <a href={ind.href} class={`card reveal ${["v-teal","v-orange","v-lime"][i]}`}>
+          <a href={ind.href} class={`card reveal ${["v-teal","v-orange","v-lime","v-gold","v-coral"][i]}`}>
             <div class="bartop"></div>
             <h3>{ind.title}</h3>
             <p>{ind.blurb}</p>

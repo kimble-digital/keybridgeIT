@@ -24,7 +24,18 @@ export const stats = [
 export const nav = [
   { label: "Managed IT", href: "/managed-it" },
   { label: "Cyber Security", href: "/cyber-security" },
-  { label: "AI Enablement", href: "/ai-enablement" },
+  {
+    label: "AI Enablement",
+    href: "/ai-enablement",
+    children: [
+      { label: "AI Enablement Overview", href: "/ai-enablement" },
+      { label: "AI for Recruitment Agencies", href: "/ai/recruitment" },
+      { label: "AI for Accountancy Firms", href: "/ai/accountancy" },
+      { label: "AI for Law Firms", href: "/ai/law-firms" },
+      { label: "AI for Financial Services", href: "/ai/financial-services" },
+      { label: "AI for Charities", href: "/ai/charities" },
+    ],
+  },
   { label: "Services", href: "/cloud-infrastructure" },
   {
     label: "Industries",
@@ -33,6 +44,8 @@ export const nav = [
       { label: "Recruitment Agencies", href: "/industries/recruitment" },
       { label: "Law Firms", href: "/industries/law-firms" },
       { label: "Accountancy Firms", href: "/industries/accountancy" },
+      { label: "Financial Services", href: "/industries/financial-services" },
+      { label: "Charities", href: "/industries/charities" },
     ],
   },
 ];
@@ -88,6 +101,18 @@ export const industries = [
     title: "Accountancy Firms",
     blurb: "Supporting practices that operate under deadline pressure and handle sensitive financial data.",
     href: "/industries/accountancy",
+  },
+  {
+    id: "financial-services",
+    title: "Financial Services",
+    blurb: "Wealth managers, advisers and financial firms where client trust and FCA expectations set the bar.",
+    href: "/industries/financial-services",
+  },
+  {
+    id: "charities",
+    title: "Charities",
+    blurb: "Not-for-profits that need every pound to count and every supporter's data protected.",
+    href: "/industries/charities",
   },
 ];
 

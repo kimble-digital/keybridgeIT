@@ -1,0 +1,125 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import BigQuote from "../../components/shared/BigQuote.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--coral)";
+
+const services = [
+  { name: "Managed IT", href: "/managed-it", label: "Managed IT Services", body: "Reliable systems, responsive support and proactive management, delivered for a predictable monthly fee your trustees can budget around. From devices and Microsoft 365 through to cloud services and day-to-day support, we keep the technology working so your team can focus on the mission." },
+  { name: "Cyber Security", href: "/cyber-security", label: "Cyber Security Services", body: "Donor records, beneficiary information and safeguarding data are among the most sensitive information any organisation holds. We help charities protect it properly, meeting the expectations of funders, insurers and the ICO without enterprise-sized budgets." },
+  { name: "AI Enablement", href: "/ai/charities", label: "AI for Charities", body: "Small teams, big workloads. AI can take on the repetitive administration around fundraising, reporting and supporter communications, giving your people more time for the work that actually delivers the mission." },
+];
+
+const faqs = [
+  { q: "Can we afford proper IT support?", a: "Charity budgets are exactly why our pricing is a predictable monthly fee based on your team size and services. Many clients also use Microsoft's charity licensing, which we help you access and make the most of. You may be paying for more than you need today." },
+  { q: "Do you understand charity governance?", a: "Yes. We work with charities across youth services, mental health, debt advice and grant-making, and we build with the oversight, auditability and reporting that trustees and funders expect." },
+  { q: "Is our donor and beneficiary data safe?", a: "Yes. We design permissions, security controls and governance around sensitive information from the outset. Safeguarding and beneficiary data is treated with the same rigour we apply to legal and financial clients." },
+  { q: "Can you support volunteers and high staff turnover?", a: "Yes. User setup and offboarding are part of our managed service, so people joining and leaving, including volunteers and seasonal staff, doesn't generate surprise invoices or lingering security risks." },
+  { q: "Can you support remote and hybrid teams?", a: "Yes. Many charities operate across sites, from home and in the community. We provide secure access, device management and support wherever your people are." },
+  { q: "Where does AI fit for a charity?", a: "Mostly in the repetitive administration around fundraising, grant reporting, supporter communications and internal knowledge. AI is most effective when it gives a stretched team capacity back, not when it replaces the human relationships charities are built on." },
+];
+---
+<Base title="IT Support for Charities UK — Keybridge IT" description="Managed IT, cyber security and AI for charities and not-for-profits. Every pound accountable, every supporter's data protected, priced for charity budgets." image="/images/card-home-og.png">
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="CHARITIES & NOT-FOR-PROFITS"
+    title={`IT support where every pound <span class="hl">counts</span>`}
+    lead="Charities run on trust and stretched resources. Every pound spent on technology is a pound that could have gone to the mission, so it has to earn its place. At the same time, donor records, beneficiary information and safeguarding data need protecting to a standard that would make any business proud."
+    tickerId="cha-ticker"
+  />
+
+  <!-- The reality (LIGHT) -->
+  <section class="section sec-light">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WE GET IT</div>
+      <h2 class="reveal" style="max-width:22ch;margin-bottom:24px">Small teams, sensitive data, no room for waste</h2>
+      <div class="press-grid">
+        <p class="reveal" style="line-height:1.75">Charities carry a strange double burden. Budgets and headcount are tight, yet the data you hold, from donor details to beneficiary and safeguarding records, is as sensitive as anything a law firm or bank manages. Funders, trustees and the ICO all expect it handled properly, and a breach damages the one thing a charity cannot operate without: trust.</p>
+        <p class="reveal" style="line-height:1.75">We support charities across youth services, mental health, debt advice and grant-making, so we've built for these realities. Predictable pricing trustees can budget around, charity licensing that stretches every pound, security that fits the risk rather than the sales brochure, and support that treats a two-person fundraising team with the same care as a trading floor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Everything your charity needs (DARK, 3 cards) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> ONE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">Everything your charity needs from one partner</h2>
+      <div class="svc-cards">
+        {services.map((s) => (
+          <a href={s.href} class="svc-card reveal">
+            <div class="svc-bar"></div>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="svc-more">{s.label} &#8594;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stretch the budget (LIGHT) -->
+  <section class="section sec-light2">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> MORE MISSION PER POUND</div>
+      <h2 class="reveal" style="max-width:22ch;margin-bottom:24px">Technology that gives money back to the mission</h2>
+      <div class="press-grid">
+        <p class="reveal" style="line-height:1.75">Microsoft offers substantial charity pricing on the tools most organisations already use, from Microsoft 365 through to Azure and security tooling. Many charities either don't know what they're entitled to or aren't using what they already pay for. As a Microsoft Solutions Partner, we help you claim the licensing you're eligible for and configure it properly.</p>
+        <p class="reveal" style="line-height:1.75">The same thinking runs through everything we do: right-sized security instead of over-specified kit, automation where it saves real hours, and honest advice when the cheaper option is genuinely good enough. Your technology bill should read like a considered decision, not a habit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why charities choose Keybridge (DARK) -->
+  <section class="section sec-tint">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why charities choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink);margin-bottom:0">Your donors trust you with their money. Your beneficiaries trust you with their stories. Your IT partner should be worthy of both.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We've spent fifteen years protecting sensitive information for organisations that can't afford to get it wrong, and we bring the same standards to the charity sector at a price that respects where your money comes from.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Clients benefit from a Microsoft Solutions Partner, genuine 24/7 support, built-in cyber security and a dedicated UK-based account manager who understands your organisation and remains accountable for the relationship.</p>
+        <p style="color:var(--ink);line-height:1.6;font-weight:500">We're large enough to deliver enterprise-grade expertise, yet small enough to know our clients personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent={AC}
+    quote="A real partner to our business."
+    name="Peter Thompson"
+  />
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll review how your charity's technology is working today, check you're getting everything you're entitled to from charity licensing, and show you where improvements could be made."
+    btn="Book a Free IT Review"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .press-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+  .svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .svc-card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .svc-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .svc-bar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--coral);transition:width .5s}
+  .svc-card:hover .svc-bar{width:100%}
+  .svc-card h3{margin-bottom:14px;font-size:1.4rem}
+  .svc-card p{color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .svc-more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--coral)}
+
+  @media(max-width:900px){
+    .why-split,.press-grid,.svc-cards{grid-template-columns:1fr;gap:30px}
+  }
+</style>

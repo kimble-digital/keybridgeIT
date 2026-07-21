@@ -3,13 +3,15 @@ import Base from "../../layouts/Base.astro";
 import ServiceHero from "../../components/service/ServiceHero.astro";
 import BusinessCycle from "../../components/industry/BusinessCycle.astro";
 import BigQuote from "../../components/shared/BigQuote.astro";
+import ClientLogos from "../../components/shared/ClientLogos.astro";
+import EventSponsors from "../../components/shared/EventSponsors.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Faq from "../../components/Faq.astro";
 
 const services = [
   { name: "Managed IT", href: "/managed-it", body: "Reliable systems, responsive support and proactive management that keep consultants productive and agencies operating smoothly. From devices and Microsoft 365 to cloud services and day-to-day support, we keep the technology running so your team can focus on billing." },
   { name: "Cyber Security", href: "/cyber-security", body: "Candidate data is one of your most valuable assets and one of your biggest responsibilities. We help agencies protect it properly, meeting the expectations of clients, insurers and regulators while reducing the risk of costly incidents." },
-  { name: "AI Enablement", href: "/ai-enablement", body: "Recruitment businesses generate huge amounts of administration. AI can help automate repetitive processes, improve data quality and give consultants more time to focus on candidates, clients and placements." },
+  { name: "AI Enablement", href: "/ai/recruitment", body: "Recruitment businesses generate huge amounts of administration. AI can help automate repetitive processes, improve data quality and give consultants more time to focus on candidates, clients and placements." },
 ];
 
 const faqs = [
@@ -21,12 +23,12 @@ const faqs = [
   { q: "How does pricing work?", a: "A predictable monthly fee based on your team size and the services you require. No surprise invoices every time something breaks or your headcount changes." },
 ];
 ---
-<Base title="IT Support for Recruitment Agencies — Keybridge IT" description="Recruitment is where Keybridge began. Managed IT, cyber security and AI built for the way agencies actually operate.">
+<Base title="IT Support for Recruitment Agencies UK — Keybridge IT" description="Recruitment is where Keybridge began. Managed IT, cyber security and AI built for the way UK recruitment agencies actually operate." image="/images/card-recruitment-og.png">
 
   <ServiceHero
     accent="teal"
     eyebrow="RECRUITMENT AGENCIES"
-    title={`Shit hot IT support for <span class="hl">recruitment agencies</span>`}
+    title={`IT support that speaks fluent <span class="hl">recruitment</span>`}
     lead="Recruitment is where Keybridge began. Before founding the business, our founder spent eleven years running IT inside recruitment firms. Fifteen years later, we still support the industry we came from, helping agencies across the UK and Europe with fully managed IT support, cyber security and AI enablement."
     tickerId="rec-ticker"
   />
@@ -78,6 +80,15 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <ClientLogos
+    set="recruitment"
+    eyebrow="TRUSTED BY RECRUITERS"
+    title="A selection of our recruitment customers"
+    accent="var(--teal)"
+  />
+
+  <EventSponsors accent="var(--teal)" />
 
   <BigQuote
     accent="var(--teal)"

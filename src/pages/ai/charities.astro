@@ -1,0 +1,186 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import LockViz from "../../components/service/LockViz.astro";
+import Accreditations from "../../components/shared/Accreditations.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--coral)";
+
+const cases = [
+  { ic: "GR", t: "Grant Applications & Reporting", d: "Assemble the information funders ask for, draft returns from records you already hold and keep reporting deadlines from creeping up on a small team." },
+  { ic: "SC", t: "Supporter Communications", d: "Draft newsletters, thank-you messages and campaign updates in your charity's voice, ready for a human to approve and send." },
+  { ic: "DQ", t: "Donor Record Keeping", d: "Keep donor and supporter records accurate and up to date automatically, improving Gift Aid claims and fundraising insight." },
+  { ic: "EN", t: "Enquiry Handling", d: "Answer routine questions from supporters and service users quickly and consistently, escalating anything sensitive to your team." },
+  { ic: "VO", t: "Volunteer & Staff Onboarding", d: "Collect documents, set up accounts and walk new starters through induction steps, however often people join and leave." },
+  { ic: "KM", t: "Knowledge Management", d: "Give staff and volunteers instant access to policies, procedures and past work, so knowledge survives beyond any one person's inbox." },
+];
+
+const steps = [
+  { n: "01", t: "The agent tracks the deadlines", d: "It knows every funder's reporting dates and what each return needs, so nothing surfaces as a panic the week it's due." },
+  { n: "02", t: "It gathers the evidence", d: "Activity numbers, spend records and case notes are pulled from the systems where they already live, into one working draft." },
+  { n: "03", t: "It drafts the return", d: "A first draft of the report is prepared in the funder's format, with gaps clearly flagged for the team to fill." },
+  { n: "04", t: "Your team tells the story", d: "People check the numbers, add the case studies and judgement only they can, and submit. Hours of collation become an hour of review." },
+];
+
+const faqs = [
+  { q: "Is this affordable for a charity?", a: "AI projects here aren't enterprise consulting engagements. We start with one process, prove the value in saved hours and build only where the case is clear. Combined with Microsoft's charity licensing, the tooling often costs less than expected." },
+  { q: "Is donor and beneficiary data safe?", a: "Yes. Every agent's access is defined and restricted before it goes live, activity is logged and safeguarding-sensitive information is treated with the same rigour we apply to legal and financial clients." },
+  { q: "Will AI replace the human side of our work?", a: "No, and it shouldn't. Charities are built on relationships. AI is most effective when it removes repetitive administration so your people have more time for supporters, service users and the mission itself." },
+  { q: "Will it work with our fundraising CRM?", a: "It depends on the systems you're using. Some platforms support automation more readily than others. We'll assess your environment, explain what's realistically achievable and recommend the most practical route forward." },
+  { q: "What about trustees and governance?", a: "We build with oversight and auditability in mind, and we're happy to present to trustees or your governance lead. Clear boundaries, human sign-off and logged activity tend to answer most board questions." },
+  { q: "Where do most charities start?", a: "Usually grant reporting, supporter communications or donor record keeping, where the repetitive hours are most visible. We prove the value in one area first and build from there." },
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+---
+<Base
+  title="AI for Charities — Keybridge IT"
+  description="Security-first AI for charities and not-for-profits: grant reporting, supporter communications, donor records and volunteer onboarding, sized for charity teams and budgets."
+  image="/images/card-ai-og.png"
+>
+  <script type="application/ld+json" set:html={faqSchema} is:inline></script>
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="AI FOR CHARITIES"
+    title={`More hours for the <span class="hl">mission</span>`}
+    lead="Charity teams do the work of organisations twice their size. Grant reports, donor records, supporter updates, volunteer onboarding: all of it essential, all of it competing with the mission for the same few hours. AI agents can take on that administration, at a scale and cost that makes sense for a charity."
+    tickerId="ai-cha-ticker"
+  />
+
+  <!-- Where AI creates value -->
+  <section class="section">
+    <div class="wrap val-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHERE AI CREATES VALUE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Capacity is the scarcest resource in the sector</h2>
+      </div>
+      <div class="reveal val-body">
+        <p>Most charities don't need convincing that the administration is heavy. Funders each want reports in their own format. Donor records need keeping clean for Gift Aid and fundraising. Supporters expect timely, personal communication. Volunteers join and leave constantly. And it all lands on a small team.</p>
+        <p>These processes are repetitive and record-driven, which makes them exactly what AI agents are good at, while relationships, judgement and the mission stay firmly with your people.</p>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:46px">
+      <div class="grid-3">
+        {cases.map((c, i) => (
+          <article class={`card reveal ${["v-coral","v-teal","v-purple","v-lime","v-coral","v-teal"][i]}`}>
+            <div class="bartop"></div>
+            <div class="ic">{c.ic}</div>
+            <h3>{c.t}</h3><p>{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- In practice -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--coral);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHAT THIS LOOKS LIKE IN PRACTICE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:20px">Grant reporting without the all-nighter</h2>
+      <p class="reveal prac-lead">Take funder reporting, the deadline every charity knows too well. Here's the shape of a grant-reporting agent, the kind of process charities typically automate first.</p>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step reveal">
+            <span class="step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <p class="reveal prac-foot">The reporting gets done on time and done well, and the hours it used to consume go back to fundraising and frontline work.</p>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="section">
+    <div class="wrap over-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> TRUST IS THE ASSET</div>
+        <h2 style="max-width:18ch">Automation that protects the relationship</h2>
+      </div>
+      <div class="reveal over-body">
+        <p>A charity's most valuable asset is trust: donors trusting where their money goes, beneficiaries trusting you with their circumstances, funders trusting your reporting. Nothing we automate is allowed to put that at risk.</p>
+        <p>That's why anything supporter-facing carries human approval before it goes out, anything touching beneficiary or safeguarding data is tightly restricted, and every agent's activity is logged. AI does the collating and drafting. Your people stay the voice, the judgement and the relationship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe and governed -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--coral);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Safe and governed</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Donor details, beneficiary records and safeguarding information are among the most sensitive data any organisation holds, and the ICO doesn't grade on a curve for good intentions.</p>
+        <p style="color:var(--muted);line-height:1.75">Any AI agent that touches your records is locked down before it runs. We define exactly what it can see, what it can do and where data is allowed to go, with clear permissions, tested controls and a full audit trail behind it.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge -->
+  <section class="section">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why charities choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink)">We bring the standards of our legal and financial work to the sector that can least afford to get data wrong, at a price that respects where the money comes from.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We already support charities across youth services, mental health, debt advice and grant-making, so we understand stretched teams, trustee governance and funder expectations first-hand.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">As a Microsoft Solutions Partner with a dedicated AI practice, we'll also make sure you're getting everything you're entitled to from charity licensing before you spend a pound more than you need to.</p>
+        <Accreditations />
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the administration consuming the most of your team's time and show you where AI can genuinely give hours back to the mission."
+    btn="Book a Discovery Session"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .val-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .val-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .over-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .over-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .prac-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .step:hover{border-color:rgba(224,86,107,.5);transform:translateY(-4px)}
+  .step-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--coral)}
+  .step h3{font-size:1.15rem;margin:12px 0 12px}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.65}
+  .prac-foot{margin-top:34px;font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.45;color:var(--ink);max-width:52ch}
+
+  @media(max-width:900px){
+    .val-split,.over-split,.why-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+</style>

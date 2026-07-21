@@ -1,43 +1,80 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHero from "../../components/PageHero.astro";
-import Prose from "../../components/Prose.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import PipelineViz from "../../components/industry/PipelineViz.astro";
+import LockViz from "../../components/service/LockViz.astro";
+import Accreditations from "../../components/shared/Accreditations.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Faq from "../../components/Faq.astro";
 
 const cases = [
-  { t:"Candidate Registration", d:"Reduce the time spent processing applications and preparing candidate records, so consultants can focus on engaging the strongest candidates." },
-  { t:"Recruitment CRM Automation", d:"Keep candidate and client records up to date automatically, reducing administration and improving data quality." },
-  { t:"Compliance Management", d:"Monitor documents, expiry dates and compliance requirements without relying on manual checks." },
-  { t:"Timesheet Chasing", d:"Automate reminders and follow-up activity, freeing consultants from repetitive back-office tasks." },
-  { t:"Interview Scheduling", d:"Coordinate calendars, confirmations and reminders without endless email chains and diary management." },
+  { ic: "CR", t: "Candidate Registration", d: "Reduce the time spent processing applications and preparing candidate records, so consultants can focus on engaging the strongest candidates." },
+  { ic: "BD", t: "Outbound Sales Preparation", d: "Research target companies, pull what your CRM already knows and prepare call sheets before your BD team picks up the phone." },
+  { ic: "CM", t: "Compliance Management", d: "Monitor documents, expiry dates and compliance requirements without relying on manual checks." },
+  { ic: "TS", t: "Timesheet Chasing", d: "Automate reminders and follow-up activity, freeing consultants from repetitive back-office tasks." },
+  { ic: "IS", t: "Interview Scheduling", d: "Coordinate calendars, confirmations and reminders without endless email chains and diary management." },
+  { ic: "CA", t: "Recruitment CRM Automation", d: "Keep candidate and client records up to date automatically, reducing administration and improving data quality." },
 ];
+
+const steps = [
+  { n: "01", t: "The consultant sets the day up", d: "Each morning, a BD consultant tells the agent which companies they're calling. That's the only input it needs." },
+  { n: "02", t: "The agent does the research", d: "It researches every company on the list and looks up what the CRM already knows about each one, including past contact and live opportunities." },
+  { n: "03", t: "It prepares the pack", d: "It builds a briefing sheet covering all the day's calls, then a call sheet and a suggested script for each company." },
+  { n: "04", t: "The consultant sells", d: "By the time the first call happens, the preparation that used to eat the morning is already done. The consultant just picks up the phone." },
+];
+
 const faqs = [
-  { q:"Will AI work with our CRM?", a:"Usually, but it depends on the CRM. Some platforms support AI and automation far better than others. We'll assess your systems, explain what's realistically achievable and recommend the most practical route." },
-  { q:"Is candidate data safe?", a:"Yes. We design governance, permissions and security controls before anything goes live, ensuring data only goes where it's supposed to." },
-  { q:"Where should we start?", a:"Usually with the process creating the most administrative overhead — often candidate registration, compliance administration, application handling or timesheet chasing." },
-  { q:"Will AI replace recruiters?", a:"No. Recruitment remains a people business. AI is most effective when it removes repetitive administration and lets recruiters spend more time with candidates and clients." },
+  { q: "Will it fit the way our desks actually work?", a: "Usually, though it depends on the systems you're running. Some recruitment CRMs support automation far more effectively than others. We'll assess your environment, explain what's realistically achievable and recommend the most practical route forward." },
+  { q: "How is candidate data protected?", a: "Every AI agent is restricted to the specific records and actions its role requires. Permissions, controls and activity logging are established before anything goes live, ensuring personal data only goes where it's supposed to." },
+  { q: "Could automated screening be unfair to candidates?", a: "It shouldn't be, which is exactly why people remain part of the process. AI can apply consistent criteria, organise information and highlight relevant experience, but recruiters make the decisions. Used correctly, AI often improves consistency rather than reducing fairness." },
+  { q: "What do most agencies automate first?", a: "Usually the process creating the most administrative pressure. For many agencies that's candidate registration, compliance administration, application handling or timesheet chasing. We prove the value in one area first and build from there." },
+  { q: "Do we need Microsoft Copilot first?", a: "Not necessarily. Some agencies start with Copilot adoption, while others begin with workflow automation. We'll help you identify the right starting point based on your objectives and existing systems." },
+  { q: "Will AI replace recruiters?", a: "No. Recruitment remains a people business. AI is most effective when it removes repetitive administration and allows recruiters to spend more time building relationships, winning business and making placements." },
 ];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
 ---
-<Base title="AI for Recruitment Agencies — Keybridge IT" description="Give recruiters more time to recruit. Security-first AI that automates the admin consuming the working week.">
-  <PageHero
-    eyebrow="AI FOR RECRUITMENT"
-    title="Give recruiters more time to recruit"
-    lead="Recruitment runs on relationships and speed, yet most consultants lose hours every week to administration that has nothing to do with either. AI agents can automate repetitive operational tasks, improve data quality and reduce the workload that quietly consumes the working week."
-    stats="15 Years Supporting Recruitment · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+<Base
+  title="AI for Recruitment Agencies — Keybridge IT"
+  description="Give recruiters more time to recruit. Security-first AI agents that take on candidate registration, compliance, timesheets and BD preparation, built by a team with 15 years inside recruitment."
+  image="/images/card-ai-og.png"
+>
+  <script type="application/ld+json" set:html={faqSchema} is:inline></script>
+
+  <ServiceHero
+    accent="teal"
+    eyebrow="AI FOR RECRUITMENT AGENCIES"
+    title={`Give recruiters more time to <span class="hl">recruit</span>`}
+    lead="Recruitment runs on relationships and speed, yet most consultants lose hours every week to administration that has nothing to do with either. Registering candidates, updating the CRM, chasing timesheets and coordinating interviews all need doing, but none of them generate revenue. AI can help change that."
+    tickerId="ai-rec-ticker"
   />
 
-  <Prose eyebrow="WHERE AI CREATES VALUE" title="Most agencies don't need more recruiters">
-    <p>They need their existing recruiters spending more time on the activities that generate revenue. As application volumes increase and compliance requirements grow, consultants often find themselves buried in administration rather than speaking to candidates and clients.</p>
-    <p>AI agents are particularly effective at taking ownership of this operational workload — helping recruiters spend more time winning jobs, building relationships and making placements.</p>
-  </Prose>
-
+  <!-- Where AI creates value -->
   <section class="section">
-    <div class="wrap">
+    <div class="wrap val-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> WHERE AI CREATES VALUE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Most agencies don't need more recruiters</h2>
+      </div>
+      <div class="reveal val-body">
+        <p>They need their existing recruiters spending more time on the activities that generate revenue. As application volumes increase and compliance requirements grow, consultants often find themselves buried in administration rather than speaking to candidates and clients. The result is less selling, fewer jobs won and reduced productivity across the business.</p>
+        <p>AI agents are particularly effective at taking ownership of this operational workload, helping recruiters spend more time winning jobs, building candidate relationships and making placements.</p>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:46px">
       <div class="grid-3">
-        {cases.map((c,i) => (
-          <article class={`card reveal ${["v-purple","v-teal","v-orange","v-lime","v-purple"][i]}`}>
+        {cases.map((c, i) => (
+          <article class={`card reveal ${["v-teal","v-purple","v-orange","v-lime","v-teal","v-purple"][i]}`}>
             <div class="bartop"></div>
+            <div class="ic">{c.ic}</div>
             <h3>{c.t}</h3><p>{c.d}</p>
           </article>
         ))}
@@ -45,16 +82,120 @@ const faqs = [
     </div>
   </section>
 
-  <Prose eyebrow="THE VOLUME PROBLEM" title="Recruitment has an application volume problem">
-    <p>For many agencies, the challenge isn't finding candidates — it's dealing with the volume arriving every day. Hundreds of CVs can arrive against a single role, creating a backlog, inconsistent communication and candidates who never receive a response.</p>
-    <p>AI can help by identifying relevant experience, highlighting candidates that meet defined criteria, drafting communications and supporting the review process. The goal isn't to replace recruiter judgement — it's to process applications more consistently.</p>
-  </Prose>
+  <!-- In practice: the BD prep agent -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--teal);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> WHAT THIS LOOKS LIKE IN PRACTICE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:20px">An agent already working inside a recruitment business</h2>
+      <p class="reveal prac-lead">Here's one we built for a recruitment client. Their BD team used to spend the first part of every day researching the companies they were about to call. Now an agent does the preparation, and the consultants do the selling.</p>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step reveal">
+            <span class="step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <p class="reveal prac-foot">Every agent is different because every agency is different. The point is the shape of it: hand a repeatable process to an agent, keep the judgement with your people.</p>
+    </div>
+  </section>
 
-  <Prose eyebrow="HUMAN OVERSIGHT" title="AI should support decisions, not make them">
-    <p>One of the biggest concerns around AI in recruitment is bias. We believe recruitment decisions should always remain with people. AI can organise information, identify patterns and reduce administration, but hiring decisions require judgement, context and accountability.</p>
-    <p>That's why we build AI to support recruiters, not replace them — helping agencies improve efficiency without creating unnecessary compliance or discrimination risks.</p>
-  </Prose>
+  <!-- The volume problem -->
+  <section class="section">
+    <div class="wrap vol-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> THE VOLUME PROBLEM</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Recruitment has an application volume problem</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">For many agencies, the challenge isn't finding candidates. It's dealing with the volume of applications arriving every day. Hundreds of CVs can arrive against a single role, creating pressure on consultants to review, respond and maintain a positive candidate experience. The result is often a backlog, inconsistent communication and candidates who never receive a response.</p>
+        <p style="color:var(--muted);line-height:1.75">AI can help manage that volume by identifying relevant experience, highlighting candidates that meet defined criteria, drafting communications and supporting the review process. The goal isn't to replace recruiter judgement. It's to help recruiters process applications more consistently, improve candidate communication and spend more time engaging with the strongest people.</p>
+      </div>
+      <div class="reveal viz-wrap"><PipelineViz accent="var(--teal)" /></div>
+    </div>
+  </section>
 
-  <Faq items={faqs} />
-  <CtaBand title="Book an AI discovery session" body="We'll identify the administrative work consuming the most consultant time and show you where AI can create genuine value." btn="Book a Discovery Session" />
+  <!-- Oversight -->
+  <section class="section sec-tint2">
+    <div class="wrap over-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> HUMAN OVERSIGHT</div>
+        <h2 style="max-width:18ch">AI should support decisions, not make them</h2>
+      </div>
+      <div class="reveal over-body">
+        <p>One of the biggest concerns around AI in recruitment is bias. We believe recruitment decisions should always remain with people. AI can help organise information, identify patterns and reduce administration, but hiring decisions require judgement, context and accountability.</p>
+        <p>That's why we build AI to support recruiters, not replace them. Human oversight remains part of the process, helping agencies improve efficiency without creating unnecessary compliance or discrimination risks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe and governed -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--teal);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Safe and governed</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Recruitment data is some of the most personal information your business holds. CVs, contact details, right-to-work documents and client information all sit within your systems, and GDPR gives you a duty to protect them.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Any AI agent that touches candidate or client records is locked down before it runs. We define exactly what it can see, what it can do and where data is allowed to go, with clear permissions and a full audit trail behind it.</p>
+        <p style="color:var(--muted);line-height:1.75">The efficiency gains are real, but they shouldn't come at the cost of greater risk. Our approach is designed to improve productivity without widening your data exposure.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent="var(--teal)" /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge -->
+  <section class="section">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--teal);box-shadow:0 0 12px var(--teal)"></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why recruitment agencies choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink)">Most AI providers have never worked alongside a recruitment business. We have, for fifteen years.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We understand the rhythm of an agency, the pressure to keep desks productive, the compliance obligations that can't slip and the difference between a consultant spending time with candidates versus spending time on administration.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That means we focus on automation that genuinely helps recruiters, not features that look impressive in a demonstration but create more work in practice.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">Combined with our Microsoft partnership and security-first approach, you get AI built by people who understand both the technology and the business you're in.</p>
+        <Accreditations withApsco={true} />
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--teal)" />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the administrative work consuming the most consultant time and show you where AI can create genuine value inside your recruitment business."
+    btn="Book a Discovery Session"
+    accent="var(--teal)"
+  />
 </Base>
+
+<style>
+  .val-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .val-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .vol-split{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .over-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .over-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .prac-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .step:hover{border-color:rgba(30,110,130,.5);transform:translateY(-4px)}
+  .step-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--teal)}
+  .step h3{font-size:1.15rem;margin:12px 0 12px}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.65}
+  .prac-foot{margin-top:34px;font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.45;color:var(--ink);max-width:52ch}
+
+  @media(max-width:900px){
+    .val-split,.vol-split,.over-split,.why-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+</style>

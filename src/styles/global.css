@@ -20,6 +20,8 @@
   --teal:#1E6E82;
   --indigo:#3D52A8;
   --emerald:#1F8A6B;
+  --gold:#C9A233;
+  --coral:#E0566B;
 
   /* Light surfaces (industry pages) */
   --light:#F4F2EF;
@@ -110,6 +112,8 @@ h3{font-size:1.5rem;letter-spacing:-.01em}
 .v-orange .bartop{background:var(--orange)} .v-orange .more{color:var(--orange)} .v-orange .ic{background:rgba(232,132,43,.16);color:var(--orange)}
 .v-lime .bartop{background:var(--lime)} .v-lime .more{color:var(--lime)} .v-lime .ic{background:rgba(141,191,63,.16);color:var(--lime)}
 .v-purple .bartop{background:var(--purple)} .v-purple .more{color:var(--purple)} .v-purple .ic{background:rgba(155,60,135,.18);color:#d98ac7}
+.v-gold .bartop{background:var(--gold)} .v-gold .more{color:var(--gold)} .v-gold .ic{background:rgba(201,162,51,.16);color:var(--gold)}
+.v-coral .bartop{background:var(--coral)} .v-coral .more{color:var(--coral)} .v-coral .ic{background:rgba(224,86,107,.16);color:var(--coral)}
 
 /* ---- Grid utilities ---- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}

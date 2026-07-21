@@ -1,0 +1,185 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import ConfidentialViz from "../../components/industry/ConfidentialViz.astro";
+import LockViz from "../../components/service/LockViz.astro";
+import Accreditations from "../../components/shared/Accreditations.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--gold)";
+
+const cases = [
+  { ic: "OB", t: "Client Onboarding & KYC", d: "Collect information and documents, support identity checks and AML processes, and keep new client onboarding moving without weeks of back and forth." },
+  { ic: "RP", t: "Review Preparation", d: "Assemble what an adviser needs before an annual review: the client's position, recent activity, outstanding actions and the documents that matter." },
+  { ic: "DP", t: "Document Processing", d: "Extract information from statements, applications and provider documents, file them correctly and flag anything unusual for review." },
+  { ic: "RD", t: "Report Drafting Support", d: "Assist with drafting suitability letters, review summaries and recurring client reporting, ready for an adviser to check and refine." },
+  { ic: "KM", t: "Knowledge Management", d: "Give your team instant access to internal guidance, precedents, product notes and past work, without interrupting colleagues." },
+  { ic: "CU", t: "CRM & Record Keeping", d: "Keep client records, meeting notes and actions up to date automatically, strengthening the audit trail the FCA expects." },
+];
+
+const steps = [
+  { n: "01", t: "The agent gathers the file", d: "Ahead of each annual review, it pulls together the client's records, recent correspondence, portfolio reporting and any outstanding actions." },
+  { n: "02", t: "It chases what's missing", d: "Outstanding documents and information requests go out to the client automatically, with polite reminders until they arrive." },
+  { n: "03", t: "It prepares the pack", d: "The adviser gets a review pack: position summary, changes since last review, flags worth discussing and the compliance items due." },
+  { n: "04", t: "The adviser advises", d: "The conversation, the judgement and the advice stay entirely with your adviser. They just start from prepared, not from scratch." },
+];
+
+const faqs = [
+  { q: "Can AI be used safely in a regulated firm?", a: "Yes, with the right governance. We define what each agent can access, what it's allowed to do and where human sign-off is required before anything goes live. Activity is logged and auditable, which supports rather than undermines your regulatory position." },
+  { q: "Will AI give financial advice?", a: "No. Advice, suitability and client relationships remain entirely with your advisers. AI supports the administration around advice: gathering information, preparing documents and keeping records current." },
+  { q: "Is client financial data kept secure?", a: "Yes. We design permissions, governance and security controls before anything goes live, ensuring portfolios, plans and personal information remain protected and only accessible to authorised users." },
+  { q: "Will it work with our platforms and back office?", a: "It depends on the systems you're using. Some platforms support automation far more readily than others. We'll assess your environment, explain what's realistically achievable and recommend the most practical route forward." },
+  { q: "How does this sit with Consumer Duty?", a: "Well-governed automation tends to strengthen your position: records are more complete, reviews happen on time and clients get more consistent communication. We're happy to work with your compliance function so anything we build supports the outcomes you have to evidence." },
+  { q: "Where do most firms start?", a: "Usually with the administration around client reviews and onboarding, where the hours are most visible and the value is easiest to prove. We start with one process, demonstrate the value and build from there." },
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+---
+<Base
+  title="AI for Financial Services Firms — Keybridge IT"
+  description="Security-first AI for wealth managers and financial advisers: onboarding, review preparation, document processing and reporting support, governed to FCA-grade standards."
+  image="/images/card-ai-og.png"
+>
+  <script type="application/ld+json" set:html={faqSchema} is:inline></script>
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="AI FOR FINANCIAL SERVICES"
+    title={`Advisers should spend their time <span class="hl">advising</span>`}
+    lead="A financial adviser's week fills up with work that isn't advice. Chasing documents, preparing review packs, updating records, drafting letters. All of it necessary, none of it the reason clients pay you. AI agents can take ownership of that administration, with governance built for a regulated firm."
+    tickerId="ai-fin-ticker"
+  />
+
+  <!-- Where AI creates value -->
+  <section class="section">
+    <div class="wrap val-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHERE AI CREATES VALUE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">The advice is the product. The admin is the cost.</h2>
+      </div>
+      <div class="reveal val-body">
+        <p>Most financial firms don't have an expertise problem. They have a capacity problem. Client reviews take days of preparation. Onboarding stretches across weeks of document collection. Suitability reports and recurring client communications consume hours that could be spent with clients.</p>
+        <p>These processes are repetitive, rule-driven and record-heavy, which makes them exactly what AI agents are good at supporting, while advice and judgement stay with your advisers.</p>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:46px">
+      <div class="grid-3">
+        {cases.map((c, i) => (
+          <article class={`card reveal ${["v-gold","v-purple","v-teal","v-lime","v-gold","v-purple"][i]}`}>
+            <div class="bartop"></div>
+            <div class="ic">{c.ic}</div>
+            <h3>{c.t}</h3><p>{c.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- In practice -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--gold);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHAT THIS LOOKS LIKE IN PRACTICE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:20px">Review season without the scramble</h2>
+      <p class="reveal prac-lead">Take annual client reviews, the workload every advice firm recognises. Here's the shape of a review-preparation agent, the kind of process firms typically automate first.</p>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step reveal">
+            <span class="step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <p class="reveal prac-foot">Reviews happen on time, files are complete and the audit trail builds itself. The adviser's hours go into the conversation, not the collation.</p>
+    </div>
+  </section>
+
+  <!-- Confidentiality / regulation -->
+  <section class="section">
+    <div class="wrap vol-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> REGULATED MEANS GOVERNED</div>
+        <h2 style="max-width:20ch;margin-bottom:24px">Built for a firm the FCA is watching</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">In a regulated firm, AI cannot simply be switched on and left to run. Client money, personal data and suitability obligations mean every automated process needs clear boundaries, human sign-off in the right places and records that stand up to inspection.</p>
+        <p style="color:var(--muted);line-height:1.75">That's how we build. Every agent's access is defined before it runs, activity is logged, and anything touching advice, suitability or client communication carries human review. Done properly, automation strengthens your compliance position, because complete records and consistent processes are exactly what regulators want to see.</p>
+      </div>
+      <div class="reveal viz-wrap"><ConfidentialViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Safe and governed -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--gold);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Safe and governed</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Few organisations hold information as consequential as a financial firm. Portfolios, plans, bank details and personal circumstances all sit within your systems, and your clients' trust depends on them staying there.</p>
+        <p style="color:var(--muted);line-height:1.75">Any AI agent operating in that environment is locked down before it runs. We define exactly what it can see, what it can do and where data is allowed to go, with clear permissions, tested controls and a full audit trail behind it.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge -->
+  <section class="section">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why financial firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink)">In financial services, the question isn't whether AI can help. It's whether it can be trusted near your clients' financial lives.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That's the standard we build to. We've spent fifteen years protecting sensitive information for professional-services firms, and we already support wealth managers, financial research houses and insurance businesses.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">Combined with our Microsoft partnership and dedicated AI practice, that experience means every agent we build starts from governance and works up, not the other way around.</p>
+        <Accreditations />
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the administration consuming the most adviser time and show you where AI can create genuine value inside your firm."
+    btn="Book a Discovery Session"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .val-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .val-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .vol-split{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .prac-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .step:hover{border-color:rgba(201,162,51,.5);transform:translateY(-4px)}
+  .step-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--gold)}
+  .step h3{font-size:1.15rem;margin:12px 0 12px}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.65}
+  .prac-foot{margin-top:34px;font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.45;color:var(--ink);max-width:52ch}
+
+  @media(max-width:900px){
+    .val-split,.vol-split,.why-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+</style>

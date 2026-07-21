@@ -1,0 +1,42 @@
+---
+// Recruitment community sponsorships and partnerships strip.
+// Logos live in /public/images/events (dark backgrounds, shown in dark chips).
+interface Props { accent?: string }
+const { accent = "var(--teal)" } = Astro.props;
+const sponsors = [
+  { file: "/images/accreditations/apsco-trusted-partner.png", alt: "APSCo Trusted Partner", pad: true, href: "https://uk.apsco.org/" },
+  { file: "/images/recconnect-full-colour-rev.png", alt: "RecConnect. Recruitment, connected.", pad: true, href: "https://recconnect.co/" },
+  { file: "/images/Pump_original.webp", alt: "Pump" },
+  { file: "/images/events/recruiters-recruitment-podcast.png", alt: "The Recruiter's Recruitment Podcast" },
+];
+---
+<section class="section sponsors" style={`--ac:${accent}`}>
+  <div class="wrap">
+    <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${accent};box-shadow:0 0 12px ${accent}`}></span> IN THE ROOM, NOT JUST ON THE PHONE</div>
+    <h2 class="reveal" style="max-width:22ch;margin-bottom:20px">Part of the recruitment community</h2>
+    <p class="reveal spon-lead">As an APSCo Trusted Partner and a supporter of RecConnect, Pump and The Recruiter's Recruitment Podcast, we spend our time where recruiters do. Sponsoring the industry's events and communities keeps us close to the people we build for.</p>
+    <div class="spon-row reveal">
+      {sponsors.map((s) =>
+        s.href ? (
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class={`spon-chip ${s.pad ? "padded" : ""}`} aria-label={s.alt}>
+            <img src={s.file} alt={s.alt} loading="lazy" />
+          </a>
+        ) : (
+          <span class={`spon-chip ${s.pad ? "padded" : ""}`}><img src={s.file} alt={s.alt} loading="lazy" /></span>
+        )
+      )}
+    </div>
+  </div>
+</section>
+<style>
+  .sponsors{border-top:1px solid var(--line)}
+  .spon-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:38px}
+  .spon-row{display:flex;flex-wrap:wrap;gap:18px}
+  .spon-chip{display:flex;align-items:center;justify-content:center;
+    height:88px;padding:18px 26px;border-radius:12px;
+    background:var(--bg2);border:1px solid var(--line);transition:border-color .3s}
+  .spon-chip:hover{border-color:var(--line-strong)}
+  .spon-chip img{max-height:100%;max-width:180px;width:auto;object-fit:contain}
+  .spon-chip.padded img{max-height:34px}
+  @media(max-width:600px){.spon-chip{height:72px;padding:14px 18px}.spon-chip img{max-width:140px}}
+</style>

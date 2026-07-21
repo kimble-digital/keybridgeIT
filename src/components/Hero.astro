@@ -12,10 +12,10 @@ const heroBg = "/images/ai-bloke.png";
     <div class="hero-left">
       <div class="eyebrow hb"><span class="dot"></span> AI &nbsp;|&nbsp; CYBER &nbsp;|&nbsp; SUPPORT</div>
       <h1>
-        <span class="line"><span data-w>Secure IT.</span></span>
-        <span class="line"><span data-w>Protected <span class="accent">data.</span></span></span>
-        <span class="line"><span data-w>Smarter ways</span></span>
-        <span class="line"><span data-w>to <span class="rotator" id="rot">operate</span>.</span></span>
+        <span class="line">Secure IT.</span>
+        <span class="line">Protected <span class="accent">data.</span></span>
+        <span class="line">Smarter ways</span>
+        <span class="line">to <span class="rotator" id="rot">operate</span>.</span>
       </h1>
       <p class="lead hsub">
         We help <b>recruitment agencies, law firms and accountancy practices</b> keep their technology secure,
@@ -25,6 +25,9 @@ const heroBg = "/images/ai-bloke.png";
         <a href="/it-review" class="btn-primary">Book a Free IT Review →</a>
         <a href="#services" class="btn-ghost">See how we work</a>
       </div>
+    </div>
+    <div class="hero-badge hbadge">
+      <img src="/images/accreditations/ms-solutions-partner-white.png" alt="Microsoft Solutions Partner" />
     </div>
   </div>
 
@@ -44,7 +47,7 @@ const heroBg = "/images/ai-bloke.png";
   .hero-bg{
     position:absolute;inset:0;z-index:0;
     background-position:center right;background-size:cover;background-repeat:no-repeat;
-    transform:scale(1.04);will-change:transform;
+    transform:scale(1.04);
   }
   .hero-shade{
     position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -57,13 +60,44 @@ const heroBg = "/images/ai-bloke.png";
   .hero-inner{position:relative;z-index:2;width:100%;flex:1 1 auto;display:flex;align-items:center}
   .hero-left{display:flex;flex-direction:column;justify-content:center;max-width:62ch}
   h1{margin-bottom:22px;max-width:16ch;line-height:1.02;font-size:clamp(42px,5.6vw,74px)}
-  .line{display:block;overflow:hidden}
-  .line span[data-w]{display:inline-block;will-change:transform}
-  .line.revealed{overflow:visible}
-  .rotator{position:relative;display:inline-block;color:var(--lime)}
+  .line{display:block}
+  .accent{color:var(--purple)}
+  .rotator{display:inline-block;color:var(--lime);transition:transform .34s ease, opacity .34s ease}
+  .rotator.is-out{opacity:0;transform:translateY(-45%)}
   .hsub{max-width:52ch;margin-bottom:38px}
   .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-  .hb{margin-bottom:28px;opacity:0}
+  .hb{margin-bottom:28px}
+
+  /* ============================================================
+     INTRO ANIMATION — pure CSS, fires on first paint.
+     Gated on html.js (set synchronously in <head>) so non-JS users
+     just see the final state. Animates whole blocks with a gentle
+     fade + rise, so it can never clip or overlap the layout, and
+     never waits on GSAP/images (no flash).
+     `both` fill-mode holds the hidden start state during the delay
+     and the final state at the end.
+     ============================================================ */
+  @keyframes heroRise{ from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+  @keyframes heroBgIn{ from{opacity:0;transform:scale(1.08)} to{opacity:1;transform:scale(1.04)} }
+
+  html.js .hero-bg{opacity:0;animation:heroBgIn 1.6s ease-out both}
+  html.js .hb{opacity:0;animation:heroRise .7s .04s cubic-bezier(.2,.7,.2,1) both}
+  html.js h1 .line{opacity:0;animation:heroRise .8s cubic-bezier(.2,.7,.2,1) both}
+  html.js h1 .line:nth-child(1){animation-delay:.14s}
+  html.js h1 .line:nth-child(2){animation-delay:.22s}
+  html.js h1 .line:nth-child(3){animation-delay:.30s}
+  html.js h1 .line:nth-child(4){animation-delay:.38s}
+  html.js .hsub{opacity:0;animation:heroRise .8s .52s cubic-bezier(.2,.7,.2,1) both}
+  html.js .hcta{opacity:0;animation:heroRise .8s .64s cubic-bezier(.2,.7,.2,1) both}
+  html.js .hbadge{opacity:0;animation:heroRise .8s .78s cubic-bezier(.2,.7,.2,1) both}
+
+  .hero-badge{margin-left:auto;align-self:flex-end;padding-bottom:6px}
+  .hero-badge img{height:56px;width:auto;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55))}
+  @media(max-width:1040px){
+    .hero-inner{flex-wrap:wrap}
+    .hero-badge{margin-left:0;align-self:flex-start;margin-top:36px;padding-bottom:0;flex:1 1 100%}
+    .hero-badge img{height:42px}
+  }
 
   @media(min-width:1040px){
     .hero-left{max-width:none;width:58%}
@@ -76,50 +110,59 @@ const heroBg = "/images/ai-bloke.png";
       linear-gradient(0deg, rgba(6,8,12,.94) 8%, rgba(6,8,12,.55) 55%, rgba(6,8,12,.7) 100%);}
   }
 
+  /* Reduced motion: no intro, no marquee, no rotator motion. */
+  @media(prefers-reduced-motion:reduce){
+    html.js .hero-bg,
+    html.js .hb,
+    html.js h1 .line,
+    html.js .hsub,
+    html.js .hcta,
+    html.js .hbadge{opacity:1;animation:none;transform:none}
+    .rotator{transition:none}
+  }
+
   .ticker-wrap{position:relative;z-index:2;margin-top:40px;flex:0 0 auto;border-block:1px solid var(--line);overflow:hidden;background:rgba(6,8,12,.45);backdrop-filter:blur(2px)}
-  .ticker{display:flex;white-space:nowrap;will-change:transform}
+  .ticker{display:flex;white-space:nowrap;width:max-content;animation:tickerScroll 26s linear infinite}
+  @keyframes tickerScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @media(prefers-reduced-motion:reduce){ .ticker{animation:none} }
   .ticker .item{display:inline-flex;align-items:center;gap:14px;padding:18px 38px;font-family:var(--display);font-weight:600;font-size:15px;border-right:1px solid var(--line)}
   .ticker .item small{color:var(--muted);font-weight:400;font-family:var(--body)}
   .ticker .item .bdot{width:6px;height:6px;border-radius:50%}
 </style>
 
 <script is:inline>
-  window.addEventListener('load', () => {
-    if (!window.gsap) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const words = gsap.utils.toArray('[data-w]');
+  (function () {
+    // Word rotator — plain CSS transition, no GSAP dependency. Purely
+    // decorative, so it's safe to start whenever; it never affects the
+    // intro or the layout flow.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    if (reduce) {
-      gsap.set(words, { yPercent: 0 });
-      document.querySelector('.hb').style.opacity = 1;
-      document.querySelectorAll('.line').forEach(l => l.classList.add('revealed'));
-    } else {
-      gsap.set(words, { yPercent: 115 });
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-      tl.to('.hb', { opacity: 1, duration: .6 }, 0)
-        .to(words, { yPercent: 0, duration: 1.1, stagger: .09, onComplete: () => {
-          document.querySelectorAll('.line').forEach(l => l.classList.add('revealed'));
-        } }, .1)
-        .from('.hsub', { opacity: 0, y: 20, duration: .8 }, '-=.6')
-        .from('.hcta', { opacity: 0, y: 20, duration: .7 }, '-=.5')
-        .from('.hero-bg', { opacity: 0, scale: 1.12, duration: 1.6, ease: 'power2.out' }, 0);
+    var rot = document.getElementById('rot');
+    if (!rot) return;
 
-      // word rotator
-      const rotWords = ['operate','grow','automate','win'];
-      const rotColors = ['var(--lime)','var(--teal)','#f5c542','var(--orange)'];
-      let ri = 0;
-      const rot = document.getElementById('rot');
-      setInterval(() => {
-        ri = (ri + 1) % rotWords.length;
-        gsap.to(rot, { yPercent: -100, opacity: 0, duration: .32, ease: 'power2.in', onComplete: () => {
-          rot.textContent = rotWords[ri];
-          rot.style.color = rotColors[ri];
-          gsap.fromTo(rot, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power2.out' });
-        }});
-      }, 2200);
+    var words  = ['operate', 'grow', 'automate', 'win'];
+    var colors = ['var(--lime)', 'var(--teal)', '#f5c542', 'var(--orange)'];
+    var i = 0;
 
-      // ticker marquee
-      gsap.to('#ticker', { xPercent: -50, duration: 26, ease: 'none', repeat: -1 });
-    }
-  });
+    setInterval(function () {
+      rot.classList.add('is-out');                 // slide current word out
+      setTimeout(function () {
+        i = (i + 1) % words.length;
+        rot.textContent = words[i];
+        rot.style.color = colors[i];
+        // jump below (no transition), then transition back into place
+        rot.style.transition = 'none';
+        rot.style.transform = 'translateY(45%)';
+        rot.style.opacity = '0';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            rot.style.transition = '';
+            rot.classList.remove('is-out');
+            rot.style.transform = '';
+            rot.style.opacity = '';
+          });
+        });
+      }, 340);
+    }, 2600);
+  })();
 </script>

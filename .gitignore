@@ -5,3 +5,6 @@ dist/
 .DS_Store
 *.log
 .vercel
+
+_to_delete/
+keybridge-update.zip

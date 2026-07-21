@@ -6,10 +6,10 @@ const { eyebrow, title, lead, stats } = Astro.props;
   <div class="grid-bg"></div>
   <div class="glow pg"></div>
   <div class="wrap pinner">
-    <div class="eyebrow reveal"><span class="dot"></span> {eyebrow}</div>
-    <h1 class="reveal">{title}</h1>
-    {lead && <p class="lead phlead reveal">{lead}</p>}
-    {stats && <p class="pstats reveal">{stats}</p>}
+    <div class="eyebrow phin"><span class="dot"></span> {eyebrow}</div>
+    <h1 class="phin">{title}</h1>
+    {lead && <p class="lead phlead phin">{lead}</p>}
+    {stats && <p class="pstats phin">{stats}</p>}
   </div>
 </header>
 <style>
@@ -19,4 +19,23 @@ const { eyebrow, title, lead, stats } = Astro.props;
   .phlead{max-width:60ch;margin-top:24px}
   .pstats{margin-top:30px;font-family:var(--display);font-size:13px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
   h1{max-width:18ch}
+
+  /* ============================================================
+     Page-hero intro — pure CSS, fires on first paint.
+     Uses its own class (.phin) so the global GSAP reveal script,
+     which targets .reveal, never touches these and can't re-flash
+     them. Gentle fade + rise on whole blocks: no clip, no overlap,
+     no JS timing, no flash. `both` holds start/end states.
+     ============================================================ */
+  @keyframes phinRise{ from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+  html.js .phin{opacity:0;animation:phinRise .7s cubic-bezier(.2,.7,.2,1) both}
+  html.js .phin:nth-child(1){animation-delay:.06s}
+  html.js .phin:nth-child(2){animation-delay:.15s}
+  html.js .phin:nth-child(3){animation-delay:.24s}
+  html.js .phin:nth-child(4){animation-delay:.32s}
+
+  @media(prefers-reduced-motion:reduce){
+    html.js .phin{opacity:1;animation:none;transform:none}
+  }
 </style>

@@ -1,44 +1,79 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHero from "../../components/PageHero.astro";
-import Prose from "../../components/Prose.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import DeadlineViz from "../../components/industry/DeadlineViz.astro";
+import LockViz from "../../components/service/LockViz.astro";
+import Accreditations from "../../components/shared/Accreditations.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Faq from "../../components/Faq.astro";
 
 const cases = [
-  { t:"Client Information Collection", d:"Automate requesting records, tracking outstanding information and following up with clients, reducing the endless chasing around filing deadlines." },
-  { t:"Client Onboarding", d:"Collect information, request documents, support identity and AML processes, and keep new client onboarding moving without unnecessary administration." },
-  { t:"Knowledge Management", d:"Give your team instant access to internal guidance, templates, procedures and past work, so expertise is shared across the firm." },
-  { t:"Document Processing", d:"Extract information from incoming documents, organise them correctly and flag anything unusual for review." },
-  { t:"Management Commentary & Reporting", d:"Assist with drafting commentary, summarising financial information and identifying key trends, reducing manual effort in recurring reporting." },
+  { ic: "IC", t: "Client Information Collection", d: "Automate requesting records, tracking outstanding information and following up with clients, reducing the endless chasing that consumes valuable time around filing deadlines." },
+  { ic: "ON", t: "Client Onboarding", d: "Collect information, request documents, support identity and AML processes, and keep new client onboarding moving without unnecessary administration." },
+  { ic: "KM", t: "Knowledge Management", d: "Give your team instant access to internal guidance, templates, procedures and past work, so expertise is shared across the firm rather than locked inside individual managers and partners." },
+  { ic: "DP", t: "Document Processing", d: "Extract information from incoming documents, organise them correctly and flag anything unusual for review, helping teams manage large volumes of client information more efficiently." },
+  { ic: "MR", t: "Management Commentary & Reporting", d: "Assist with drafting management commentary, summarising financial information and identifying key trends, reducing the manual effort in recurring reporting processes." },
 ];
+
+const steps = [
+  { n: "01", t: "The agent knows what's outstanding", d: "It watches the list of records still owed for each job, so nothing depends on someone remembering to check." },
+  { n: "02", t: "It chases, politely and persistently", d: "Clients get clear, personalised requests and reminders for exactly what's missing, without a team member drafting a single email." },
+  { n: "03", t: "It logs what arrives", d: "Incoming documents are recorded against the right client and job, and the outstanding list updates itself." },
+  { n: "04", t: "People handle the exceptions", d: "When something needs judgement, a client goes quiet or a record looks wrong, it's escalated to your team. Everything else just keeps moving." },
+];
+
 const faqs = [
-  { q:"Will AI work with our existing systems?", a:"Usually, but it depends on the software. Some platforms support AI and automation far better than others. We'll assess your systems and recommend the most practical route forward." },
-  { q:"Is client financial data safe?", a:"Yes. We design governance, permissions and security controls before anything goes live, ensuring sensitive information remains protected and accessible only to authorised users." },
-  { q:"Where should we start?", a:"Usually with the process creating the most administrative overhead — often information collection, onboarding, document management or internal knowledge sharing." },
-  { q:"Do we need Microsoft Copilot first?", a:"Not necessarily. Some firms begin with Copilot adoption, while others start with workflow automation. We'll help you determine the right starting point." },
-  { q:"Will AI replace accountants?", a:"No. Accountancy remains a profession built on expertise, judgement and trust. AI is most effective when it removes repetitive administration." },
+  { q: "Will AI work with our practice software?", a: "Usually, yes, although the answer depends on the systems you're using. Some accountancy and practice-management platforms support automation far better than others. We'll assess your existing environment, explain what's realistically achievable and recommend the most practical route forward." },
+  { q: "Is client financial data kept secure?", a: "Yes. We design permissions, governance and security controls before anything goes live, ensuring client records and financial information remain protected and only accessible to authorised users." },
+  { q: "Can it help during busy season?", a: "That's often where AI delivers the greatest value. Information collection, document processing and routine administration don't slow down when deadlines approach, helping firms reduce bottlenecks during their busiest periods." },
+  { q: "Does it fit our professional and AML obligations?", a: "Yes. We build solutions with oversight, auditability and accountability in mind. AI supports your processes, but judgement and responsibility remain with qualified professionals." },
+  { q: "Where do most accountancy firms start with AI?", a: "Usually with the processes creating the most administrative pressure. For many firms that's client information collection, onboarding, document processing or internal knowledge management." },
+  { q: "Will AI replace accountants?", a: "No. Accountancy remains a profession built on expertise, judgement and trust. AI is most effective when it removes repetitive administration and allows qualified people to spend more time advising clients and solving problems." },
 ];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
 ---
-<Base title="AI for Accountancy Firms — Keybridge IT" description="Turn administration into automation. Security-first AI for practices under deadline pressure.">
-  <PageHero
-    eyebrow="AI FOR ACCOUNTANCY"
-    title="Turn administration into automation"
-    lead="The information needed to complete the work doesn't arrive when it's requested — it arrives days before the deadline. From collecting information and onboarding clients to answering routine questions, AI agents can take ownership of the repetitive tasks that slow firms down."
-    stats="15 Years Supporting Professional Services · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+<Base
+  title="AI for Accountancy Firms — Keybridge IT"
+  description="Turn administration into automation. Security-first AI agents for accountancy practices: information collection, onboarding, document processing and reporting, governed properly."
+  image="/images/card-accountancy-og.png"
+>
+  <script type="application/ld+json" set:html={faqSchema} is:inline></script>
+
+  <ServiceHero
+    accent="orange"
+    eyebrow="AI FOR ACCOUNTANCY FIRMS"
+    title={`Turn administration into <span class="hl">automation</span>`}
+    lead="Accountancy firms know the pattern. The information needed to complete the work doesn't arrive when it's requested. It arrives days before the deadline. Clients forget, records are incomplete and qualified accountants spend valuable time chasing information instead of advising clients. AI can help remove much of that friction."
+    tickerId="ai-acc-ticker"
   />
 
-  <Prose eyebrow="WHERE AI CREATES VALUE" title="Most firms already know where the bottlenecks are">
-    <p>It's the client who hasn't sent the records. It's the onboarding process waiting for documents. It's the knowledge buried in a partner's inbox. It's the recurring work that has to happen every month, quarter and year.</p>
-    <p>These are exactly the types of processes AI agents are good at supporting.</p>
-  </Prose>
-
+  <!-- Where AI creates value -->
   <section class="section">
-    <div class="wrap">
+    <div class="wrap val-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> WHERE AI CREATES VALUE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Most firms already know where the bottlenecks are</h2>
+      </div>
+      <div class="reveal val-body">
+        <p>It's the client who hasn't sent the records. It's the onboarding process waiting for documents. It's the knowledge that's buried in a partner's inbox. It's the recurring work that has to happen every month, quarter and year.</p>
+        <p>These are exactly the types of processes AI agents are good at supporting. From collecting information and onboarding new clients to answering routine questions and supporting reporting, agents can take ownership of many of the repetitive tasks that slow firms down.</p>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:46px">
       <div class="grid-3">
-        {cases.map((c,i) => (
+        {cases.map((c, i) => (
           <article class={`card reveal ${["v-orange","v-purple","v-teal","v-lime","v-orange"][i]}`}>
             <div class="bartop"></div>
+            <div class="ic">{c.ic}</div>
             <h3>{c.t}</h3><p>{c.d}</p>
           </article>
         ))}
@@ -46,15 +81,119 @@ const faqs = [
     </div>
   </section>
 
-  <Prose eyebrow="DEADLINE PRESSURE" title="Most firms don't struggle because the work is too complex">
-    <p>They struggle because the information arrives too late. As deadlines approach, teams find themselves chasing records, answering routine questions and managing incomplete information instead of focusing on the work itself.</p>
-    <p>AI can help by automatically requesting information, tracking outstanding items, answering routine queries and escalating exceptions when human intervention is needed. The goal isn't to replace accountants — it's to help firms stay ahead of deadlines.</p>
-  </Prose>
+  <!-- In practice: records chasing agent -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--orange);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> WHAT THIS LOOKS LIKE IN PRACTICE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:20px">Take the chasing off your team's desk</h2>
+      <p class="reveal prac-lead">Take the bottleneck almost every practice recognises: records that arrive late. Here's the shape of an information-collection agent, the kind of process firms typically automate first.</p>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step reveal">
+            <span class="step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <p class="reveal prac-foot">The chasing happens every day, not just when someone finds time. By the time deadline season arrives, far more of the information is already in.</p>
+    </div>
+  </section>
 
-  <Prose eyebrow="JUDGEMENT STAYS HUMAN" title="AI should support judgement, not replace it">
-    <p>Accountancy relies on professional judgement, experience and accountability. AI can organise information, automate repetitive tasks and support decision-making, but responsibility must always remain with qualified people. That's why we build AI to support accountants, not replace them.</p>
-  </Prose>
+  <!-- Deadline pressure -->
+  <section class="section">
+    <div class="wrap vol-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> DEADLINE PRESSURE</div>
+        <h2 style="max-width:20ch;margin-bottom:24px">Most firms don't struggle because the work is too complex</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">They struggle because the information arrives too late. As deadlines approach, teams often find themselves chasing records, answering routine questions and managing incomplete information instead of focusing on the work itself. The result is compressed workloads, avoidable stress and less time available for higher-value client conversations.</p>
+        <p style="color:var(--muted);line-height:1.75">AI can help by automatically requesting information, tracking outstanding items, answering routine queries and escalating exceptions when human intervention is needed. The goal isn't to replace accountants. It's to help firms stay ahead of deadlines and spend more time delivering advice rather than administration.</p>
+      </div>
+      <div class="reveal viz-wrap"><DeadlineViz accent="var(--orange)" /></div>
+    </div>
+  </section>
 
-  <Faq items={faqs} />
-  <CtaBand title="Book an AI discovery session" body="We'll identify the operational bottlenecks consuming the most time inside your practice and show you where AI can create genuine value." btn="Book a Discovery Session" />
+  <!-- Judgement -->
+  <section class="section sec-tint2">
+    <div class="wrap over-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> JUDGEMENT STAYS HUMAN</div>
+        <h2 style="max-width:18ch">AI should support judgement, not replace it</h2>
+      </div>
+      <div class="reveal over-body">
+        <p>One of the biggest misconceptions about AI in professional services is that it can replace expertise. It can't.</p>
+        <p>Accountancy relies on professional judgement, experience and accountability. AI can help organise information, automate repetitive tasks and support decision-making, but responsibility must always remain with qualified people. That's why we build AI to support accountants, not replace them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe and governed -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--orange);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Safe and governed</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Few organisations handle information as sensitive as an accountancy firm. Client financial records, tax information, payroll data and supporting documentation all carry significant professional, regulatory and commercial responsibilities. Any AI solution operating in that environment needs clear boundaries and proper oversight.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That's why we define exactly what each AI agent can access, what it's allowed to do and where human sign-off is required before anything goes live. Access is restricted to what the task genuinely needs, activity is logged and controls are tested before an agent touches live client work.</p>
+        <p style="color:var(--muted);line-height:1.75">You gain the efficiency without losing control of confidential information or weakening your compliance position.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent="var(--orange)" /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge -->
+  <section class="section">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why accountancy firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink)">Adopting AI in a practice isn't really a technology challenge. It's a governance, security and process challenge with technology sitting in the middle.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That's the part many AI consultancies overlook. We've spent fifteen years helping organisations protect sensitive information and operate securely. As a Microsoft Solutions Partner with a dedicated AI practice, we focus on building automation that stands up to the scrutiny accountancy firms demand.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">The result is AI that can support client work with confidence, not a pilot project that creates concern for partners, compliance teams or regulators.</p>
+        <Accreditations />
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--orange)" />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the operational bottlenecks consuming the most time inside your practice and show you where AI can create genuine value for your team and your clients."
+    btn="Book a Discovery Session"
+    accent="var(--orange)"
+  />
 </Base>
+
+<style>
+  .val-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .val-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .vol-split{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .over-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .over-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .prac-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .step:hover{border-color:rgba(232,132,43,.5);transform:translateY(-4px)}
+  .step-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--orange)}
+  .step h3{font-size:1.15rem;margin:12px 0 12px}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.65}
+  .prac-foot{margin-top:34px;font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.45;color:var(--ink);max-width:52ch}
+
+  @media(max-width:900px){
+    .val-split,.vol-split,.over-split,.why-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+import Base from "../../layouts/Base.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import ConfidentialViz from "../../components/industry/ConfidentialViz.astro";
+import BigQuote from "../../components/shared/BigQuote.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+
+const AC = "var(--gold)";
+
+const services = [
+  { name: "Cyber Security", href: "/cyber-security", label: "Cyber Security Services", body: "Client portfolios, financial records and personal information make financial firms a natural target. We build genuine protection around the standards your clients, insurers and the FCA increasingly expect, with monitoring, governance and certification that stand up to scrutiny." },
+  { name: "Managed IT", href: "/managed-it", label: "Managed IT Services", body: "A dependable technology foundation that keeps advisers advising. From Microsoft 365 and secure cloud services through to devices, support and proactive monitoring, we keep systems available, compliant and quietly working in the background." },
+  { name: "AI Enablement", href: "/ai/financial-services", label: "AI for Financial Services", body: "Much of the work surrounding client advice is repetitive by nature. Preparing for reviews, collecting documents, drafting reports and keeping records current are all areas where AI can reduce administration while judgement and advice stay with your advisers." },
+];
+
+const faqs = [
+  { q: "Do you understand FCA obligations?", a: "We build systems and processes with governance, auditability and accountability in mind, and we're happy to work alongside your compliance function to ensure technology supports your regulatory obligations rather than complicating them." },
+  { q: "Is client financial data kept secure?", a: "Yes. We design permissions, security controls and governance around sensitive information from the outset, ensuring portfolios, records and personal data remain protected and accessible only to authorised users." },
+  { q: "Can you help us meet cyber insurance requirements?", a: "Yes. Insurers increasingly mandate controls such as MFA, endpoint protection, secure backup and incident response plans as policy conditions. We implement and evidence these as standard, which also strengthens your position at renewal." },
+  { q: "Can you support hybrid and remote advisers?", a: "Yes. We provide secure access, device management and support wherever your people work, so client information stays governed whether someone is in the office, at home or with a client." },
+  { q: "Will switching provider disrupt client work?", a: "Very little. We plan transitions carefully, move systems methodically and handle the heavy lifting in the background so your team can continue working throughout the process." },
+  { q: "How does pricing work?", a: "A predictable monthly fee based on your team size and the services you require. No surprise invoices every time something breaks or your headcount changes." },
+];
+---
+<Base title="IT Support for Financial Services Firms UK — Keybridge IT" description="Managed IT, cyber security and AI for wealth managers, advisers and financial firms. Built around client trust, FCA expectations and data that cannot leak." image="/images/card-home-og.png">
+
+  <ServiceHero
+    accentVar={AC}
+    eyebrow="FINANCIAL SERVICES"
+    title={`IT support built on <span class="hl">client trust</span>`}
+    lead="Wealth managers, financial advisers and investment firms trade on one thing above everything else: trust. The portfolios, plans and personal information you hold are exactly what clients expect you to protect, and exactly what attackers, insurers and the FCA are paying attention to."
+    tickerId="fin-ticker"
+  />
+
+  <!-- The stakes (LIGHT) -->
+  <section class="section sec-light">
+    <div class="wrap und-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHAT'S AT STAKE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">In this industry, a breach is a business event</h2>
+        <p style="line-height:1.75;margin-bottom:18px">Two things shape technology in financial services. The first is confidentiality. Client portfolios, financial plans and personal records cannot be left exposed, and the FCA's expectations around data handling and operational resilience leave little room for improvisation.</p>
+        <p style="line-height:1.75;margin-bottom:18px">The second is continuity. Markets don't pause because a server did. When advisers can't reach client records or trading and reporting systems are down, the cost is measured in client confidence, not just lost hours.</p>
+        <p style="line-height:1.75;color:var(--light-ink);font-weight:500">We've spent fifteen years supporting organisations where sensitive data and uptime are non-negotiable. That's the standard we build to.</p>
+      </div>
+      <div class="reveal viz-wrap"><ConfidentialViz accent={AC} /></div>
+    </div>
+  </section>
+
+  <!-- Everything your firm needs (DARK, 3 cards) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> ONE PARTNER</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:40px">Everything your firm needs from one partner</h2>
+      <div class="svc-cards">
+        {services.map((s) => (
+          <a href={s.href} class="svc-card reveal">
+            <div class="svc-bar"></div>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="svc-more">{s.label} &#8594;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurers as the real regulator (LIGHT) -->
+  <section class="section sec-light2">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> THE NEW BAR</div>
+      <h2 class="reveal" style="max-width:24ch;margin-bottom:24px">Your insurer now sets the security bar, alongside the FCA</h2>
+      <div class="press-grid">
+        <p class="reveal" style="line-height:1.75">Cyber insurance underwriters have quietly become one of the strictest regulators a financial firm answers to. Multi-factor authentication, endpoint protection, tested backups and incident response plans are increasingly conditions of cover, not nice-to-haves. Fall short and premiums climb, or claims fail exactly when you need them.</p>
+        <p class="reveal" style="line-height:1.75">We implement and evidence those controls as standard, so the questions on your renewal form have good answers. Combined with Cyber Essentials, ISO 27001-aligned practice and honest reporting, your security position becomes something you can demonstrate rather than assert.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why financial firms choose Keybridge (DARK) -->
+  <section class="section sec-tint">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style={`background:${AC};box-shadow:0 0 12px ${AC}`}></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why financial services firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink);margin-bottom:0">The question isn't whether technology can help your firm. It's whether it can be trusted near your clients' financial lives.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">We already support wealth managers, financial research houses and insurance businesses, alongside fifteen years protecting sensitive information for professional-services firms. Security, governance and accountability aren't an add-on to how we work. They're the starting point.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Clients benefit from a Microsoft Solutions Partner, genuine 24/7 support, built-in cyber security and a dedicated UK-based account manager who understands their firm and remains accountable for the relationship.</p>
+        <p style="color:var(--ink);line-height:1.6;font-weight:500">We're large enough to protect you properly, yet small enough to know your business personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <BigQuote
+    accent={AC}
+    quote="An IT support team that actually cares about my needs."
+    name="Nicholas Clarkin"
+  />
+
+  <Faq items={faqs} accent={AC} />
+
+  <CtaBand
+    title="Book a free IT review"
+    body="We'll review how your firm's technology is performing today, identify any risks around security, resilience or compliance, and show you where improvements could be made."
+    btn="Book a Free IT Review"
+    accent={AC}
+  />
+</Base>
+
+<style>
+  .und-split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .press-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+  .svc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .svc-card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .svc-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .svc-bar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--gold);transition:width .5s}
+  .svc-card:hover .svc-bar{width:100%}
+  .svc-card h3{margin-bottom:14px;font-size:1.4rem}
+  .svc-card p{color:var(--muted);line-height:1.7;margin-bottom:22px}
+  .svc-more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--gold)}
+
+  @media(max-width:900px){
+    .und-split,.why-split,.press-grid,.svc-cards{grid-template-columns:1fr;gap:30px}
+  }
+</style>

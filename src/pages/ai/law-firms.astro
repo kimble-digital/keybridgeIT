@@ -1,46 +1,87 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHero from "../../components/PageHero.astro";
-import Prose from "../../components/Prose.astro";
+import ServiceHero from "../../components/service/ServiceHero.astro";
+import ConfidentialViz from "../../components/industry/ConfidentialViz.astro";
+import LockViz from "../../components/service/LockViz.astro";
+import Accreditations from "../../components/shared/Accreditations.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Faq from "../../components/Faq.astro";
 
 const cases = [
-  { t:"Client Onboarding & Compliance", d:"Gather information, support AML processes, prepare onboarding and engagement documentation, and keep new matters moving without unnecessary delays." },
-  { t:"Matter Administration", d:"Support matter creation, record management, workflow tracking and routine administration throughout the lifecycle of a matter." },
-  { t:"Document Review", d:"Review large volumes of documents, identify key dates, clauses and points of interest, and flag items requiring legal review." },
-  { t:"Knowledge Search", d:"Help teams find relevant precedents, guidance, policies and past work without interrupting colleagues." },
-  { t:"Meeting Notes & Action Tracking", d:"Capture key decisions, actions and follow-ups automatically so matters continue progressing between meetings." },
+  { ic: "OB", t: "Client Onboarding & Compliance", d: "Gather information, support AML processes, prepare onboarding and engagement documentation, and keep new matters moving without unnecessary delays." },
+  { ic: "MA", t: "Matter Administration", d: "Support matter creation, record management, workflow tracking and routine administration throughout the lifecycle of a matter." },
+  { ic: "DR", t: "Document Review", d: "Review large volumes of documents, identify key dates, clauses and points of interest, and flag items requiring legal review." },
+  { ic: "KS", t: "Knowledge Search", d: "Help teams find relevant precedents, guidance, policies and past work without interrupting colleagues." },
+  { ic: "MN", t: "Meeting Notes & Action Tracking", d: "Capture key decisions, actions and follow-ups automatically so matters continue progressing between meetings." },
 ];
+
+const steps = [
+  { n: "01", t: "The agent starts the file", d: "When a new client comes in, the agent requests identity documents and the information the engagement needs, and tracks what's arrived." },
+  { n: "02", t: "It prepares the checks", d: "It assembles what's needed for AML and conflict checks and drafts the engagement documentation, ready for review." },
+  { n: "03", t: "It keeps the matter moving", d: "Missing items are chased, records are filed against the right matter, and nothing waits for someone to find a spare hour." },
+  { n: "04", t: "Your team makes the decisions", d: "Approval, judgement and anything touching privilege stay with your lawyers. The agent hands over a file that's ready, not a decision that's made." },
+];
+
 const faqs = [
-  { q:"Is client confidentiality protected?", a:"Yes. We define what each AI agent can access, restrict permissions appropriately and ensure sensitive information remains governed and secure." },
-  { q:"Will AI replace legal judgement?", a:"No. AI is designed to support lawyers, not replace them. Legal judgement, professional responsibility and client advice remain with qualified professionals." },
-  { q:"Can AI help with onboarding and compliance?", a:"Yes. AI is particularly effective at supporting information gathering, onboarding workflows, AML processes, engagement documentation and other routine administrative tasks." },
-  { q:"Will AI work with our existing systems?", a:"It depends on the systems you're using. Some platforms support AI and automation more effectively than others. We'll assess your environment and explain what's realistically achievable." },
-  { q:"Where should we start?", a:"Most firms begin with an area that creates significant administrative overhead, such as client onboarding, matter administration, document review or knowledge management." },
+  { q: "How are client confidentiality and legal privilege protected?", a: "Every AI agent is restricted to the specific information and systems required for its role. Access is tightly controlled, activity is logged and sensitive or privileged information remains governed throughout the process." },
+  { q: "Will AI make legal decisions?", a: "No. AI is designed to support lawyers, not replace them. It can handle routine administration, organise information and surface relevant knowledge, but legal advice, judgement and professional responsibility remain with qualified professionals." },
+  { q: "Can AI support onboarding, conflicts and AML checks?", a: "Yes. Information gathering, onboarding workflows, conflict checking, AML processes, engagement documentation and similar administrative activities are well suited to automation, while decisions remain with your team." },
+  { q: "Will it work with our case management and document systems?", a: "It depends on the systems you're using. Some legal platforms support automation more readily than others. We'll assess your environment, explain what's realistically achievable and recommend the most practical route forward." },
+  { q: "How does this align with SRA expectations?", a: "We build solutions with governance, oversight and auditability in mind. We're also happy to work alongside your risk, compliance and leadership teams to ensure any AI implementation aligns with your professional obligations." },
+  { q: "Where do most firms start?", a: "Most begin with an area creating significant administrative overhead, such as client onboarding, matter administration, document review or knowledge management, where the time savings are clear and the benefits can be demonstrated quickly." },
+  { q: "Will AI replace lawyers?", a: "No. Legal services are built on expertise, judgement and professional responsibility. AI is most effective when it removes routine administration and allows lawyers to spend more time on client work, legal analysis and strategic advice." },
 ];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
 ---
-<Base title="AI for Law Firms — Keybridge IT" description="Give fee earners more time to focus on client work. Security-first AI built around confidentiality and privilege.">
-  <PageHero
+<Base
+  title="AI for Law Firms — Keybridge IT"
+  description="Give fee earners more time for client work. Security-first AI agents for law firms: onboarding, matter administration, document review and knowledge search, built around confidentiality and privilege."
+  image="/images/card-law-firms-og.png"
+>
+  <script type="application/ld+json" set:html={faqSchema} is:inline></script>
+
+  <ServiceHero
+    accent="purple"
     eyebrow="AI FOR LAW FIRMS"
-    title="Give fee earners more time to focus on client work"
-    lead="Clients expect fast responses, rigorous attention to detail and complete confidentiality — yet fee earners are often pulled into administrative tasks that don't require legal expertise. From onboarding to document review, AI agents can take ownership of the repetitive processes that pull lawyers away from client work."
-    stats="15 Years Supporting Professional Services · Microsoft Solutions Partner · Security-First AI · 200 Organisations"
+    title={`More time for <span class="hl">client work</span>. Less time on admin.`}
+    lead="Law firms face a constant balancing act. Clients expect fast responses, rigorous attention to detail and complete confidentiality. At the same time, fee earners are pulled into administrative tasks that don't require legal expertise but still need to be completed. Opening matters. Collecting information. Chasing outstanding actions. Necessary work, but not necessarily billable work."
+    tickerId="ai-law-ticker"
   />
 
-  <Prose eyebrow="CONFIDENTIALITY ISN'T OPTIONAL" title="AI cannot simply be switched on and left to run">
-    <p>Legal practices handle some of the most sensitive information any organisation can hold. Client confidentiality, legal privilege, SRA obligations and reputational risk mean AI needs proper governance.</p>
-    <p>That's why we approach AI as a security-first technology. Every agent is governed around what it can see, what it can access and what actions it can take. The goal is simple: improve efficiency without compromising confidentiality.</p>
-  </Prose>
-
+  <!-- Confidentiality first -->
   <section class="section">
+    <div class="wrap vol-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> CONFIDENTIALITY ISN'T OPTIONAL</div>
+        <h2 style="max-width:20ch;margin-bottom:24px">We start from confidentiality, not efficiency</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Legal practices handle some of the most sensitive information any organisation can hold. Client confidentiality, legal privilege, SRA obligations and reputational risk mean AI cannot simply be switched on and left to run.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Every AI agent operates within clearly defined boundaries. What it can see, what it can access and what actions it's allowed to take are agreed before it ever runs.</p>
+        <p style="color:var(--muted);line-height:1.75">The goal is straightforward: improve efficiency without compromising client confidentiality, legal privilege or professional obligations.</p>
+      </div>
+      <div class="reveal viz-wrap"><ConfidentialViz accent="var(--purple)" /></div>
+    </div>
+  </section>
+
+  <!-- Where AI creates value -->
+  <section class="section sec-tint2">
     <div class="wrap">
-      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot"></span> WHERE AI CREATES VALUE</div>
-      <h2 class="reveal" style="margin-bottom:40px;max-width:22ch">The most expensive people in a firm shouldn't spend their day on routine admin</h2>
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> WHERE AI CREATES VALUE</div>
+      <h2 class="reveal" style="margin-bottom:20px;max-width:24ch">The most expensive people in a firm shouldn't spend their day on routine admin</h2>
+      <p class="reveal" style="color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px">Many firms still rely on lawyers and support staff to complete operational tasks that, while necessary, don't require legal judgement. AI agents are particularly effective at supporting these workflows, helping firms improve efficiency while allowing fee earners to focus on client work.</p>
       <div class="grid-3">
-        {cases.map((c,i) => (
-          <article class={`card reveal ${["v-teal","v-purple","v-orange","v-lime","v-teal"][i]}`}>
+        {cases.map((c, i) => (
+          <article class={`card reveal ${["v-purple","v-teal","v-orange","v-lime","v-purple"][i]}`}>
             <div class="bartop"></div>
+            <div class="ic">{c.ic}</div>
             <h3>{c.t}</h3><p>{c.d}</p>
           </article>
         ))}
@@ -48,11 +89,103 @@ const faqs = [
     </div>
   </section>
 
-  <Prose eyebrow="JUDGEMENT STAYS HUMAN" title="Lawyers should focus on legal judgement">
-    <p>The challenge for many firms isn't a lack of legal expertise — it's that too much of that expertise gets consumed by the processes surrounding it. Onboarding, compliance checks, document review, action tracking: none of it replaces legal judgement, but all of it takes time.</p>
-    <p>Legal advice requires judgement, context and professional responsibility. AI can organise information and automate routine processes, but responsibility must always remain with qualified professionals. That's why we build AI to support lawyers, not replace them.</p>
-  </Prose>
+  <!-- In practice: onboarding agent -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--purple);left:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> WHAT THIS LOOKS LIKE IN PRACTICE</div>
+      <h2 class="reveal" style="max-width:20ch;margin-bottom:20px">Onboarding that doesn't wait for a spare hour</h2>
+      <p class="reveal prac-lead">Take client onboarding, the process most firms automate first. Here's the shape of an onboarding agent, with your team keeping every decision that matters.</p>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step reveal">
+            <span class="step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <p class="reveal prac-foot">New matters open faster, files are complete from day one, and fee earners spend the saved hours on work clients actually pay for.</p>
+    </div>
+  </section>
 
-  <Faq items={faqs} />
-  <CtaBand title="Book an AI discovery session" body="We'll identify the operational work pulling fee earners away from client matters and show you where AI can create genuine value." btn="Book a Discovery Session" />
+  <!-- Judgement -->
+  <section class="section">
+    <div class="wrap over-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> JUDGEMENT STAYS HUMAN</div>
+        <h2 style="max-width:18ch">Lawyers should focus on legal judgement</h2>
+      </div>
+      <div class="reveal over-body">
+        <p>The challenge for many firms isn't a lack of legal expertise. It's that too much of that expertise gets consumed by the processes surrounding it. Client onboarding has to be completed. Compliance checks have to be performed. Documents have to be reviewed. Actions have to be tracked. None of this replaces legal judgement, but all of it takes time.</p>
+        <p>Legal advice requires judgement, context and professional responsibility. AI can help organise information, automate routine processes and surface relevant knowledge, but responsibility must always remain with qualified professionals. That's why we build AI to support lawyers, not replace them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe and governed -->
+  <section class="section sec-band sec-tint">
+    <div class="band-glow" style="background:var(--purple);right:-120px;top:50%;transform:translateY(-50%)"></div>
+    <div class="wrap feat-row">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> SECURITY-FIRST</div>
+        <h2 style="max-width:18ch;margin-bottom:22px">Governed like the sensitive work it touches</h2>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">Any AI agent operating near privileged material needs proper controls. We define what each agent can see, what it can access and what actions it's allowed to take, with permissions restricted to what the task genuinely needs and a full audit trail behind it.</p>
+        <p style="color:var(--muted);line-height:1.75">Controls are tested before an agent touches live matters, and human sign-off sits wherever judgement or privilege is involved. Confidentiality, governance and oversight aren't features bolted on afterwards. They're the starting point.</p>
+      </div>
+      <div class="reveal viz-wrap"><LockViz accent="var(--purple)" /></div>
+    </div>
+  </section>
+
+  <!-- Why Keybridge -->
+  <section class="section">
+    <div class="wrap why-split">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px"><span class="dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></span> WHY KEYBRIDGE</div>
+        <h2 style="max-width:18ch;margin-bottom:24px">Why law firms choose Keybridge</h2>
+        <p style="font-family:var(--display);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.4;color:var(--ink)">In legal services, the question isn't whether AI can help. It's whether it can be trusted near privileged and confidential information.</p>
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:18px">That's the standard we build to. We've spent fifteen years helping organisations protect highly sensitive information. Combined with our Microsoft partnership and dedicated AI practice, that experience allows us to approach AI differently from many automation-focused providers.</p>
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">We help firms achieve the efficiency benefits of AI without putting privilege, client trust or SRA obligations at risk.</p>
+        <Accreditations />
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} accent="var(--purple)" />
+
+  <CtaBand
+    title="Book an AI discovery session"
+    body="We'll identify the operational work pulling fee earners away from client matters and show you where AI can create genuine value inside your firm."
+    btn="Book a Discovery Session"
+    accent="var(--purple)"
+  />
 </Base>
+
+<style>
+  .vol-split{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .over-split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+  .over-body p{color:var(--muted);line-height:1.75;margin-bottom:18px}
+  .why-split{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .feat-row{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .viz-wrap{display:flex;justify-content:center}
+
+  .prac-lead{color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:44px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .step{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0));transition:border-color .3s,transform .3s}
+  .step:hover{border-color:rgba(155,60,135,.5);transform:translateY(-4px)}
+  .step-num{font-family:var(--display);font-size:13px;letter-spacing:.1em;color:var(--purple)}
+  .step h3{font-size:1.15rem;margin:12px 0 12px}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.65}
+  .prac-foot{margin-top:34px;font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.45;color:var(--ink);max-width:52ch}
+
+  @media(max-width:900px){
+    .vol-split,.over-split,.why-split,.feat-row{grid-template-columns:1fr;gap:30px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:1100px) and (min-width:901px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
