@@ -13,7 +13,7 @@ const { eyebrow, title, lead, stats } = Astro.props;
   </div>
 </header>
 <style>
-  .phero{position:relative;overflow:hidden;padding:160px 0 70px}
+  .phero{position:relative;overflow:hidden;padding:calc(160px + var(--banner-h,0px)) 0 70px}
   .pinner{position:relative;z-index:2}
   .pg{width:520px;height:520px;background:var(--purple);top:-160px;left:-60px;opacity:.22}
   .phlead{max-width:60ch;margin-top:24px}

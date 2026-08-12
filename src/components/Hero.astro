@@ -41,7 +41,20 @@ const heroBg = "/images/ai-bloke.png";
 </header>
 
 <style>
-  .hero{min-height:100svh;display:flex;flex-direction:column;padding:96px 0 0;position:relative;overflow:hidden;background:#06080c}
+  /* Top padding must clear the fixed nav (~76px) PLUS the audit banner when
+     it's visible (--banner-h, set on body). 120px base gives the eyebrow
+     breathing room below the logo even on short viewports. */
+  .hero{min-height:100svh;display:flex;flex-direction:column;padding:calc(120px + var(--banner-h,0px)) 0 0;position:relative;overflow:hidden;background:#06080c}
+
+  /* Short screens (laptops, small externals): tighten the type before it can
+     crowd the nav, and keep the clearance generous. */
+  @media(max-height:800px){
+    .hero{padding-top:calc(132px + var(--banner-h,0px))}
+    h1{font-size:clamp(38px,5vw,60px)}
+    .hb{margin-bottom:20px}
+    .hsub{margin-bottom:28px}
+    .ticker-wrap{margin-top:28px}
+  }
 
   /* ---- background image + shading ---- */
   .hero-bg{

@@ -22,7 +22,8 @@ const styleVar = accentVar ? `--ac:${accentVar}` : undefined;
   <Ticker id={tickerId} />
 </header>
 <style>
-  .svc-hero{min-height:88svh;display:flex;flex-direction:column;padding:128px 0 0;position:relative;overflow:hidden}
+  .svc-hero{min-height:88svh;display:flex;flex-direction:column;padding:calc(128px + var(--banner-h,0px)) 0 0;position:relative;overflow:hidden}
+  @media(max-height:800px){.svc-hero{padding-top:calc(140px + var(--banner-h,0px))}}
   .svc-inner{position:relative;z-index:2;width:100%;flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
   .sg{width:540px;height:540px;top:-140px;left:-60px;opacity:.24}
   .accent-teal .sg{background:var(--teal)}
