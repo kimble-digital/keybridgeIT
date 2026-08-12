@@ -5,6 +5,7 @@ import ShieldViz from "../components/service/ShieldViz.astro";
 import BigQuote from "../components/shared/BigQuote.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Faq from "../components/Faq.astro";
+import AuditPromo from "../components/shared/AuditPromo.astro";
 
 const layers = [
   "Multi-factor authentication",
@@ -119,6 +120,8 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <AuditPromo />
 
   <Faq items={faqs} accent="var(--orange)" />
 

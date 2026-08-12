@@ -1,0 +1,30 @@
+---
+// Body-copy promo band for the Free Microsoft 365 Security Audit.
+// Used on the homepage and the Cyber Security pillar; consistent anchor text
+// ("Free Microsoft 365 Security Audit") is deliberate — sitelink signals.
+---
+<section class="section audpromo">
+  <div class="glow apg"></div>
+  <div class="wrap ap-inner reveal">
+    <div class="ap-copy">
+      <div class="eyebrow" style="margin-bottom:14px"><span class="dot" style="background:var(--orange);box-shadow:0 0 12px var(--orange)"></span> NEW · FREE · READ-ONLY</div>
+      <h2 style="max-width:20ch;margin-bottom:18px">How securely is your Microsoft 365 tenant configured?</h2>
+      <p>Our <a href="/free-microsoft-365-security-audit" class="ap-link">Free Microsoft 365 Security Audit</a> shows you the configuration gaps, unnecessary risks and protections you're already paying for but not using. Read-only access, seven days, no obligation, and the report is yours to keep.</p>
+    </div>
+    <div class="ap-cta">
+      <a href="/free-microsoft-365-security-audit" class="btn-primary">Start your free security audit →</a>
+      <span class="ap-note">No password shared. We cannot change your settings.</span>
+    </div>
+  </div>
+</section>
+<style>
+  .audpromo{position:relative;overflow:hidden;border-block:1px solid var(--line);background:linear-gradient(180deg,var(--bg2),var(--bg))}
+  .apg{width:520px;height:520px;background:var(--orange);left:-140px;top:50%;transform:translateY(-50%);opacity:.12}
+  .ap-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr 1fr;gap:50px;align-items:center}
+  .ap-copy p{color:var(--muted);line-height:1.75;max-width:58ch}
+  .ap-link{color:var(--orange);text-decoration:underline;text-underline-offset:3px;font-weight:500}
+  .ap-link:hover{color:var(--ink)}
+  .ap-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-self:end}
+  .ap-note{font-size:13px;color:var(--muted2)}
+  @media(max-width:900px){.ap-inner{grid-template-columns:1fr;gap:26px}.ap-cta{justify-self:start}}
+</style>

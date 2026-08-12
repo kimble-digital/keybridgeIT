@@ -34,6 +34,8 @@ const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
       )
     )}
 
+    <a href="/free-microsoft-365-security-audit" class="navaudit">Free Security Audit</a>
+
     <span class="nav-sep" aria-hidden="true"></span>
     <a href="/support" class="navutil">
       <svg class="navutil-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -85,6 +87,12 @@ const telUK = (company?.phoneUK || "").replace(/[^\d+]/g, "");
   .navlinks a.nav-mobile{display:none} /* shown only in the mobile menu */
   .nav-clienthelp{display:none} /* mobile menu only */
 
+  .navlinks a.navaudit{
+    color:var(--orange);font-weight:600;
+    padding:6px 12px;border:1px solid rgba(232,132,43,.45);border-radius:8px;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  .navlinks a.navaudit:hover{background:rgba(232,132,43,.14);color:#f0a05c;border-color:var(--orange)}
   .navcta{background:var(--purple);color:#fff!important;padding:10px 18px;border-radius:8px;font-weight:600;font-family:var(--display);white-space:nowrap;transition:transform .2s,background .2s}
   .navcta:hover{background:var(--purple-deep);transform:translateY(-1px)}
   .hasmenu{position:relative}
