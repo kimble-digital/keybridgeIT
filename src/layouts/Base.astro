@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
+import AuditBanner from "../components/AuditBanner.astro";
 import Footer from "../components/Footer.astro";
 import { company } from "../data/site";
 
@@ -69,6 +70,7 @@ const canonical = new URL(Astro.url.pathname, siteOrigin).href;
     />
   </head>
   <body>
+    <AuditBanner />
     <Nav />
     <main>
       <slot />

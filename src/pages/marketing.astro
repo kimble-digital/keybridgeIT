@@ -1,0 +1,1414 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+
+export const prerender = true;
+
+/* ============================================================
+   /marketing — Boilerplate & Profile Copy Pack
+   Internal reference page. noindex, not in nav, not in sitemap.
+   Source of truth: "Keybridge IT: Boilerplate & Profile Copy Pack (v1)"
+   (Google Doc). Update both together.
+   ============================================================ */
+
+type Block = {
+  id: string;
+  label: string;
+  meta?: string;
+  limit?: number;
+  note?: string;
+  paras: string[];
+};
+type Group = { title?: string; blocks: Block[] };
+type Section = {
+  id: string;
+  num: string;
+  title: string;
+  accent: string;
+  intro?: string;
+  groups: Group[];
+};
+
+const facts: [string, string][] = [
+  ["Age", "15 years / fifteen years established"],
+  ["Team", "25 specialists"],
+  ["Clients", "200 organisations"],
+  ["Devices", "5,000 devices"],
+  ["Servers", "roughly 100 to 120 servers"],
+  ["Reviews", "130+ five-star reviews"],
+  ["Security record", "over a decade with no client ransomware breach"],
+  ["Response", "critical issues: 20-minute response, 2-hour resolution"],
+  ["Location", "London-based, supporting clients UK-wide"],
+  [
+    "Support model",
+    "UK help desk in business hours, English-speaking colleagues in the Philippines overnight, real people around the clock",
+  ],
+  [
+    "Accreditations",
+    "Microsoft Solutions Partner · Cyber Essentials · Cyber Essentials Plus · ISO 27001:2022 · APSCo Trusted Partner",
+  ],
+];
+
+const flags: string[] = [
+  `"over a decade with no client ransomware breach". Andy to confirm the exact number of years before any specific figure is used.`,
+  `"£4m turnover". In the foundation doc, deliberately kept out of public boilerplate. Use only in tender and investor contexts where turnover is asked for.`,
+  `"more than 30 recruitment businesses". Derived from the 32 recruitment logos in the welcome pack. Confirm with Andy before use in press.`,
+];
+
+const sections: Section[] = [
+  {
+    id: "core",
+    num: "2",
+    title: "Core boilerplate",
+    accent: "purple",
+    groups: [
+      {
+        blocks: [
+          {
+            id: "core-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge is a London-based IT firm protecting 200 UK organisations with cyber security, agentic AI and managed IT. Fifteen years established, rooted in recruitment.`,
+            ],
+          },
+          {
+            id: "core-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations UK-wide. We bring three things together: cyber security that holds up when it's tested, agentic AI that takes repetitive work off your team, and managed IT that simply works. Fifteen years established, rooted in recruitment, where we still specialise.`,
+            ],
+          },
+          {
+            id: "core-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations UK-wide. We bring three things together under one accountable partner. Cyber security that holds up when it's tested, with honest Cyber Essentials certification and over a decade without a client ransomware breach. Agentic AI that takes repetitive work off your team, built and governed by our AI practice. And managed IT that simply works, with real people around the clock. Fifteen years established, and a Microsoft Solutions Partner. We grew up in recruitment, and the same standards now protect law firms, accountancies, financial services businesses and charities.`,
+            ],
+          },
+          {
+            id: "core-250",
+            label: "Extended",
+            meta: "≈250 words",
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations and around 5,000 devices across the UK. We work with professional-services firms that hold sensitive data and can't afford to go down.`,
+              `We bring three things together under one accountable partner. The first is cyber security that holds up when it's tested. Most attacks don't break in, they log in, so we start with identity and people, we certify honestly, and we hold every client to a minimum security standard we won't go below. Over a decade on, no client of ours has had a ransomware breach.`,
+              `The second is agentic AI. Most firms have learned to ask AI a question. The real value is in AI agents that run repetitive work from start to finish on their own, and identifying, building and governing those agents is a specialist job. It's the one our AI practice does, on Microsoft technologies, with the same security thinking we apply everywhere else.`,
+              `The third is managed IT that simply works. Our UK help desk covers business hours, experienced English-speaking colleagues in the Philippines cover nights and weekends, and every client has a dedicated UK-based account manager who knows the business and meets them face to face.`,
+              `Keybridge has been established for fifteen years and holds more than 130 five-star reviews. We're a Microsoft Solutions Partner, certified to Cyber Essentials, Cyber Essentials Plus and ISO 27001:2022. We grew up in recruitment and still specialise in it, and the same standards now protect law firms, accountancies, financial services businesses and charities.`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "sectors",
+    num: "3",
+    title: "Sector variants",
+    accent: "lime",
+    intro: `Same facts, different door in. Use these when the reader is definitely in that sector: sector awards, trade directories, sponsor listings, sector event programmes, sector-specific proposals.`,
+    groups: [
+      {
+        title: "Recruitment",
+        blocks: [
+          {
+            id: "rec-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge grew up in recruitment. Fifteen years on, we protect agencies across the UK with cyber security, agentic AI and managed IT that simply works.`,
+            ],
+          },
+          {
+            id: "rec-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Keybridge grew up in recruitment and still specialises in it. Our founder ran IT inside recruitment businesses for eleven years first, so we know the churn, the candidate data, the joiners and leavers, and the everyday urgency. Today we bring agencies cyber security, agentic AI and managed IT, from a team of 25.`,
+            ],
+          },
+          {
+            id: "rec-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Keybridge grew up in recruitment and still specialises in it. Our founder ran IT inside recruitment businesses for eleven years before starting the firm fifteen years ago, so we know the churn, the candidate data and GDPR exposure, the joiners and leavers, and the fact that everything is urgent to the person it's happening to. We handle all of it without nickel-and-diming. Beyond the day-to-day, we bring agencies two things most providers don't: cyber security that holds up when it's tested, and agentic AI that takes repetitive work off consultants. We're an APSCo Trusted Partner and a Microsoft Solutions Partner, with 130+ five-star reviews.`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "Accountancy",
+        blocks: [
+          {
+            id: "acc-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge protects accountancy practices with cyber security, agentic AI and managed IT. Fifteen years established, 200 UK organisations supported, and certification done honestly.`,
+            ],
+          },
+          {
+            id: "acc-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Accountancy practices hold client financial data and work to deadlines that don't move. Keybridge keeps that data secure, certifies honestly, and keeps your systems running through year-end and self assessment peaks. We also help practices put agentic AI to work on the repetitive jobs: chasing records, preparing files, drafting reports. Fifteen years established, 25 specialists.`,
+            ],
+          },
+          {
+            id: "acc-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Accountancy practices hold client financial data and work to deadlines that don't move, which makes both a breach and an outage expensive in a way few other businesses experience. Keybridge keeps that data genuinely secure, certifies honestly rather than ticking a box, and keeps your systems running through year-end and self assessment peaks. Beyond the foundations, our AI practice helps firms put agents to work on the repetitive jobs: chasing records, preparing files, drafting first-pass reports, with a person reviewing everything before it goes out. Fifteen years established, 25 specialists, 200 organisations supported, and a Microsoft Solutions Partner certified to Cyber Essentials Plus.`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "Legal",
+        blocks: [
+          {
+            id: "law-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge protects law firms with cyber security, agentic AI and managed IT. Fifteen years established, honest certification, and over a decade with no client ransomware breach.`,
+            ],
+          },
+          {
+            id: "law-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Client confidentiality isn't a policy for a law firm, it's the business. Keybridge protects firms that can't risk a breach: honest Cyber Essentials certification, a minimum security standard we won't go below, and over a decade without a client ransomware breach. We also help firms use agentic AI safely, with human oversight.`,
+            ],
+          },
+          {
+            id: "law-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Client confidentiality isn't a policy for a law firm, it's the business, and the SRA's expectations on cyber have only sharpened. Keybridge protects firms that can't risk a breach. We start with identity and people, because most attacks don't break in, they log in. We certify honestly, we hold every client to a minimum security standard, and over a decade on, no client of ours has had a ransomware breach. Beyond that, our AI practice helps firms put agents to work on matter onboarding and document-heavy admin, with a person reviewing every output. Fifteen years established, 25 specialists, Microsoft Solutions Partner.`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "Financial services",
+        blocks: [
+          {
+            id: "fs-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge protects financial services firms with cyber security, agentic AI and managed IT. Fifteen years established, ISO 27001 certified, and built for firms under regulatory scrutiny.`,
+            ],
+          },
+          {
+            id: "fs-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Financial services firms carry client money, client data and a regulator's attention, so the security has to be real and evidenced. Keybridge certifies honestly, holds every client to a minimum security standard, and keeps the systems running underneath. We also help firms use agentic AI safely, with oversight and audit trails built in.`,
+            ],
+          },
+          {
+            id: "fs-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Financial services firms carry client money, client data and a regulator's attention, so the security has to be real and the evidence has to exist when someone asks for it. Keybridge certifies honestly rather than ticking a box, holds every client to a minimum security standard we won't go below, and keeps the systems running underneath. Our AI practice helps firms put agents to work on onboarding and KYC checks, review preparation and document processing, with human oversight and an audit trail on every step. Fifteen years established, 25 specialists, ISO 27001:2022 and Cyber Essentials Plus certified, and a Microsoft Solutions Partner.`,
+            ],
+          },
+        ],
+      },
+      {
+        title: "Charities",
+        blocks: [
+          {
+            id: "cha-25",
+            label: "Short",
+            meta: "≈25 words",
+            paras: [
+              `Keybridge protects charities with cyber security, agentic AI and managed IT. Fifteen years established, honest certification, and a team that explains things in plain English.`,
+            ],
+          },
+          {
+            id: "cha-50",
+            label: "Standard",
+            meta: "≈50 words",
+            paras: [
+              `Charities hold supporter and beneficiary data that people trusted them with, usually on a budget with no room for waste. Keybridge protects that data properly, certifies honestly, and keeps the technology running without surprise bills. We also help charities put agentic AI to work on grant reporting and supporter admin, freeing time for the cause.`,
+            ],
+          },
+          {
+            id: "cha-100",
+            label: "Medium",
+            meta: "≈100 words",
+            paras: [
+              `Charities hold supporter and beneficiary data that people trusted them with, usually on a budget that leaves no room for waste and with a team already stretched. Keybridge protects that data properly, certifies honestly, and keeps the technology running without surprise bills for the things other providers charge extra for. Our AI practice helps charities put agents to work on the admin that eats the week: grant reporting, supporter communications, keeping donor records straight, volunteer onboarding. A person reviews everything before it goes out. Fifteen years established, 25 specialists, 200 organisations supported, and a Microsoft Solutions Partner certified to Cyber Essentials Plus.`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "directory",
+    num: "4",
+    title: "Directory and listing entries",
+    accent: "teal",
+    intro: `Character counts include spaces. Trim from the end, never from the front.`,
+    groups: [
+      {
+        blocks: [
+          {
+            id: "dir-80",
+            label: "Ultra-short",
+            meta: "under 80 characters",
+            limit: 80,
+            paras: [
+              `Cyber security, agentic AI and managed IT for UK professional-services firms.`,
+            ],
+          },
+          {
+            id: "dir-120",
+            label: "Tagline",
+            meta: "under 120 characters",
+            limit: 120,
+            paras: [
+              `Secure IT, smarter operations, and a genuine AI advantage. Fifteen years protecting UK professional-services firms.`,
+            ],
+          },
+          {
+            id: "dir-150",
+            label: "Short listing",
+            meta: "150 characters",
+            limit: 150,
+            paras: [
+              `London-based IT firm protecting 200 UK organisations with cyber security, agentic AI and managed IT. Fifteen years established, rooted in recruitment.`,
+            ],
+          },
+          {
+            id: "dir-300",
+            label: "Standard listing",
+            meta: "under 300 characters",
+            limit: 300,
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, protecting 200 UK organisations. We bring cyber security that holds up when it's tested, agentic AI that takes repetitive work off your team, and managed IT that simply works. Fifteen years established. Microsoft Solutions Partner.`,
+            ],
+          },
+          {
+            id: "dir-500",
+            label: "Long listing",
+            meta: "under 500 characters",
+            limit: 500,
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations and 5,000 devices across the UK. We bring three things together under one accountable partner: cyber security that holds up when it's tested, agentic AI that takes repetitive work off your team, and managed IT that simply works, with real people available around the clock. Fifteen years established, 130+ five-star reviews, Microsoft Solutions Partner, certified to Cyber Essentials Plus and ISO 27001:2022.`,
+            ],
+          },
+          {
+            id: "dir-gbp",
+            label: "Google Business Profile description",
+            meta: "under 750 characters",
+            limit: 750,
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations and around 5,000 devices across the UK. We work with professional-services firms that hold sensitive data and can't afford to go down: recruitment agencies, law firms, accountancies, financial services businesses and charities. We bring three things together under one accountable partner. Cyber security that holds up when it's tested, certified honestly. Agentic AI that takes repetitive work off your team. And managed IT that simply works, with a UK help desk, real people around the clock, and a dedicated account manager who knows your business. Fifteen years established, 130+ five-star reviews, and a Microsoft Solutions Partner.`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "press",
+    num: "5",
+    title: "Press",
+    accent: "orange",
+    groups: [
+      {
+        blocks: [
+          {
+            id: "press-boiler",
+            label: `Press release boilerplate ("About Keybridge IT" block)`,
+            note: `Check the founding year and the website URL before first use.`,
+            paras: [
+              `Keybridge IT is a London-based IT firm of 25 specialists, looking after 200 organisations and around 5,000 devices across the UK. Founded in 2011 by Andy Hinxman, the firm brings cyber security, agentic AI and managed IT together under one accountable partner, working with professional-services firms that hold sensitive data and can't afford downtime. Keybridge is a Microsoft Solutions Partner, certified to Cyber Essentials, Cyber Essentials Plus and ISO 27001:2022, holds more than 130 five-star reviews, and has gone over a decade without a client ransomware breach. Rooted in recruitment, where it still specialises, Keybridge today protects law firms, accountancies, financial services businesses and charities. keybridgeit.co.uk`,
+            ],
+          },
+          {
+            id: "press-short",
+            label: "Short press boilerplate",
+            meta: "for tight word counts",
+            paras: [
+              `Keybridge IT is a London-based firm of 25 specialists bringing cyber security, agentic AI and managed IT to 200 UK organisations. Established fifteen years, Microsoft Solutions Partner, rooted in recruitment.`,
+            ],
+          },
+          {
+            id: "press-spokes",
+            label: "Spokesperson attribution line",
+            paras: [`Andy Hinxman, founder and CEO of Keybridge IT`],
+          },
+          {
+            id: "press-media",
+            label: "Media contact block",
+            paras: [
+              `Media enquiries`,
+              `[Name], [email], [phone]`,
+              `Keybridge IT, [London address]`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "tender",
+    num: "6",
+    title: "Awards and tender profile",
+    accent: "gold",
+    intro: `Longer, evidence-first, written for someone scoring against criteria rather than browsing.`,
+    groups: [
+      {
+        blocks: [
+          {
+            id: "tender-profile",
+            label: "Company profile",
+            meta: "tender / award submission, ≈300 words",
+            paras: [
+              `Keybridge IT is a London-based managed IT and cyber security firm, established for fifteen years and employing 25 specialists across support, cyber security and AI. We support 200 organisations and approximately 5,000 devices, along with 100 to 120 servers, across the UK.`,
+              `Our client base is concentrated in professional services: recruitment agencies, law firms, accountancy practices, financial services businesses and charities. These are organisations that hold sensitive personal and financial data and cannot tolerate extended downtime. Our service is built around that profile.`,
+              `Security. Every client is held to a documented minimum security standard from day one. We deliver Cyber Essentials and Cyber Essentials Plus certification honestly, and we decline work where a client is unwilling to meet the baseline. We are certified to ISO 27001:2022. Over a decade of operation, no client of ours has suffered a ransomware breach.`,
+              `Support. Our UK help desk operates during business hours, with experienced English-speaking colleagues in the Philippines covering nights and weekends, so a real person is always available. Critical issues carry a 20-minute response and 2-hour resolution target. Every client is assigned a dedicated UK-based account manager who meets them in person on a regular cycle.`,
+              `AI. We operate a dedicated AI practice building and governing agentic AI on Microsoft technologies. We identify the repetitive processes worth automating, build the agents, and put human oversight and audit trails around them. This capability is unusual among providers of our size and is a significant part of the value we bring beyond core IT.`,
+              `Accreditations. Microsoft Solutions Partner, Cyber Essentials, Cyber Essentials Plus, ISO 27001:2022, APSCo Trusted Partner.`,
+              `Evidence of service quality. More than 130 five-star reviews. We ask every client to tell us the moment we fall short, and to leave a negative review if we drop the ball, because it is the only way we hear about a problem and put it right.`,
+            ],
+          },
+          {
+            id: "tender-summary",
+            label: "Capability summary",
+            meta: "one paragraph, for coversheets",
+            paras: [
+              `Keybridge IT provides cyber security, agentic AI and managed IT services to 200 UK organisations from a London base, with a team of 25 specialists. We are a Microsoft Solutions Partner certified to Cyber Essentials, Cyber Essentials Plus and ISO 27001:2022, established fifteen years, with over a decade of operation and no client ransomware breach.`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "social",
+    num: "7",
+    title: "Social profiles",
+    accent: "indigo",
+    groups: [
+      {
+        blocks: [
+          {
+            id: "li-tagline",
+            label: "LinkedIn company tagline",
+            meta: "120 character limit",
+            limit: 120,
+            paras: [
+              `Cyber security, agentic AI and managed IT for UK professional-services firms. Fifteen years. Rooted in recruitment.`,
+            ],
+          },
+          {
+            id: "li-about",
+            label: "LinkedIn company About",
+            meta: "2,000 character limit",
+            limit: 2000,
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations and around 5,000 devices across the UK.`,
+              `We work with professional-services firms that hold sensitive data and can't afford to go down. Recruitment agencies, law firms, accountancies, financial services businesses and charities.`,
+              `We bring three things together under one accountable partner.`,
+              `Cyber security that holds up when it's tested. Most attacks don't break in, they log in, so we start with identity and people. We certify honestly, we hold every client to a minimum security standard we won't go below, and over a decade on, no client of ours has had a ransomware breach.`,
+              `Agentic AI that does real work. Most firms have learned to ask AI a question. The value is in agents that run repetitive tasks from start to finish on their own, and building and governing those agents is a specialist job. It's the one our AI practice does.`,
+              `Managed IT that simply works. Our UK help desk covers business hours, experienced English-speaking colleagues in the Philippines cover nights and weekends, and every client has a dedicated UK-based account manager who knows the business and meets them face to face.`,
+              `We've been established for fifteen years and hold more than 130 five-star reviews. We're a Microsoft Solutions Partner, certified to Cyber Essentials, Cyber Essentials Plus and ISO 27001:2022, and an APSCo Trusted Partner.`,
+              `We grew up in recruitment and still specialise in it. The same standards now protect firms of every kind.`,
+              `Book a free IT review: [URL]`,
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "sales",
+    num: "8",
+    title: "Email and sales collateral",
+    accent: "emerald",
+    groups: [
+      {
+        blocks: [
+          {
+            id: "sig-block",
+            label: "Email signature block",
+            paras: [
+              `[Name]`,
+              `[Job title] | Keybridge IT`,
+              `[phone] | [email] | keybridgeit.co.uk`,
+              `Cyber security · Agentic AI · Managed IT`,
+              `Microsoft Solutions Partner · Cyber Essentials Plus · ISO 27001:2022`,
+            ],
+          },
+          {
+            id: "sig-strap",
+            label: "Email signature strapline",
+            meta: "single line, under the block",
+            paras: [
+              `Fifteen years keeping UK professional-services firms secure, supported and ahead on AI.`,
+            ],
+          },
+          {
+            id: "proposal",
+            label: "Proposal cover blurb",
+            meta: "≈90 words",
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, looking after 200 organisations across the UK. We bring cyber security, agentic AI and managed IT together under one accountable partner, and we've been doing it for fifteen years. What that means in practice: you're genuinely protected rather than told you are, your team gets capacity back as AI takes on the repetitive work, your IT just works, and you have a named UK account manager who knows your business. This proposal sets out what that would look like for [Client].`,
+            ],
+          },
+          {
+            id: "elevator",
+            label: "Elevator pitch, 30 seconds",
+            meta: "spoken",
+            paras: [
+              `Most IT providers do as little as possible and charge you for the rest, and some will even fake your cyber compliance to keep you. We do the two things that actually matter and most get wrong: we keep you genuinely secure, and we help you actually use AI. All of it on managed services that just work, run by people who pick up the phone. Fifteen years, 200 organisations. We grew up in recruitment and still specialise in it, and the same care now protects professional-services firms of every kind.`,
+            ],
+          },
+          {
+            id: "oneline-1",
+            label: "One-liner: positioning",
+            paras: [`Secure IT, smarter operations, and a genuine AI advantage.`],
+          },
+          {
+            id: "oneline-2",
+            label: "One-liner: audience",
+            paras: [
+              `Cyber security, agentic AI and managed IT for firms that hold sensitive data and can't afford downtime.`,
+            ],
+          },
+          {
+            id: "oneline-3",
+            label: "One-liner: partner",
+            paras: [`The IT partner that keeps you secure and gets you ahead on AI.`],
+          },
+          {
+            id: "oneline-4",
+            label: "One-liner: heritage",
+            paras: [
+              `Fifteen years of secure, supported IT. Now with the AI practice most providers don't have.`,
+            ],
+          },
+          {
+            id: "oneline-5",
+            label: "One-liner: competitive",
+            paras: [`Most providers stop at the firewall. We help you actually use AI.`],
+          },
+          {
+            id: "sponsor",
+            label: "Event sponsor / speaker blurb",
+            meta: "≈70 words",
+            paras: [
+              `Keybridge is a London-based IT firm of 25 specialists, protecting 200 UK organisations with cyber security, agentic AI and managed IT. Established fifteen years and rooted in recruitment, where we still specialise, we work with professional-services firms that hold sensitive data and can't afford to go down. We're a Microsoft Solutions Partner, an APSCo Trusted Partner, and certified to Cyber Essentials Plus and ISO 27001:2022. Come and say hello.`,
+            ],
+          },
+          {
+            id: "cta-primary",
+            label: "CTA: primary",
+            paras: [`Book a Free IT Review. No jargon, no pressure, and no hard sell.`],
+          },
+          {
+            id: "cta-secondary",
+            label: "CTA: secondary",
+            paras: [`Prefer to talk? Call us and a real person will pick up.`],
+          },
+          {
+            id: "cta-sector",
+            label: "CTA: sector variant",
+            paras: [`Book a free [sector] IT review.`],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const guardrails: [string, string][] = [
+  [
+    "Never write",
+    "world-class, best-in-class, cutting-edge, seamless, robust, leverage, synergy, holistic, empower, unlock, elevate, harness, streamline, turnkey, ecosystem, on a mission, fast-growing, next-generation, reimagine, game-changing, revolutionise, the future of, disrupt.",
+  ],
+  [
+    "Never use",
+    `em-dashes. "Not just X, but Y." Rule-of-three headers everywhere. "In today's fast-paced digital landscape." "Whether you're X or Y."`,
+  ],
+  [
+    "Never name",
+    "engineers or support staff. It invites poaching. Convey personal service through the account-manager promise instead.",
+  ],
+  [
+    "Never imply",
+    "that every overnight agent is UK-based, that Keybridge has moved on from recruitment, or that AI runs without human oversight.",
+  ],
+  [
+    "Always",
+    "British spelling, contractions on, one concrete fact or number per claim. Then run the five-second test: could a competitor paste this exact sentence onto their site and have it be equally true? If yes, make it specifically Keybridge.",
+  ],
+];
+
+const navItems = [
+  { id: "facts", label: "Approved facts", num: "1" },
+  ...sections.map((s) => ({ id: s.id, label: s.title, num: s.num })),
+  { id: "guardrails", label: "Guardrails", num: "9" },
+];
+
+const blockCount = sections.reduce(
+  (n, s) => n + s.groups.reduce((m, g) => m + g.blocks.length, 0),
+  0,
+);
+---
+
+<Base
+  title="Boilerplate & Profile Copy Pack — Keybridge IT"
+  description="Internal reference. Approved Keybridge company copy at every length, for every context."
+  noindex={true}
+>
+  <PageHero
+    eyebrow="INTERNAL REFERENCE"
+    title="Boilerplate copy pack"
+    lead={`Approved company copy at every length and for every context, so Keybridge reads the same everywhere it appears. ${blockCount} blocks, one click each.`}
+    stats="Voice & Messaging Guide v3 · Brand & Copy Foundation v2 · Not indexed, not linked in nav"
+  />
+
+  <section class="section packsec">
+    <div class="wrap packwrap">
+      <!-- ---------- Anchor menu ---------- -->
+      <aside class="anchors" aria-label="Section navigation">
+        <div class="anchbox">
+          <label class="srch">
+            <span class="sr-only">Filter copy blocks</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="srch-ic"
+              ><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"
+              ></circle><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"></path></svg
+            >
+            <input
+              type="search"
+              id="packSearch"
+              placeholder="Filter blocks…"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+          <p class="hits" id="packHits" hidden></p>
+          <nav class="anchlist">
+            {
+              navItems.map((n) => (
+                <a href={`#${n.id}`} data-anch={n.id}>
+                  <span class="anum">{n.num}</span>
+                  {n.label}
+                </a>
+              ))
+            }
+          </nav>
+          <p class="anchnote">
+            Blocks are editable in place. Counts update as you type. Nothing is saved, so refresh
+            to reset everything.
+          </p>
+        </div>
+      </aside>
+
+      <!-- ---------- Content ---------- -->
+      <div class="packbody">
+        <!-- 1. Approved facts -->
+        <section class="psec" id="facts" data-sec="facts">
+          <h2 class="psec-h"><span class="pnum">1</span>Approved facts</h2>
+          <p class="psec-intro">The only numbers to use.</p>
+
+          <div class="tablewrap">
+            <table class="facts">
+              <thead><tr><th>Fact</th><th>Approved wording</th></tr></thead>
+              <tbody>
+                {facts.map(([k, v]) => (
+                  <tr>
+                    <td class="fk">{k}</td>
+                    <td>{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="flagbox">
+            <h3>Flagged before publishing anywhere external</h3>
+            <ul>{flags.map((f) => <li>{f}</li>)}</ul>
+          </div>
+        </section>
+
+        <!-- 2-8. Copy sections -->
+        {
+          sections.map((s) => (
+            <section class="psec" id={s.id} data-sec={s.id}>
+              <h2 class="psec-h">
+                <span class="pnum">{s.num}</span>
+                {s.title}
+              </h2>
+              {s.intro && <p class="psec-intro">{s.intro}</p>}
+
+              {s.groups.map((g) => (
+                <div class="pgroup">
+                  {g.title && <h3 class="pgroup-h">{g.title}</h3>}
+                  <div class="blocks">
+                    {g.blocks.map((b) => (
+                      <article
+                        class={`cblock v-${s.accent}`}
+                        data-block
+                        data-search={`${s.title} ${g.title ?? ""} ${b.label} ${b.meta ?? ""} ${b.paras.join(" ")}`.toLowerCase()}
+                      >
+                        <header class="cbhead">
+                          <div class="cbtitle">
+                            <h4>{b.label}</h4>
+                            {b.meta && <span class="cbmeta">{b.meta}</span>}
+                          </div>
+                          <div class="cbtools">
+                            <span
+                              class="counts"
+                              data-counts
+                              data-limit={b.limit ?? ""}
+                              aria-live="polite"
+                            />
+                            <button class="cbtn" type="button" data-copy>
+                              <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect
+                                  x="9"
+                                  y="9"
+                                  width="11"
+                                  height="11"
+                                  rx="2"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                />
+                                <path
+                                  d="M5 15V6a2 2 0 0 1 2-2h9"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                />
+                              </svg>
+                              <span data-copylabel>Copy</span>
+                            </button>
+                          </div>
+                        </header>
+                        <div
+                          class="cbtext"
+                          data-text
+                          contenteditable="true"
+                          spellcheck="false"
+                          role="textbox"
+                          aria-multiline="true"
+                          aria-label={`${b.label} copy, editable`}
+                        >
+                          {b.paras.map((p) => (
+                            <p>{p}</p>
+                          ))}
+                        </div>
+                        {b.note && <p class="cbnote">{b.note}</p>}
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
+          ))
+        }
+
+        <!-- 9. Guardrails -->
+        <section class="psec" id="guardrails" data-sec="guardrails">
+          <h2 class="psec-h"><span class="pnum">9</span>Guardrails</h2>
+          <div class="rails">
+            {
+              guardrails.map(([k, v]) => (
+                <div class="rail">
+                  <span class="railk">{k}</span>
+                  <p>{v}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <p class="noresults" id="packNone" hidden>
+          Nothing matches that. Clear the filter to see everything again.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .packsec {
+    padding-top: 20px;
+  }
+  .packwrap {
+    display: grid;
+    grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+    gap: 54px;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .packwrap {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 26px;
+    }
+  }
+
+  /* ---------- Anchor menu ---------- */
+  .anchors {
+    position: sticky;
+    top: 96px;
+  }
+  @media (max-width: 980px) {
+    .anchors {
+      top: 62px;
+      z-index: 5;
+    }
+  }
+  .anchbox {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+  }
+  .srch {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 9px 11px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s;
+  }
+  .srch:focus-within {
+    border-color: var(--purple);
+  }
+  .srch-ic {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    color: var(--muted2);
+  }
+  .srch input {
+    background: none;
+    border: 0;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+  }
+  .srch input::placeholder {
+    color: var(--muted2);
+  }
+  .srch input::-webkit-search-cancel-button {
+    filter: invert(0.6);
+  }
+  .hits {
+    font-size: 12px;
+    color: var(--lime);
+    margin-top: 9px;
+    font-family: var(--display);
+    letter-spacing: 0.02em;
+  }
+  .anchlist {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
+  .anchlist a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 7px 8px;
+    border-radius: 7px;
+    border-left: 2px solid transparent;
+    transition:
+      color 0.2s,
+      background 0.2s,
+      border-color 0.2s;
+  }
+  .anchlist a:hover {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .anchlist a.on {
+    color: var(--ink);
+    border-left-color: var(--purple);
+    background: rgba(155, 60, 135, 0.1);
+  }
+  .anum {
+    font-family: var(--display);
+    font-size: 11px;
+    color: var(--muted2);
+    min-width: 11px;
+  }
+  .anchlist a.on .anum {
+    color: var(--purple);
+  }
+  .anchnote {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted2);
+    margin-top: 14px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+
+  /* On narrow screens the anchor list becomes a horizontal chip strip so it
+     doesn't push the copy blocks a screen and a half down the page. */
+  @media (max-width: 980px) {
+    .anchbox {
+      background: rgba(10, 10, 10, 0.94);
+      backdrop-filter: blur(10px);
+      padding: 12px;
+    }
+    .anchlist {
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 4px;
+      margin-top: 12px;
+      padding: 8px 0 2px;
+      scrollbar-width: none;
+    }
+    .anchlist::-webkit-scrollbar {
+      display: none;
+    }
+    .anchlist a {
+      white-space: nowrap;
+      border-left: 0;
+      border-bottom: 2px solid transparent;
+      border-radius: 7px 7px 0 0;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    .anchlist a.on {
+      border-left-color: transparent;
+      border-bottom-color: var(--purple);
+    }
+    .anchnote {
+      display: none;
+    }
+  }
+
+  /* ---------- Sections ---------- */
+  .psec {
+    scroll-margin-top: 88px;
+    margin-bottom: 64px;
+  }
+  /* clears the fixed nav plus the sticky filter/chip bar */
+  @media (max-width: 980px) {
+    .psec {
+      scroll-margin-top: 200px;
+    }
+  }
+  .psec-h {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .pnum {
+    font-size: 13px;
+    color: var(--muted2);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .psec-intro {
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 14px;
+    max-width: 68ch;
+  }
+  .pgroup {
+    margin-top: 26px;
+  }
+  .pgroup-h {
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ---------- Copy block ---------- */
+  .cblock {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 18px 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+    transition: border-color 0.25s;
+  }
+  .cblock:hover,
+  .cblock:focus-within {
+    border-color: var(--line-strong);
+  }
+  .cblock::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+  .v-purple::before {
+    background: var(--purple);
+  }
+  .v-lime::before {
+    background: var(--lime);
+  }
+  .v-teal::before {
+    background: var(--teal);
+  }
+  .v-orange::before {
+    background: var(--orange);
+  }
+  .v-gold::before {
+    background: var(--gold);
+  }
+  .v-indigo::before {
+    background: var(--indigo);
+  }
+  .v-emerald::before {
+    background: var(--emerald);
+  }
+
+  .cbhead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .cbtitle {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cbtitle h4 {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .cbmeta {
+    font-size: 11.5px;
+    color: var(--muted2);
+    font-family: var(--display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .cbtools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+  }
+  .counts {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .counts.over {
+    color: var(--coral);
+  }
+  .cbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--display);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 11px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .cbtn svg {
+    width: 13px;
+    height: 13px;
+  }
+  .cbtn:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+  }
+  .cbtn.done {
+    background: rgba(141, 191, 63, 0.15);
+    border-color: var(--lime);
+    color: var(--lime);
+  }
+  .cbtext {
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    border-radius: 8px;
+    padding: 2px 4px;
+    margin: 0 -4px;
+    outline: none;
+    transition: background 0.2s;
+  }
+  .cbtext:focus {
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+  }
+  .cbtext p + p {
+    margin-top: 12px;
+  }
+  .cbnote {
+    font-size: 12.5px;
+    color: var(--muted2);
+    font-style: italic;
+    margin-top: 12px;
+  }
+
+  /* ---------- Facts table ---------- */
+  .tablewrap {
+    overflow-x: auto;
+    margin-top: 22px;
+  }
+  table.facts {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 520px;
+  }
+  table.facts th,
+  table.facts td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    vertical-align: top;
+  }
+  table.facts th {
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  table.facts .fk {
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .flagbox {
+    margin-top: 26px;
+    border: 1px solid rgba(224, 86, 107, 0.3);
+    background: rgba(224, 86, 107, 0.05);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .flagbox h3 {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-family: var(--display);
+  }
+  .flagbox ul {
+    margin: 12px 0 0 18px;
+  }
+  .flagbox li {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .flagbox li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ---------- Guardrails ---------- */
+  .rails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .rail {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 15px 18px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .railk {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lime);
+  }
+  .rail p {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-top: 7px;
+  }
+
+  .noresults {
+    color: var(--muted);
+    font-size: 15px;
+    padding: 30px 0 60px;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var blocks = Array.prototype.slice.call(document.querySelectorAll("[data-block]"));
+    if (!blocks.length) return;
+
+    /* ---- plain text of a block, paragraphs separated by blank lines ---- */
+    function plain(block) {
+      var host = block.querySelector("[data-text]");
+      var ps = host.querySelectorAll("p");
+      var parts = [];
+      if (ps.length) {
+        Array.prototype.forEach.call(ps, function (p) {
+          parts.push(p.innerText.replace(/\s+/g, " ").trim());
+        });
+      } else {
+        parts.push(host.innerText.replace(/\s+/g, " ").trim());
+      }
+      return parts
+        .filter(function (t) {
+          return t.length;
+        })
+        .join("\n\n");
+    }
+
+    /* ---- live counters ---- */
+    function count(block) {
+      var el = block.querySelector("[data-counts]");
+      if (!el) return;
+      var t = plain(block);
+      var words = t.split(/\s+/).filter(Boolean).length;
+      var chars = t.length;
+      var limit = parseInt(el.getAttribute("data-limit"), 10);
+      el.textContent = words + "w · " + chars + "c";
+      if (limit) {
+        el.textContent = words + "w · " + chars + "/" + limit + "c";
+        el.classList.toggle("over", chars > limit);
+      }
+    }
+    blocks.forEach(function (b) {
+      count(b);
+      var t = b.querySelector("[data-text]");
+      t.addEventListener("input", function () {
+        count(b);
+      });
+      /* paste as plain text so pasted formatting never lands in a block */
+      t.addEventListener("paste", function (e) {
+        e.preventDefault();
+        var txt = (e.clipboardData || window.clipboardData).getData("text");
+        document.execCommand("insertText", false, txt);
+      });
+    });
+
+    /* ---- copy ---- */
+    function flash(btn) {
+      var label = btn.querySelector("[data-copylabel]");
+      var was = label.textContent;
+      btn.classList.add("done");
+      label.textContent = "Copied";
+      setTimeout(function () {
+        btn.classList.remove("done");
+        label.textContent = was;
+      }, 1400);
+    }
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+      } catch (err) {}
+      document.body.removeChild(ta);
+    }
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest ? e.target.closest("[data-copy]") : null;
+      if (!btn) return;
+      var block = btn.closest("[data-block]");
+      var text = plain(block);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () {
+            flash(btn);
+          },
+          function () {
+            fallbackCopy(text);
+            flash(btn);
+          },
+        );
+      } else {
+        fallbackCopy(text);
+        flash(btn);
+      }
+    });
+
+    /* ---- search filter ---- */
+    var input = document.getElementById("packSearch");
+    var hits = document.getElementById("packHits");
+    var none = document.getElementById("packNone");
+    var secs = Array.prototype.slice.call(document.querySelectorAll("[data-sec]"));
+
+    function filter() {
+      var q = input.value.trim().toLowerCase();
+      if (!q) {
+        blocks.forEach(function (b) {
+          b.hidden = false;
+        });
+        secs.forEach(function (s) {
+          s.hidden = false;
+        });
+        document.querySelectorAll(".pgroup").forEach(function (g) {
+          g.hidden = false;
+        });
+        hits.hidden = true;
+        none.hidden = true;
+        return;
+      }
+      var shown = 0;
+      blocks.forEach(function (b) {
+        var match = b.getAttribute("data-search").indexOf(q) !== -1;
+        b.hidden = !match;
+        if (match) shown++;
+      });
+      /* hide empty groups, then empty sections */
+      document.querySelectorAll(".pgroup").forEach(function (g) {
+        g.hidden = !g.querySelector("[data-block]:not([hidden])");
+      });
+      secs.forEach(function (s) {
+        if (s.id === "facts" || s.id === "guardrails") {
+          s.hidden = true;
+          return;
+        }
+        s.hidden = !s.querySelector("[data-block]:not([hidden])");
+      });
+      hits.hidden = false;
+      hits.textContent = shown + (shown === 1 ? " block" : " blocks");
+      none.hidden = shown > 0;
+    }
+    input.addEventListener("input", filter);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        input.value = "";
+        filter();
+      }
+    });
+
+    /* ---- scroll spy ---- */
+    var links = Array.prototype.slice.call(document.querySelectorAll("[data-anch]"));
+    var byId = {};
+    links.forEach(function (a) {
+      byId[a.getAttribute("data-anch")] = a;
+    });
+    if ("IntersectionObserver" in window) {
+      /* the narrow layout puts a sticky filter bar under the fixed nav, so the
+         "what am I looking at" line sits much further down the viewport */
+      var narrow = window.matchMedia("(max-width: 980px)");
+      var obs = null;
+      var visible = {};
+      var lastOn = null;
+
+      function markActive(id) {
+        if (id === lastOn) return;
+        lastOn = id;
+        links.forEach(function (a) {
+          var on = a.getAttribute("data-anch") === id;
+          a.classList.toggle("on", on);
+          /* keep the active chip in view in the horizontal strip */
+          if (on && narrow.matches && a.parentNode.scrollWidth > a.parentNode.clientWidth) {
+            var l = a.offsetLeft - 12;
+            a.parentNode.scrollTo ? a.parentNode.scrollTo({ left: l, behavior: "smooth" })
+                                  : (a.parentNode.scrollLeft = l);
+          }
+        });
+      }
+
+      function build() {
+        if (obs) obs.disconnect();
+        visible = {};
+        obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              visible[en.target.id] = en.isIntersecting;
+            });
+            var current = null;
+            secs.forEach(function (s) {
+              if (!current && visible[s.id] && !s.hidden) current = s.id;
+            });
+            if (current) markActive(current);
+          },
+          {
+            rootMargin: (narrow.matches ? -206 : -84) + "px 0px -60% 0px",
+            threshold: 0,
+          },
+        );
+        secs.forEach(function (s) {
+          obs.observe(s);
+        });
+      }
+      build();
+      narrow.addEventListener
+        ? narrow.addEventListener("change", build)
+        : narrow.addListener(build);
+    }
+  })();
+</script>

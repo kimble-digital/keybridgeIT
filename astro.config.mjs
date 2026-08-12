@@ -4,6 +4,10 @@ import sitemap from '@astrojs/sitemap';
 
 import vercel from '@astrojs/vercel';
 
+// Internal-only routes: kept out of the sitemap and robots.txt, and marked
+// noindex via the `noindex` prop on Base.astro. Add new ones here.
+const PRIVATE_ROUTES = ['/marketing'];
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://keybridgeit.com',
@@ -23,6 +27,11 @@ export default defineConfig({
     defaultStrategy: 'viewport',
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !PRIVATE_ROUTES.some((route) => new URL(page).pathname.startsWith(route)),
+    }),
+  ],
   adapter: vercel(),
 });

@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Internal reference page, not for search results.
+Disallow: /marketing
+
 Sitemap: https://keybridgeit.com/sitemap-index.xml

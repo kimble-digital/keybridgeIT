@@ -1,0 +1,86 @@
+---
+// Sitewide announcement banner for the Free Microsoft 365 Security Audit.
+// Rendered in Base.astro above the Nav. Fixed to the top; the nav is pushed
+// down by --banner-h while the banner is visible. Dismissal is remembered
+// per-browser via localStorage.
+const onAuditPage = Astro.url.pathname.startsWith("/free-microsoft-365-security-audit");
+---
+{!onAuditPage && (
+<div id="auditBanner" class="audit-banner" role="region" aria-label="Free Microsoft 365 Security Audit">
+  <div class="ab-sheen" aria-hidden="true"></div>
+  <a href="/free-microsoft-365-security-audit" class="ab-link">
+    <span class="ab-new"><span class="ab-dot"></span>NEW</span>
+    <span class="ab-text"><b>Free Microsoft 365 Security Audit</b><span class="ab-sub"> — find the security gaps hiding in your tenant</span></span>
+    <span class="ab-cta">Start your free audit <span class="ab-arr">→</span></span>
+  </a>
+  <button id="auditBannerClose" class="ab-close" aria-label="Dismiss banner">&times;</button>
+</div>
+)}
+<style is:global>
+  :root{--banner-h:0px}
+  body.has-audit-banner{--banner-h:44px}
+  body.has-audit-banner nav#nav{top:var(--banner-h)}
+  @media(max-width:640px){body.has-audit-banner{--banner-h:40px}}
+</style>
+<style>
+  .audit-banner{
+    position:fixed;top:0;left:0;right:0;z-index:110;height:var(--banner-h,44px);
+    display:none;align-items:center;justify-content:center;
+    background:linear-gradient(90deg,#5c1f4f 0%,var(--purple) 32%,#b4552e 72%,var(--orange) 100%);
+    overflow:hidden;
+  }
+  body.has-audit-banner .audit-banner{display:flex}
+  .ab-sheen{
+    position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);
+    transform:translateX(-100%);animation:abSheen 6s ease-in-out infinite;
+  }
+  @keyframes abSheen{0%,55%{transform:translateX(-100%)}85%,100%{transform:translateX(100%)}}
+  .ab-link{
+    position:relative;z-index:2;display:flex;align-items:center;gap:14px;
+    color:#fff;text-decoration:none;font-size:14px;padding:0 46px 0 18px;
+    max-width:100%;white-space:nowrap;overflow:hidden;
+  }
+  .ab-new{
+    display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.14em;
+    padding:3px 9px;border:1px solid rgba(255,255,255,.45);border-radius:999px;
+  }
+  .ab-dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:abPulse 1.6s ease-in-out infinite}
+  @keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .ab-text{overflow:hidden;text-overflow:ellipsis}
+  .ab-text b{font-weight:600}
+  .ab-sub{opacity:.85}
+  .ab-cta{
+    flex:0 0 auto;font-family:var(--display);font-weight:600;font-size:13px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+    padding:5px 13px;border-radius:8px;transition:background .2s;
+  }
+  .ab-link:hover .ab-cta{background:rgba(255,255,255,.28)}
+  .ab-arr{display:inline-block;transition:transform .2s}
+  .ab-link:hover .ab-arr{transform:translateX(3px)}
+  .ab-close{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:3;
+    background:none;border:none;color:rgba(255,255,255,.75);font-size:20px;line-height:1;
+    width:30px;height:30px;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;
+  }
+  .ab-close:hover{background:rgba(255,255,255,.15);color:#fff}
+  @media(max-width:900px){.ab-sub{display:none}}
+  @media(max-width:640px){
+    .ab-link{gap:10px;font-size:13px;padding-left:12px}
+    .ab-new{display:none}
+    .ab-cta{font-size:12px;padding:4px 10px}
+  }
+  @media(prefers-reduced-motion:reduce){.ab-sheen,.ab-dot{animation:none}}
+</style>
+<script>
+  const KEY = "kb-audit-banner-dismissed";
+  const banner = document.getElementById("auditBanner");
+  if (banner && !localStorage.getItem(KEY)) {
+    document.body.classList.add("has-audit-banner");
+  }
+  document.getElementById("auditBannerClose")?.addEventListener("click", () => {
+    localStorage.setItem(KEY, "1");
+    document.body.classList.remove("has-audit-banner");
+  });
+</script>
