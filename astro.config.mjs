@@ -20,6 +20,9 @@ export default defineConfig({
   // keep the old AI page URL working after the rename
   redirects: {
     '/ai-adoption': '/ai-enablement',
+    // Short link for social posts and print. The full audit URL is too long to
+    // sit on a social card without wrapping.
+    '/audit': '/free-microsoft-365-security-audit',
   },
 
   prefetch: {

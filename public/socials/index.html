@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Keybridge IT · Social cards</title>
+<title>Keybridge IT · Social studio</title>
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,137 +11,669 @@
 <style>
   :root{
     --bg:#0A0A0A; --bg2:#111114; --bg3:#16161A; --ink:#F4F2EF; --muted:#9A9AA0;
-    --purple:#9B3C87; --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.18);
+    --acc:#8DBF3F; --acc2:#9B3C87; --li:#0A66C2;
+    --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.18);
     --display:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);padding:0 clamp(20px,4vw,56px) 100px;}
-  header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.92);backdrop-filter:blur(10px);
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.93);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);padding:26px 0 16px;margin-bottom:10px;}
   .wm{display:flex;align-items:center;gap:16px;}
-  .wm img{height:46px;width:auto;}
-  .wm-lbl{font-family:var(--display);text-transform:uppercase;letter-spacing:.2em;font-size:15px;color:var(--muted);}
-  header h1{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:34px;margin-top:14px;}
-  header p.note{color:var(--muted);font-size:14px;margin-top:8px;max-width:80ch;line-height:1.55;}
-  .filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .wm img{height:44px;width:auto;}
+  .wm-lbl{font-family:var(--display);text-transform:uppercase;letter-spacing:.2em;font-size:14px;color:var(--muted);}
+  header h1{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:32px;margin-top:12px;}
+  header p.note{color:var(--muted);font-size:13.5px;margin-top:8px;max-width:86ch;line-height:1.6;}
+  header p.note b{color:var(--ink);font-weight:600;}
+  .filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;}
   .chip{background:transparent;color:var(--muted);border:1px solid var(--line-strong);border-radius:999px;
     padding:7px 17px;font-family:var(--display);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-    font-size:13px;cursor:pointer;transition:all .15s;}
-  .chip:hover{border-color:var(--purple);color:var(--ink);}
-  .chip.active{background:var(--purple);color:#fff;border-color:var(--purple);}
+    font-size:12.5px;cursor:pointer;transition:all .15s;}
+  .chip:hover{border-color:var(--acc);color:var(--ink);}
+  .chip.active{background:var(--acc);color:#0A0A0A;border-color:var(--acc);}
   .fmt-toggle{margin-left:auto;display:flex;gap:6px;align-items:center;}
-  .fmt-toggle .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-family:var(--display);}
-  section{margin-top:46px;}
+  .fmt-toggle .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-family:var(--display);}
+  section{margin-top:44px;}
   section>h2{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em;
-    font-size:22px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:24px;
+    font-size:20px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:24px;
     display:flex;align-items:center;gap:12px;}
-  section>h2 .cnt{font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.04em;}
+  section>h2 .cnt{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:none;}
   .row{display:flex;flex-wrap:wrap;gap:26px;}
-  figure{width:340px;}
-  .frame{border-radius:10px;overflow:hidden;background:#000;box-shadow:0 14px 40px rgba(0,0,0,.55);
-    border:1px solid var(--line);position:relative;}
-  .frame iframe{border:0;display:block;pointer-events:none;}
-  /* square thumb */
-  .sq .frame{width:340px;height:340px;}
-  .sq .frame iframe{width:1280px;height:1280px;transform:scale(.265625);transform-origin:top left;}
-  /* og thumb */
-  .og .frame{width:340px;height:178.5px;}
-  .og .frame iframe{width:1200px;height:630px;transform:scale(.28333);transform-origin:top left;}
+  figure{cursor:pointer;}
+  .frame{position:relative;border-radius:10px;overflow:hidden;background:#000;
+    box-shadow:0 14px 40px rgba(0,0,0,.55);border:1px solid var(--line);transition:border-color .15s,transform .15s;}
+  figure:hover .frame{border-color:var(--acc);transform:translateY(-2px);}
+  .frame iframe{border:0;display:block;transform-origin:top left;pointer-events:none;}
+  .hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(8,9,12,.55);opacity:0;transition:opacity .15s;}
+  figure:hover .hover{opacity:1;}
+  .hover .pill{background:var(--acc);color:#0A0A0A;padding:9px 18px;border-radius:8px;
+    font-family:var(--display);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;}
   figcaption{display:flex;justify-content:space-between;align-items:center;margin-top:11px;gap:10px;}
   figcaption .t{font-size:13px;color:var(--ink);font-weight:500;font-family:var(--display);}
-  figcaption .t .dim{color:var(--muted);font-weight:400;font-size:11px;letter-spacing:.06em;}
-  .acts a{font-family:var(--display);font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-    font-size:12px;color:var(--purple);text-decoration:none;margin-left:12px;white-space:nowrap;}
-  .acts a:hover{text-decoration:underline;}
+  figcaption .t .dim{color:var(--muted);font-weight:400;font-size:11px;letter-spacing:.06em;display:block;margin-top:2px;}
+  figcaption .tag{font-family:var(--display);font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    font-size:10.5px;color:var(--acc);border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);
+    border-radius:999px;padding:3px 9px;white-space:nowrap;}
+  figcaption .tag.plain{color:var(--muted);border-color:var(--line-strong);}
   .hidden{display:none!important;}
-  footer.tip{margin-top:60px;color:var(--muted);font-size:13px;line-height:1.7;max-width:90ch;
+
+  /* ---- lightbox ---- */
+  #lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:32px;}
+  #lb.show{display:flex;}
+  .lb-bg{position:absolute;inset:0;background:rgba(4,5,7,.84);backdrop-filter:blur(6px);}
+  .lb-panel{position:relative;z-index:2;display:flex;gap:30px;background:var(--bg2);
+    border:1px solid var(--line-strong);border-radius:16px;padding:28px;max-width:1020px;width:100%;
+    max-height:92vh;overflow:auto;box-shadow:0 30px 90px rgba(0,0,0,.6);}
+  .lb-close{position:absolute;top:14px;right:16px;z-index:5;background:rgba(255,255,255,.08);border:0;
+    color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1;}
+  .lb-close:hover{background:rgba(255,255,255,.18);}
+  .lb-prev{flex:0 0 auto;}
+  .lb-prev .frame{cursor:default;}
+  .lb-prev .frame:hover{transform:none;border-color:var(--line);}
+  .lb-fmt{display:flex;gap:6px;margin-bottom:12px;}
+  .lb-fmt .chip{font-size:11.5px;padding:6px 14px;}
+  .lb-side{flex:1 1 340px;min-width:300px;display:flex;flex-direction:column;}
+  .lb-kicker{font-family:var(--display);font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    font-size:12px;color:var(--acc);}
+  .lb-title{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:26px;margin:6px 0 20px;line-height:1.1;}
+  .step{margin-bottom:22px;}
+  .step .lab{font-family:var(--display);font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    font-size:11.5px;color:var(--muted);margin-bottom:8px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;
+    letter-spacing:.05em;text-transform:uppercase;font-size:13px;background:var(--acc);color:#0A0A0A;
+    border:0;border-radius:9px;padding:12px 20px;cursor:pointer;transition:background .15s;}
+  .btn:hover{background:#A3D453;}
+  .btn.ghost{background:transparent;color:var(--acc);border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);}
+  .btn.ghost:hover{background:color-mix(in srgb,var(--acc) 12%,transparent);}
+  .btn.share{background:var(--li);color:#fff;width:100%;justify-content:center;font-size:14px;padding:14px;}
+  .btn.share:hover{background:#0b5cab;}
+  .cap-box{width:100%;height:190px;resize:vertical;background:var(--bg);border:1px solid var(--line-strong);
+    border-radius:10px;color:#D7DDE6;font-family:var(--body);font-size:13px;line-height:1.6;padding:12px 14px;}
+  .cap-box:focus{outline:none;border-color:var(--acc);}
+  @keyframes capflash{0%{border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 30%,transparent);}
+    100%{border-color:var(--line-strong);box-shadow:none;}}
+  .cap-box.flash{animation:capflash 1.7s ease;}
+  .row-btns{display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+  .copied{font-family:var(--display);font-weight:600;letter-spacing:.04em;font-size:12.5px;color:var(--acc);}
+  .divider{font-family:var(--display);font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    font-size:11px;color:#6B7480;margin:4px 0 12px;display:flex;align-items:center;gap:10px;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line);}
+  .smallnote{font-size:12px;color:#7C8694;margin-top:8px;line-height:1.55;}
+  .smallnote b{color:var(--ink);}
+  .smallnote.lb-callout{background:color-mix(in srgb,var(--acc) 10%,transparent);
+    border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);border-radius:10px;padding:11px 13px;color:#D8E6C6;}
+  .dlfallback{font-size:12px;color:#7C8694;margin-top:8px;}
+  .dlfallback a{color:var(--acc);}
+  .guide{margin-top:14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--bg3);}
+  .guide>summary{cursor:pointer;list-style:none;padding:11px 14px;font-family:var(--display);font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;font-size:11.5px;color:var(--acc);}
+  .guide>summary::-webkit-details-marker{display:none;}
+  .guide>summary::before{content:'+  ';}
+  .guide[open]>summary::before{content:'\2013  ';}
+  .guide ol{margin:0;padding:2px 18px 16px 34px;display:flex;flex-direction:column;gap:9px;}
+  .guide li{font-size:12.5px;line-height:1.5;color:#C2C9D2;}
+  .guide li b{color:var(--ink);}
+  .tip{margin-top:auto;padding-top:20px;font-size:12px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);}
+  footer.tip-foot{margin-top:60px;color:var(--muted);font-size:12.5px;line-height:1.75;max-width:92ch;
     border-top:1px solid var(--line);padding-top:22px;}
-  footer.tip code{background:var(--bg3);padding:2px 7px;border-radius:5px;color:var(--ink);font-size:12px;}
+  footer.tip-foot code{background:var(--bg3);padding:2px 7px;border-radius:5px;color:var(--ink);font-size:11.5px;}
+  @media(max-width:860px){ .lb-panel{flex-direction:column;} .lb-prev{align-self:center;} }
 </style>
 </head>
 <body>
   <header>
-    <div class="wm"><img src="keybridge-logo.svg" alt="Keybridge IT" /><span class="wm-lbl">Social cards</span></div>
-    <h1>Keybridge IT · Social cards</h1>
-    <p class="note">Each card renders at two sizes. <b>OG 1200×630</b> is the link-preview image (set as <code>og:image</code>; used automatically by messaging apps, Facebook, X and LinkedIn link previews). <b>Square 1280×1280</b> is for native LinkedIn / Instagram image posts you upload by hand.</p>
-    <div class="filter">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="home">Homepage</button>
-      <button class="chip" data-filter="pillar">Pillars</button>
-      <button class="chip" data-filter="industry">Industries</button>
-      <button class="chip" data-filter="mkt">Marketing</button>
-      <span class="fmt-toggle">
-        <span class="lbl">Show:</span>
-        <button class="chip fc active" data-fmt="both">Both</button>
-        <button class="chip fc" data-fmt="og">OG only</button>
-        <button class="chip fc" data-fmt="square">Square only</button>
-      </span>
-    </div>
+    <div class="wm"><img src="keybridge-logo.svg" alt="Keybridge IT" /><span class="wm-lbl">Social studio</span></div>
+    <h1>Keybridge IT · Social studio</h1>
+    <p class="note">Click any card to preview it, copy its post and download the image. <b>Square 1280×1280</b> is the one you upload to LinkedIn by hand. <b>OG 1200×630</b> is the link-preview image the site uses automatically, so it rarely needs posting on its own.</p>
+    <div class="filter" id="chips"></div>
   </header>
 
   <div id="grid"></div>
 
-  <footer class="tip">
-    <b>Paths:</b> cards load from <code>BASE</code> below; set to <code>/socials/</code> for your live site. Change it if you deploy this folder somewhere else (use <code>'./'</code> for opening straight off disk).<br/>
-    <b>Export:</b> open any card and use the on-canvas <code>PNG 2×</code> button, or click a <code>PNG ⬇</code> link below to auto-download. Toggle <code>Square / OG</code> on the card itself too.<br/>
-    <b>Add / reorder cards:</b> edit the <code>CARDS</code> array in the script below; order here is export order.<br/>
-    <b>Logo:</b> replace <code>keybridge-logo.svg</code> in this folder with the real brand mark (keep the filename).
+  <footer class="tip-foot">
+    <b>Paths:</b> cards load from <code>BASE</code> in the script below. Leave it as <code>/socials/</code> for the live site, change to <code>'./'</code> to open this folder straight off disk.<br/>
+    <b>Add or reorder cards:</b> edit the <code>CARDS</code> array below. Order here is the order on the page.<br/>
+    <b>Post copy:</b> lives in the <code>cap</code> field of each card. Source of truth is <code>social-studio-posts.md</code> in the repo root.
   </footer>
 
+  <!-- preview + post -->
+  <div id="lb" aria-hidden="true">
+    <div class="lb-bg" data-close></div>
+    <div class="lb-panel">
+      <button class="lb-close" data-close aria-label="Close">&times;</button>
+      <div class="lb-prev">
+        <div class="lb-fmt">
+          <button class="chip lbf active" data-lbf="square">Square 1280</button>
+          <button class="chip lbf" data-lbf="og">OG 1200×630</button>
+        </div>
+        <div class="frame" id="lbFrame"></div>
+      </div>
+      <div class="lb-side">
+        <p class="lb-kicker" id="lbKicker">Keybridge IT</p>
+        <h3 class="lb-title" id="lbTitle"></h3>
+
+        <div class="step" id="lbCapStep">
+          <p class="lab">The post</p>
+          <textarea class="cap-box" id="lbCap" spellcheck="false"></textarea>
+          <div class="row-btns">
+            <button class="btn" id="lbCopy">Copy post</button>
+            <span class="copied" id="lbCopied"></span>
+          </div>
+          <p class="smallnote">Edit it here first if you want. The copy button takes whatever is in the box.</p>
+        </div>
+
+        <div class="step">
+          <p class="lab">The image</p>
+          <button class="btn ghost" id="lbDownload">&#8595; Download PNG</button>
+          <p class="dlfallback" id="lbFallback"></p>
+        </div>
+
+        <div class="divider">Or in one go</div>
+        <button class="btn share" id="lbShare">Share to LinkedIn</button>
+        <p class="smallnote" id="lbShareNote"></p>
+
+        <details class="guide">
+          <summary>New to this? Step by step</summary>
+          <ol>
+            <li><b>Copy post</b>: click the button above. The words are on your clipboard, ready to paste.</li>
+            <li><b>Download PNG</b>: the image saves to your Downloads folder.</li>
+            <li><b>Share to LinkedIn</b>: the blue button opens LinkedIn in a new tab.</li>
+            <li>In LinkedIn, click <b>Start a post</b>.</li>
+            <li>Click the <b>photo icon</b> and pick the image you just downloaded.</li>
+            <li>Click into the text box and <b>paste</b>: Ctrl + V on Windows, Cmd + V on Mac.</li>
+            <li>Read it back, then click <b>Post</b>.</li>
+          </ol>
+        </details>
+
+        <p class="tip" id="lbTip"></p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Where these card files are served from on your site. They live in /socials/.
-    // Set to './' if you're opening index.html directly off disk instead of via the site.
+    // Where the card files are served from. Use './' to open this folder off disk.
     const BASE = '/socials/';
+    const THUMB = 320;
+    const DIMS = { square:{w:1280,h:1280,label:'1280×1280'}, og:{w:1200,h:630,label:'1200×630'} };
 
-    const CARDS = [
-      { group:'home',     file:'card-home.html',          title:'Homepage' },
-
-      { group:'pillar',   file:'card-managed-it.html',    title:'Managed IT' },
-      { group:'pillar',   file:'card-cyber.html',         title:'Cyber Security' },
-      { group:'pillar',   file:'card-ai.html',            title:'AI Enablement' },
-
-      { group:'industry', file:'card-recruitment.html',   title:'Recruitment' },
-      { group:'industry', file:'card-law-firms.html',     title:'Law Firms' },
-      { group:'industry', file:'card-accountancy.html',   title:'Accountancy' },
-
-      { group:'mkt',      file:'card-mkt-proof.html',     title:'Proof / Stats' },
-      { group:'mkt',      file:'card-mkt-switch.html',    title:'Why firms switch' },
-      { group:'mkt',      file:'card-mkt-review.html',    title:'Free IT Review (CTA)' },
-      { group:'mkt',      file:'card-mkt-ops.html',       title:'24/7 Live Security Ops' },
-      { group:'mkt',      file:'card-mkt-roots.html',     title:'Built inside recruitment' },
-      { group:'mkt',      file:'card-mkt-microsoft.html', title:'Microsoft Solutions Partner' },
-    ];
     const GROUPS = [
+      { key:'audit',    label:'IT audit campaign' },
       { key:'home',     label:'Homepage' },
       { key:'pillar',   label:'Pillar pages' },
       { key:'industry', label:'Industry pages' },
       { key:'mkt',      label:'Marketing' },
     ];
 
+    const CARDS = [
+      /* CARDS:START */
+      { group:'audit', file:'card-audit-pledge.html', title:'The pledge', cap:`We're going to audit the Microsoft 365 security of 100 UK recruitment agencies, free of charge.
+
+No catch, no obligation, and you keep the report either way.
+
+Here is why. We have spent fifteen years looking after IT for recruitment firms, and we keep finding the same things. Administrator accounts nobody remembers creating. Multi-factor authentication that covers most people but not everyone. Security features already paid for in the licence and never switched on.
+
+None of that shows up on a dashboard. You only see it when someone actually looks inside the tenant.
+
+So we are going to look inside 100 of them. Every finding gets anonymised and published later as the first State of Recruitment Microsoft 365 Security report, so the industry gets to see what normal actually looks like.
+
+If you run a recruitment agency and you want one of the hundred, the link is below. It takes about ten minutes to set up. Read-only access for seven days, we cannot change a thing, and your password never comes near us.
+
+keybridgeit.com/audit
+
+#recruitment #cybersecurity` },
+      { group:'audit', file:'card-audit-question.html', title:'The honest question', cap:`Here is a question most agency owners cannot answer, and it is not their fault.
+
+How securely is your Microsoft 365 configured?
+
+Not whether you have Microsoft 365. Almost everyone does. Whether the security controls inside it are switched on, pointed at the right people, and doing what you assume they are doing.
+
+Most firms we talk to assume it got sorted at some point. Usually by whoever set it up, some years and a few staff changes ago. Then people joined, permissions got handed out in a hurry, someone was made an admin to fix one thing and stayed an admin, and nobody went back to check.
+
+That is not negligence. It is just what happens when nobody owns it.
+
+The only way to know is to look. We are running free Microsoft 365 security audits for 100 UK recruitment agencies. Read-only, seven days, and the report is yours to keep whether you ever speak to us again or not.
+
+keybridgeit.com/audit
+
+#microsoft365 #recruitment` },
+      { group:'audit', file:'card-audit-scope.html', title:'What the audit examines', cap:`When we say free Microsoft 365 security audit, this is what we actually mean.
+
+Six areas, looked at properly.
+
+Identity and access. Who holds administrator rights, who is missing multi-factor authentication, and what your Conditional Access rules really allow.
+
+Email and collaboration. The protections around Exchange, Teams and SharePoint, and how well they hold up against ordinary phishing.
+
+Devices and endpoints. Intune configuration, device compliance, and whether Defender is doing its job.
+
+Data protection. Data loss prevention, sensitivity labels, and who can reach the information that would hurt most if it walked out of the building.
+
+Security baselines. Your tenant measured against recognised Microsoft practice, so you can see what is missing instead of guessing.
+
+Licence utilisation. This one surprises people every time. Most firms are already paying for protections they have never switched on.
+
+You get all six written up in plain English, with the quick wins separated from the longer jobs. It is yours to keep.
+
+keybridgeit.com/audit
+
+#microsoft365 #cybersecurity` },
+      { group:'audit', file:'card-audit-readonly.html', title:'Read-only reassurance', cap:`The most common question we get about the free audit is a fair one. What are you actually getting access to?
+
+So, plainly.
+
+You sign in directly with Microsoft. Your password never touches us and we never ask for it. Before you approve anything, you see exactly which permissions are being requested. The access is read-only, which means we can look at how your tenant is configured but we cannot change a single setting. And it expires after seven days whether we are finished or not.
+
+Your users notice nothing. No downtime, no interruption to email, no prompts landing in anyone's inbox.
+
+It is also not a penetration test. We are not trying to break in. We are reading your configuration the way an auditor reads accounts, and writing down what we find.
+
+At the end you get the report and a conversation to walk through it. If you take that report straight to your existing IT provider and ask them to fix everything on it, that is a perfectly good outcome and we will not chase you.
+
+keybridgeit.com/audit
+
+#microsoft365 #cybersecurity` },
+      { group:'audit', file:'card-audit-findings.html', title:'The findings report', cap:`Every audit we run gets stripped of anything identifying and added to a data set.
+
+At the end of the hundred, we are publishing it as the State of Recruitment Microsoft 365 Security report. As far as we can tell it will be the first of its kind for this industry.
+
+The reason is simple. Right now, if you run a 60-person agency and you want to know whether your security setup is normal, good, or quietly alarming, there is nothing to measure yourself against. General cyber statistics get written about all UK businesses, which lumps you in with a chip shop and a bank and tells you very little about your own risk.
+
+We want agency leaders to be able to look at a page and think, right, so most firms our size have that switched on and we do not.
+
+No client is named. No tenant is identifiable. Just the shape of the thing.
+
+If you want your agency counted, the audit is free and open now.
+
+keybridgeit.com/audit
+
+#recruitment #cybersecurity` },
+      { group:'audit', file:'card-audit-cta.html', title:'100 audits, take one', cap:`Short one.
+
+We are giving away 100 free Microsoft 365 security audits to UK recruitment agencies.
+
+What it costs you: about ten minutes to connect, and no money at all.
+
+What you get: a written report on how your Microsoft 365 tenant is actually configured, what is exposed, what to fix first and what can wait. Plus half an hour with us to talk it through, if you want it.
+
+What you owe us afterwards: nothing at all. Take the report to your current provider if you have one. That is a fine use of it.
+
+We are doing this because we have spent fifteen years inside recruitment IT, and we would rather more agencies had this looked at than not.
+
+If you want one of the remaining places, start here.
+
+keybridgeit.com/audit
+
+#recruitment #microsoft365` },
+      { group:'home', file:'card-home.html', title:'Homepage', cap:`Fifteen years ago we started Keybridge to do one thing properly: look after IT for professional firms who had outgrown whatever they had been putting up with.
+
+That is still the job.
+
+Two hundred organisations, around five and a half thousand devices, and a support team that answers as a person rather than a ticket number.
+
+Three things sit underneath all of it. Keeping systems running so nobody has to think about them. Protecting the data, which now means a great deal more than a firewall and a hope. And helping firms get something back from the tools they already pay for, AI included, without turning it into a two-year programme.
+
+If your IT is fine but you would not call it good, that gap is usually where the cost is hiding.
+
+keybridgeit.com
+
+#managedit #ukbusiness` },
+      { group:'pillar', file:'card-managed-it.html', title:'Managed IT', cap:`The best compliment we get is that people forget we are there.
+
+That sounds like a low bar. It is not. Getting a 120-person firm to the point where a full month goes by without anyone mentioning IT takes a lot of unglamorous work: patching on a schedule, monitoring that catches things before a user does, a helpdesk that resolves rather than logs, and a real plan for the boring failures that take a business offline for a day.
+
+Most firms who come to us are not in crisis. They are just tired. Tired of chasing updates, tired of hearing "we're looking into it", tired of being the person stuck in the middle between their staff and a provider who has quietly gone reactive.
+
+We look after around 200 organisations and 5,500 devices across the UK. A lot of them are in and around Greater London, where we are based, and a fair few are a long way north of it. If IT is taking up more of your week than it should, that is worth half an hour of your time.
+
+keybridgeit.com/managed-it
+
+#managedit #itsupport` },
+      { group:'pillar', file:'card-cyber.html', title:'Cyber Security', cap:`Every firm we meet has some cyber security. Very few of them know whether it works.
+
+There is a difference between having the products and having the protection. Antivirus that was installed once and never checked since. MFA that covers everyone except the three people who found it annoying. Backups that run every night and have not been restored from since the day they were set up.
+
+None of that fails on a normal Tuesday. It fails on the one day you actually need it.
+
+What we do about it is less exciting than it sounds. We monitor properly, twenty four hours a day, with real people behind it. We test the things everyone assumes are working. We keep controls current as Microsoft moves them, which it does constantly. And we write down what we find in language you can put in front of a board.
+
+ISO 27001 certified, Cyber Essentials certified, Microsoft Solutions Partner. Those are the receipts rather than the pitch.
+
+keybridgeit.com/cyber-security
+
+#cybersecurity #infosec` },
+      { group:'pillar', file:'card-ai.html', title:'AI Enablement', cap:`Most firms we speak to have already bought AI. Very few are getting anything back from it.
+
+Copilot licences sitting on forty seats. A handful of people using it to tidy up emails. Nobody quite sure what else it is for, and no obvious way to find out without derailing a quarter.
+
+The gap is rarely the technology. It is that nobody has sat down with one specific team, watched what they actually do all day, and picked out the two or three jobs worth handing over.
+
+For a recruitment agency that might be formatting CVs and drafting job adverts. For an accountancy practice it might be pulling client information out of forty email threads at year end. For a law firm it might be first-pass document review, with a human still signing it off.
+
+Start there, prove it on something small, then widen. That works. Announcing an AI strategy does not.
+
+We help firms find the first one and make it stick.
+
+keybridgeit.com/ai-enablement
+
+#ai #microsoft365` },
+      { group:'industry', file:'card-recruitment.html', title:'Recruitment', cap:`Recruitment breaks IT in ways other businesses do not.
+
+You hire eight people in a month and need eight laptops built by Monday. Someone resigns on a Friday with a phone full of candidate data and a CRM login that needs closing before they reach the car park. Consultants work from client sites, home, a train and occasionally a bar, and expect the same speed from all four.
+
+Then there is the data itself. Candidate records are personal data in the eyes of the ICO, and losing them is not just embarrassing, it is reportable.
+
+We understand this because our founder spent eleven years doing IT inside recruitment businesses before starting Keybridge, and recruitment has been a large part of what we do ever since. Fast onboarding and offboarding, CRM and job board integrations that stay up, and security built around how consultants actually work rather than how a policy wishes they did.
+
+If your IT is fine in January and struggling by March, that is a shape we know well.
+
+keybridgeit.com/industries/recruitment
+
+#recruitment #recruitmentleaders` },
+      { group:'industry', file:'card-law-firms.html', title:'Law Firms', cap:`For a law firm, an IT problem is rarely just an IT problem.
+
+A file in the wrong place is a confidentiality issue. An email sent to the wrong Sarah is a potential report to the SRA. A day of downtime is a day of missed deadlines that do not move just because your systems did.
+
+So the questions we get from law firms are different ones. Not "how fast is the support", but "who can see what, how would we prove it, and what happens if the answer turns out to be wrong".
+
+In practice that means access controls tight enough to survive a client audit, document management that behaves itself, encryption and retention matched to your obligations rather than a generic template, and continuity planning built around court dates instead of averages.
+
+We work with practices up and down the country, and we are ISO 27001 certified ourselves, so the standards we ask of your systems are the ones we hold to.
+
+keybridgeit.com/industries/law-firms
+
+#legaltech #lawfirms` },
+      { group:'industry', file:'card-accountancy.html', title:'Accountancy', cap:`Accountancy runs to a calendar that does not negotiate.
+
+The thirty first of January does not move because your remote access is playing up. Neither does a payroll run, a VAT quarter or a set of statutory accounts. Everything in a practice is fine right up until the fortnight where it very much is not.
+
+Which is why we plan around your year rather than ours. No major changes in deadline season. Capacity checked before the busy weeks rather than during them. Support that understands what a filing deadline means to your team's evening.
+
+The other half of it is security, and the questions have got sharper. Practices hold exactly what a criminal wants: client bank details, UTRs, payroll files, and HMRC correspondence convincing enough to imitate. AML obligations and PI renewals now ask harder questions about how that data is protected, and "we have antivirus" is not the answer anyone is looking for.
+
+Both of those are fixable. Neither is fixable in January.
+
+keybridgeit.com/industries/accountancy
+
+#accountancy #accountants` },
+      { group:'mkt', file:'card-mkt-proof.html', title:'Proof / Stats', cap:`We are not a startup, and we stopped apologising for that a long time ago.
+
+Keybridge has been going since 2011. Fifteen years, around 200 organisations supported, roughly 5,500 devices looked after, and more than 130 five-star Google reviews written by people we did not chase for them.
+
+None of those numbers mean much on their own. What they add up to is the thing that actually matters when you hand your IT to someone else: we have seen your problem before, probably several times, and we are still here to be held to it.
+
+Plenty of providers can promise you a service. Fewer can show you fifteen years of holding the same standard while the technology underneath changed completely.
+
+If you are weighing up providers at the moment, ask all of them how long they have been trading and how many clients have stayed more than five years. It is a more revealing question than anything on the proposal.
+
+keybridgeit.com
+
+#managedit #msp` },
+      { group:'mkt', file:'card-mkt-switch.html', title:'Why firms switch', cap:`Nobody changes IT provider because everything is going brilliantly.
+
+When firms come to us, it is almost always one of six things.
+
+Their provider has gone reactive. Everything gets fixed eventually, nothing gets prevented.
+
+Security worry is growing. Usually after a near miss, or a client questionnaire nobody in the building could answer.
+
+Support cannot keep pace. The firm grew, the provider did not.
+
+Hybrid working is still a mess, years after everyone declared it solved.
+
+They want to do something with AI and keep getting shrugs.
+
+Or, simply, they have outgrown the provider. A great fit at 30 people is often the wrong fit at 120.
+
+Not one of those is an emergency. That is exactly why they drag on for years.
+
+If you recognised more than two, it is probably worth a conversation before it becomes urgent.
+
+keybridgeit.com
+
+#managedit #itsupport` },
+      { group:'mkt', file:'card-mkt-review.html', title:'Free IT Review (CTA)', cap:`We run a 21-point IT and security review, free, and you keep the report whatever you decide afterwards.
+
+It takes about half an hour of your time. We look at the things that tend to go wrong quietly: how your backups are actually configured and whether anyone has tested a restore, who is holding administrator rights, whether multi-factor authentication really covers everyone, how your devices are managed, what your licensing costs against what it delivers, and how long you would realistically be down after a serious failure.
+
+Then we write it up. Plain English, ranked, quick wins separated from the bigger jobs.
+
+There is no obligation attached and no pressure afterwards. Plenty of firms take the report straight to their existing provider and ask them to work through it, which is a perfectly sensible thing to do with it.
+
+We would rather more firms had this looked at than not.
+
+keybridgeit.com/it-review
+
+#itsupport #cybersecurity` },
+      { group:'mkt', file:'card-mkt-ops.html', title:'24/7 Live Security Ops', cap:`Most security is invisible, which makes it very hard to trust.
+
+You pay the invoice, the products sit there, and the only evidence you have that any of it works is that nothing bad has happened yet. That is not evidence. That is a good run of luck.
+
+Our security operations run twenty four hours a day, seven days a week, with people behind the screens rather than an alerting rule and a voicemail. Around 1,300 events analysed every second across roughly 5,500 endpoints. When something gets caught, you are told what it was, what was done about it, and what it means for you.
+
+The reporting matters more than people expect. It is the difference between telling a client "yes, we take security seriously" and showing them what your provider actually stopped last month.
+
+If you have never seen a report like that from your current setup, ask for one. The answer tells you a lot.
+
+keybridgeit.com/cyber-security
+
+#cybersecurity #soc` },
+      { group:'mkt', file:'card-mkt-roots.html', title:'Built inside recruitment', cap:`Keybridge did not start as an IT company that later discovered recruitment.
+
+Our founder, Andy Hinxman, spent eleven years doing IT inside recruitment businesses before starting this one in 2011. Not selling to them. In them, at the sharp end, on the day the CRM fell over in the middle of a big placement week.
+
+That is why we tend to get on with recruitment leaders quickly. We already know that headcount can jump by ten in a month, that offboarding is a security event rather than an admin task, that consultants will find a way round any control that slows them down, and that "we'll look at it after Q1" is how most problems get old.
+
+Fifteen years on we support around 200 organisations. Recruitment is still a large part of the business, alongside accountancy and legal practices under much the same pressures in different clothes.
+
+Sector knowledge is not a marketing line. It just means fewer things to explain.
+
+keybridgeit.com/about
+
+#recruitment #managedit` },
+      { group:'mkt', file:'card-mkt-microsoft.html', title:'Microsoft Solutions Partner', cap:`There is a real trade-off when you pick an IT provider, and most firms feel it without ever naming it.
+
+Go large and you get the accreditations, the depth and the process. You also get a ticket number, an account manager who changes every eight months, and a support desk where nobody knows your business.
+
+Go small and you get someone who knows your name and picks up the phone. You may also find yourself relying on one person's memory, with no cover in August.
+
+We have spent fifteen years trying to sit in the middle of that. Microsoft Solutions Partner, ISO 27001 certified, Cyber Essentials certified, twenty four hour security operations. And still small enough that the people looking after your systems know what your business does and who your awkward Monday morning users are.
+
+Around 200 organisations across the UK, run from an office in the City. Big enough to be safe, small enough to be useful.
+
+keybridgeit.com
+
+#microsoft #managedit` },
+      /* CARDS:END */
+    ];
+
+    const q = (file, extra) => BASE + file + (file.includes('?') ? '&' : '?') + extra;
+
+    /* ---- chips ---- */
+    document.getElementById('chips').innerHTML =
+      `<button class="chip active" data-filter="all">All</button>` +
+      GROUPS.map(g => `<button class="chip" data-filter="${g.key}">${g.label}</button>`).join('') +
+      `<span class="fmt-toggle"><span class="lbl">Show:</span>
+        <button class="chip fc active" data-fmt="square">Square</button>
+        <button class="chip fc" data-fmt="og">OG</button>
+        <button class="chip fc" data-fmt="both">Both</button></span>`;
+
+    /* ---- grid ---- */
     function thumb(c, fmt){
-      const dims = fmt==='og' ? '1200×630' : '1280×1280';
-      const url = BASE + c.file + '?f=' + fmt;
+      const d = DIMS[fmt];
+      const scale = THUMB / d.w;
+      const fw = Math.round(THUMB), fh = Math.round(d.h * scale);
       return `
-        <figure class="thumb ${fmt==='og'?'og':'sq'}" data-fmt="${fmt}">
-          <div class="frame"><iframe src="${url}&embed=1" loading="lazy" scrolling="no" tabindex="-1"></iframe></div>
+        <figure data-i="${c.i}" data-fmt="${fmt}" style="width:${fw}px">
+          <div class="frame" style="width:${fw}px;height:${fh}px">
+            <iframe src="${q(c.file,'f='+fmt+'&embed=1')}" loading="lazy" scrolling="no" tabindex="-1"
+              style="width:${d.w}px;height:${d.h}px;transform:scale(${scale})"></iframe>
+            <div class="hover"><span class="pill">Preview &amp; post</span></div>
+          </div>
           <figcaption>
-            <span class="t">${c.title} <span class="dim">${dims}</span></span>
-            <span class="acts">
-              <a href="${url}" target="_blank" rel="noopener">Open</a>
-              <a href="${url}&dl=2" target="_blank" rel="noopener">PNG ⬇</a>
-            </span>
+            <span class="t">${c.title}<span class="dim">${d.label}</span></span>
+            <span class="tag ${c.cap ? '' : 'plain'}">${c.cap ? 'Image + post' : 'Image only'}</span>
           </figcaption>
         </figure>`;
     }
 
     document.getElementById('grid').innerHTML = GROUPS.map(g => {
-      const items = CARDS.filter(c => c.group === g.key);
+      const items = CARDS.map((c,i)=>({...c,i})).filter(c => c.group === g.key);
       if(!items.length) return '';
-      const figs = items.map(c => thumb(c,'og') + thumb(c,'square')).join('');
-      return `<section data-group="${g.key}"><h2>${g.label} <span class="cnt">${items.length} card${items.length>1?'s':''} · 2 sizes each</span></h2><div class="row">${figs}</div></section>`;
+      const withCap = items.filter(c=>c.cap).length;
+      const figs = items.map(c => thumb(c,'square') + thumb(c,'og')).join('');
+      return `<section data-group="${g.key}">
+        <h2>${g.label} <span class="cnt">${items.length} card${items.length>1?'s':''} · ${withCap} with post copy</span></h2>
+        <div class="row">${figs}</div></section>`;
     }).join('');
 
-    // group filter
+    /* ---- lightbox ---- */
+    const lb = document.getElementById('lb');
+    const lbFrame = document.getElementById('lbFrame');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbKicker = document.getElementById('lbKicker');
+    const lbCap = document.getElementById('lbCap');
+    const lbCapStep = document.getElementById('lbCapStep');
+    const lbCopy = document.getElementById('lbCopy');
+    const lbCopied = document.getElementById('lbCopied');
+    const lbDownload = document.getElementById('lbDownload');
+    const lbFallback = document.getElementById('lbFallback');
+    const lbShare = document.getElementById('lbShare');
+    const lbShareNote = document.getElementById('lbShareNote');
+    const lbTip = document.getElementById('lbTip');
+    const PREV = 430;
+    let cur = null, curFmt = 'square';
+
+    function renderPreview(){
+      const d = DIMS[curFmt];
+      const scale = PREV / d.w;
+      lbFrame.style.width = PREV+'px';
+      lbFrame.style.height = Math.round(d.h*scale)+'px';
+      lbFrame.innerHTML = `<iframe src="${q(cur.file,'f='+curFmt+'&embed=1')}" scrolling="no" tabindex="-1"
+        style="border:0;transform-origin:top left;width:${d.w}px;height:${d.h}px;transform:scale(${scale})"></iframe>`;
+      document.querySelectorAll('.lbf').forEach(b => b.classList.toggle('active', b.dataset.lbf === curFmt));
+      lbFallback.innerHTML = '';
+    }
+
+    function defaultShareNote(){
+      lbShareNote.classList.remove('lb-callout');
+      lbShareNote.innerHTML = cur && cur.cap
+        ? "Opens LinkedIn, copies the post and downloads the image. LinkedIn will not let anyone auto-fill a post, so you still attach the image and <b>paste the words</b> yourself."
+        : "Opens LinkedIn and downloads the image. This card has no post copy yet, so add your own words.";
+    }
+
+    function openLb(i, fmt){
+      cur = CARDS[i]; curFmt = fmt || 'square';
+      lbKicker.textContent = (GROUPS.find(g=>g.key===cur.group)||{}).label || 'Keybridge IT';
+      lbTitle.textContent = cur.title;
+      lbCopied.textContent = '';
+      lbCopy.textContent = 'Copy post';
+      if(cur.cap){
+        lbCapStep.classList.remove('hidden');
+        lbCap.value = cur.cap;
+        lbCap.classList.remove('flash');
+        lbTip.textContent = 'Nothing posts automatically. You always paste it into LinkedIn yourself, so you get a last read before it goes out.';
+      } else {
+        lbCapStep.classList.add('hidden');
+        lbTip.textContent = 'This card has no post copy yet. Download it and write your own words on LinkedIn.';
+      }
+      defaultShareNote();
+      renderPreview();
+      lb.classList.add('show'); lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closeLb(){
+      lb.classList.remove('show'); lb.setAttribute('aria-hidden','true');
+      lbFrame.innerHTML=''; document.body.style.overflow=''; cur=null;
+    }
+
+    document.querySelectorAll('figure[data-i]').forEach(f =>
+      f.addEventListener('click', ()=>openLb(+f.dataset.i, f.dataset.fmt)));
+    lb.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeLb));
+    document.addEventListener('keydown', e => { if(e.key==='Escape' && lb.classList.contains('show')) closeLb(); });
+    document.querySelectorAll('.lbf').forEach(b => b.addEventListener('click', () => {
+      if(!cur) return; curFmt = b.dataset.lbf; renderPreview(); defaultShareNote();
+    }));
+
+    /* ---- download ---- */
+    // Re-point the preview iframe with a dl flag so the card exports itself in place.
+    function triggerDownload(){
+      if(!cur) return;
+      const ifr = lbFrame.querySelector('iframe');
+      if(ifr) ifr.src = q(cur.file, 'f='+curFmt+'&embed=1&dl=2&t='+Date.now());
+      lbFallback.innerHTML = `Nothing downloaded? <a href="${q(cur.file,'f='+curFmt+'&dl=2')}" target="_blank" rel="noopener">open the card in a new tab</a> and use its PNG button.`;
+    }
+    lbDownload.addEventListener('click', () => {
+      if(!cur) return;
+      triggerDownload();
+      lbDownload.textContent = 'Preparing…';
+      setTimeout(()=>{ lbDownload.innerHTML='&#8595; Download PNG'; }, 2000);
+    });
+
+    /* ---- copy ---- */
+    function flashCaption(){
+      if(!cur || !cur.cap) return;
+      lbCap.classList.remove('flash'); void lbCap.offsetWidth; lbCap.classList.add('flash');
+      try { lbCap.focus(); lbCap.select(); } catch(e){}
+    }
+    async function copyCaption(){
+      if(!cur || !cur.cap) return false;
+      const text = lbCap.value;
+      try { await navigator.clipboard.writeText(text); return true; }
+      catch(err){ try{ lbCap.select(); document.execCommand('copy'); return true; }catch(e){ return false; } }
+    }
+    lbCopy.addEventListener('click', async () => {
+      const ok = await copyCaption();
+      flashCaption();
+      lbCopied.textContent = ok ? 'Copied. Now paste into LinkedIn' : '';
+      lbCopy.textContent = ok ? 'Copied' : 'Select all + Ctrl/Cmd C';
+      setTimeout(()=>{ lbCopy.textContent='Copy post'; }, 2000);
+    });
+
+    /* ---- share ---- */
+    const LINKEDIN_COMPOSER = 'https://www.linkedin.com/feed/?shareActive=true';
+
+    // Mobile: hand the real PNG to the native share sheet.
+    async function tryNativeShare(){
+      try{
+        const ifr = lbFrame.querySelector('iframe');
+        const node = ifr && ifr.contentDocument && ifr.contentDocument.getElementById('card');
+        if(!node || !window.captureCardBlob || !navigator.canShare) return false;
+        const blob = await window.captureCardBlob(node, 2);
+        const name = (cur.title||'keybridge').replace(/[^\w]+/g,'-').toLowerCase();
+        const file = new File([blob], name+'-'+curFmt+'.png', { type:'image/png' });
+        if(navigator.canShare({ files:[file] })){
+          await navigator.share({ files:[file], text: (cur.cap ? lbCap.value : '') });
+          return true;
+        }
+      }catch(err){ /* fall through to desktop path */ }
+      return false;
+    }
+
+    // Desktop: open the composer synchronously so the click gesture survives,
+    // then copy the post and kick off the image download.
+    function shareDesktop(){
+      window.open(LINKEDIN_COMPOSER, '_blank', 'noopener');
+      triggerDownload();
+      lbShareNote.classList.add('lb-callout');
+      if(cur.cap){
+        copyCaption();
+        flashCaption();
+        lbCopied.textContent = 'Copied. Now paste into LinkedIn';
+        lbShareNote.innerHTML = '&#10003; <b>Image downloading, post copied.</b><br>In LinkedIn: click the <b>photo icon</b> to attach the image, then <b>paste the post (Ctrl/Cmd V)</b> into the box.';
+      } else {
+        lbShareNote.innerHTML = '&#10003; <b>Image downloading.</b><br>In LinkedIn, click the <b>photo icon</b> and attach it from your downloads.';
+      }
+    }
+
+    lbShare.addEventListener('click', async () => {
+      if(!cur) return;
+      const isMobile = navigator.canShare && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+      if(isMobile){ const ok = await tryNativeShare(); if(ok) return; }
+      shareDesktop();
+    });
+
+    /* ---- filters ---- */
     const gchips = document.querySelectorAll('.chip[data-filter]');
     gchips.forEach(c => c.addEventListener('click', () => {
       gchips.forEach(x => x.classList.remove('active')); c.classList.add('active');
@@ -149,14 +681,26 @@
       document.querySelectorAll('section[data-group]').forEach(s =>
         s.classList.toggle('hidden', f !== 'all' && s.dataset.group !== f));
     }));
-    // format filter
     const fchips = document.querySelectorAll('.chip[data-fmt]');
+    function applyFmt(f){
+      document.querySelectorAll('figure[data-fmt]').forEach(fig =>
+        fig.classList.toggle('hidden', f !== 'both' && fig.dataset.fmt !== f));
+    }
     fchips.forEach(c => c.addEventListener('click', () => {
       fchips.forEach(x => x.classList.remove('active')); c.classList.add('active');
-      const f = c.dataset.fmt;
-      document.querySelectorAll('figure.thumb').forEach(fig =>
-        fig.classList.toggle('hidden', f !== 'both' && fig.dataset.fmt !== f));
+      applyFmt(c.dataset.fmt);
     }));
+    applyFmt('square');
+  </script>
+
+  <script type="module">
+    // Only used for the mobile native share: capture the card DOM out of the
+    // same-origin preview iframe into a PNG blob for navigator.share.
+    import { snapdom } from 'https://cdn.jsdelivr.net/npm/@zumer/snapdom/dist/snapdom.mjs';
+    window.captureCardBlob = async (node, scale = 2) => {
+      const r = await snapdom(node, { scale, embedFonts: true });
+      return await r.toBlob({ format: 'png' });
+    };
   </script>
 </body>
 </html>
