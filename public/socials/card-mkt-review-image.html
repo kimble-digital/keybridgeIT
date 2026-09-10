@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Keybridge IT · Free IT Review</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script>
+  (function(){var q=new URLSearchParams(location.search);var f=q.get('f');
+    var c=(f==='og')?'fmt-og':'fmt-square';if(q.has('embed'))c+=' embed';
+    document.documentElement.className=c;})();
+</script>
+<style>
+  :root{
+    --bg:#06080c; --ink:#F4F2EF; --muted:#9A9AA0; --purple:#9B3C87; --lime:#8DBF3F;
+    --ac:#8DBF3F;
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+    /* Photo, served from your site root (drop the file in /images). */
+    --photo:url('/images/photo-review.jpg');
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#000;height:100%;overflow:hidden;}
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:var(--body);}
+  #stage{transform-origin:center center;}
+
+  html.fmt-square #card{width:1280px;height:1280px;--pad:104px;--eye:31px;--h:128px;--sub:33px;--foot:27px;--logo:98px;--mid:flex-end;--badge:24px;--cred:60px;--ms:54px;}
+  html.fmt-og #card{width:1200px;height:630px;--pad:62px 70px;--eye:22px;--h:80px;--sub:24px;--foot:20px;--logo:58px;--mid:center;--badge:18px;--cred:34px;--ms:36px;}
+
+  #card{position:relative;overflow:hidden;background:var(--bg);color:var(--ink);
+     display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);}
+
+  .photo{position:absolute;inset:0;z-index:0;background:var(--photo) center right/cover no-repeat;transform:scale(1.04);}
+  .shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+     linear-gradient(90deg, rgba(6,8,12,.97) 0%, rgba(6,8,12,.88) 30%, rgba(6,8,12,.5) 62%, rgba(6,8,12,.68) 100%),
+     linear-gradient(0deg, rgba(6,8,12,.95) 0%, rgba(6,8,12,0) 48%),
+     radial-gradient(120% 95% at 16% 26%, color-mix(in srgb, var(--ac) 24%, transparent), transparent 60%);}
+  .grain{position:absolute;inset:0;z-index:1;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .top,.mid,.bottom{position:relative;z-index:3;}
+  .top{display:flex;align-items:center;justify-content:space-between;}
+  .brand{height:var(--logo);width:auto;display:block;}
+
+  .mid{display:flex;flex-direction:column;justify-content:var(--mid);flex:1 1 auto;padding-block:38px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:.7em;font-family:var(--display);font-weight:600;
+    text-transform:uppercase;letter-spacing:.28em;font-size:var(--eye);color:var(--ink);margin-bottom:.9em;}
+  .eyebrow .dot{width:.4em;height:.4em;border-radius:50%;background:var(--ac);box-shadow:0 0 16px var(--ac);}
+  .headline{font-family:var(--display);font-weight:700;letter-spacing:-.022em;line-height:.98;
+    font-size:var(--h);max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.5);}
+  .headline .hl{color:var(--ac);}
+  .sub{font-family:var(--body);font-weight:500;color:rgba(244,242,239,.9);line-height:1.46;
+    letter-spacing:-.003em;font-size:var(--sub);max-width:40ch;margin-top:.95em;
+    text-shadow:0 2px 30px rgba(0,0,0,.55);}
+  .sub b{color:var(--ink);font-weight:600;}
+  .mslogo{height:var(--ms);width:auto;display:block;opacity:.95;}
+  .badge{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+    font-size:var(--badge);color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 55%,transparent);
+    border-radius:999px;padding:.5em 1.1em;background:color-mix(in srgb,var(--ac) 14%,transparent);
+    white-space:nowrap;backdrop-filter:blur(4px);}
+
+  .bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .url{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.14em;
+    font-size:var(--foot);color:var(--ink);}
+  .footnote{font-family:var(--display);font-weight:500;letter-spacing:.06em;font-size:calc(var(--foot)*.82);
+    color:var(--ink);text-align:right;text-transform:uppercase;opacity:.85;}
+  .cta{display:inline-flex;align-items:center;gap:.5em;font-family:var(--display);font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;font-size:var(--foot);background:var(--ac);color:#0A0A0A;
+    padding:.7em 1.4em;border-radius:.55em;box-shadow:0 18px 50px -16px var(--ac);}
+  .creds{display:flex;align-items:center;justify-content:flex-end;gap:1.5em;flex-wrap:wrap;max-width:62%;}
+  .creds .cl{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+    font-size:calc(var(--foot)*.62);color:var(--ink);opacity:.7;align-self:center;margin-right:.2em;}
+  .creds img{height:var(--cred);width:auto;display:block;}
+  .creds img.chip{background:#fff;border-radius:8px;padding:.5em .7em;}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div id="card">
+      <div class="photo"></div>
+      <div class="shade"></div>
+      <div class="grain"></div>
+
+      <div class="top">
+        <img class="brand" src="keybridge-logo.svg" alt="Keybridge IT" />
+        <span class="badge">No obligation</span>
+      </div>
+
+      <div class="mid">
+        <p class="eyebrow"><span class="dot"></span>Free IT Review</p>
+        <h1 class="headline">Book a <span class="hl">free IT review.</span></h1>
+        
+      </div>
+
+      <div class="bottom">
+        <span class="url">keybridgeit.com/it-review</span>
+        <span class="cta">Book your review →</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="exportbar">
+    <button data-f="square" class="tg">Square</button>
+    <button data-f="og" class="tg">OG</button>
+    <span class="sep"></span>
+    <button data-scale="1">PNG 1×</button>
+    <button data-scale="2">PNG 2×</button>
+  </div>
+  <style>
+    #exportbar{position:fixed;top:14px;left:14px;z-index:9999;display:flex;align-items:center;gap:7px;font-family:Inter,system-ui,sans-serif;}
+    #exportbar button{background:#16161A;color:#F4F2EF;border:1px solid rgba(255,255,255,.16);border-radius:7px;padding:8px 13px;font-size:13px;font-weight:600;cursor:pointer;}
+    #exportbar button:hover{border-color:#8DBF3F;color:#fff;}
+    #exportbar button.on{background:#8DBF3F;color:#0A0A0A;border-color:#8DBF3F;}
+    #exportbar button:disabled{opacity:.55;cursor:default;}
+    #exportbar .sep{width:1px;height:20px;background:rgba(255,255,255,.18);margin:0 3px;}
+    html.embed #exportbar{display:none!important;}
+    @media print{#exportbar{display:none;}}
+  </style>
+  <script type="module">
+    import { snapdom } from 'https://cdn.jsdelivr.net/npm/@zumer/snapdom/dist/snapdom.mjs';
+    const params = new URLSearchParams(location.search);
+    const embed = params.has('embed');
+    const fmt = (params.get('f')==='og')?'og':'square';
+    const stage = document.getElementById('stage');
+    const card = document.getElementById('card');
+    const bar = document.getElementById('exportbar');
+    if(embed && bar) bar.style.display='none';
+    document.querySelectorAll('.tg').forEach(b=>{ if(b.dataset.f===fmt) b.classList.add('on');
+      b.addEventListener('click',()=>{ const p=new URLSearchParams(location.search); p.set('f',b.dataset.f);
+        location.search=p.toString(); }); });
+    function fit(){ if(!stage) return; const w=card.offsetWidth||1280, h=card.offsetHeight||1280;
+      const s = embed ? 1 : Math.min(1,(innerHeight-44)/h,(innerWidth-44)/w);
+      stage.style.transform='scale('+s+')'; }
+    addEventListener('resize', fit); fit();
+    const slug='card-mkt-review-image';
+    async function exportPng(scale){ if(stage) stage.style.transform='none'; await document.fonts.ready;
+      const result=await snapdom(card,{scale,embedFonts:true}); fit();
+      await result.download({format:'png',filename:slug+'-'+fmt}); }
+    document.querySelectorAll('#exportbar button[data-scale]').forEach(b=>{
+      b.addEventListener('click', async ()=>{ const o=b.textContent;b.disabled=true;b.textContent='Rendering…';
+        try{await exportPng(+b.dataset.scale);}catch(e){alert('Export failed: '+e.message);}
+        b.disabled=false;b.textContent=o; }); });
+    const dl=params.get('dl'); if(dl){ addEventListener('load',()=>setTimeout(()=>exportPng(+dl||2),500)); }
+  </script>
+</body>
+</html>

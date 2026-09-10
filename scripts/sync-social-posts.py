@@ -18,25 +18,33 @@ INDEX = os.path.join(ROOT, 'public', 'socials', 'index.html')
 
 # file -> (group, title). Order here is the order on the studio page.
 CARD_META = [
-    ('card-audit-pledge.html',    'audit',    'The pledge'),
-    ('card-audit-question.html',  'audit',    'The honest question'),
-    ('card-audit-scope.html',     'audit',    'What the audit examines'),
-    ('card-audit-readonly.html',  'audit',    'Read-only reassurance'),
-    ('card-audit-findings.html',  'audit',    'The findings report'),
-    ('card-audit-cta.html',       'audit',    '100 audits, take one'),
-    ('card-home.html',            'home',     'Homepage'),
-    ('card-managed-it.html',      'pillar',   'Managed IT'),
-    ('card-cyber.html',           'pillar',   'Cyber Security'),
-    ('card-ai.html',              'pillar',   'AI Enablement'),
-    ('card-recruitment.html',     'industry', 'Recruitment'),
-    ('card-law-firms.html',       'industry', 'Law Firms'),
-    ('card-accountancy.html',     'industry', 'Accountancy'),
-    ('card-mkt-proof.html',       'mkt',      'Proof / Stats'),
-    ('card-mkt-switch.html',      'mkt',      'Why firms switch'),
-    ('card-mkt-review.html',      'mkt',      'Free IT Review (CTA)'),
-    ('card-mkt-ops.html',         'mkt',      '24/7 Live Security Ops'),
-    ('card-mkt-roots.html',       'mkt',      'Built inside recruitment'),
-    ('card-mkt-microsoft.html',   'mkt',      'Microsoft Solutions Partner'),
+    ('card-audit-pledge.html',          'audit',    'The pledge'),
+    ('card-audit-pledge-image.html',    'audit',    'The pledge · Photo'),
+    ('card-audit-question.html',        'audit',    'The honest question'),
+    ('card-audit-question-image.html',  'audit',    'The honest question · Photo'),
+    ('card-audit-scope.html',           'audit',    'What the audit examines'),
+    ('card-audit-readonly.html',        'audit',    'Read-only reassurance'),
+    ('card-audit-findings.html',        'audit',    'The findings report'),
+    ('card-audit-findings-image.html',  'audit',    'The findings report · Photo'),
+    ('card-audit-cta.html',             'audit',    '100 audits, take one'),
+    ('card-home.html',                  'home',     'Homepage'),
+    ('card-home-image.html',            'home',     'Homepage · Photo'),
+    ('card-managed-it.html',            'pillar',   'Managed IT'),
+    ('card-managed-it-image.html',      'pillar',   'Managed IT · Photo'),
+    ('card-cyber.html',                 'pillar',   'Cyber Security'),
+    ('card-cyber-image.html',           'pillar',   'Cyber Security · Photo'),
+    ('card-ai.html',                    'pillar',   'AI Enablement'),
+    ('card-ai-image.html',              'pillar',   'AI Enablement · Photo'),
+    ('card-recruitment.html',           'industry', 'Recruitment'),
+    ('card-law-firms.html',             'industry', 'Law Firms'),
+    ('card-accountancy.html',           'industry', 'Accountancy'),
+    ('card-mkt-proof.html',             'mkt',      'Proof / Stats'),
+    ('card-mkt-switch.html',            'mkt',      'Why firms switch'),
+    ('card-mkt-review.html',            'mkt',      'Free IT Review (CTA)'),
+    ('card-mkt-review-image.html',      'mkt',      'Free IT Review · Photo'),
+    ('card-mkt-ops.html',               'mkt',      '24/7 Live Security Ops'),
+    ('card-mkt-roots.html',             'mkt',      'Built inside recruitment'),
+    ('card-mkt-microsoft.html',         'mkt',      'Microsoft Solutions Partner'),
 ]
 
 
@@ -81,7 +89,8 @@ def main():
     lines = []
     missing = []
     for f, group, title in CARD_META:
-        cap = posts.get(f, '')
+        # Photo variants (card-x-image.html) reuse their twin's post copy.
+        cap = posts.get(f) or posts.get(re.sub(r'-image\.html$', '.html', f), '')
         if not cap:
             missing.append(f)
         if not os.path.exists(os.path.join(ROOT, 'public', 'socials', f)):

@@ -22,69 +22,65 @@ Suggested run order over three to four weeks. A1 launches, A2 and A3 do the pers
 ---
 
 ## A1 · The pledge
-**Card:** `card-audit-pledge.html` · accent orange · badge "100 free audits" · headline "We're auditing **100 recruitment agencies.** Free." · url keybridgeit.com/audit
+**Card:** `card-audit-pledge.html` · accent purple · badge "Free Microsoft 365 Security Audit" · headline "We're auditing **100 professional firms.** Free." · url keybridgeit.com/audit
 
-We're going to audit the Microsoft 365 security of 100 UK recruitment agencies, free of charge.
+We are running free Microsoft 365 security audits for 100 professional services firms across the UK.
 
-No catch, no obligation, and you keep the report either way.
+No catch, no obligation, and the report is yours to keep either way.
 
-Here is why. We have spent fifteen years looking after IT for recruitment firms, and we keep finding the same things. Administrator accounts nobody remembers creating. Multi-factor authentication that covers most people but not everyone. Security features already paid for in the licence and never switched on.
+Here is why it matters. Most firms have Microsoft 365 locked down in theory and wide open in practice. Admin accounts nobody remembers creating. MFA that covers most people, but not everyone. Security you already pay for, sitting switched off.
 
-None of that shows up on a dashboard. You only see it when someone actually looks inside the tenant.
+None of it shows on a dashboard. You only see it when someone looks inside the tenant.
 
-So we are going to look inside 100 of them. Every finding gets anonymised and published later as the first State of Recruitment Microsoft 365 Security report, so the industry gets to see what normal actually looks like.
+So we are going to look inside 100 of them, properly, and hand each firm a plain-English report on what we find.
 
-If you run a recruitment agency and you want one of the hundred, the link is below. It takes about ten minutes to set up. Read-only access for seven days, we cannot change a thing, and your password never comes near us.
+Get your free audit: keybridgeit.com/audit
 
-keybridgeit.com/audit
-
-#recruitment #cybersecurity
+#microsoft365 #cybersecurity
 
 ---
 
 ## A2 · The honest question
 **Card:** `card-audit-question.html` · accent orange · badge "Free audit" · headline "Do you know how your **tenant is configured?**" · url keybridgeit.com/audit
 
-Here is a question most agency owners cannot answer, and it is not their fault.
+Here is a question most business owners cannot answer, and it is not their fault.
 
-How securely is your Microsoft 365 configured?
+How securely is your Microsoft 365 actually configured?
 
-Not whether you have Microsoft 365. Almost everyone does. Whether the security controls inside it are switched on, pointed at the right people, and doing what you assume they are doing.
+Not whether you have it. Whether the controls inside it are switched on, pointed at the right people, and doing what you assume they are doing.
 
-Most firms we talk to assume it got sorted at some point. Usually by whoever set it up, some years and a few staff changes ago. Then people joined, permissions got handed out in a hurry, someone was made an admin to fix one thing and stayed an admin, and nobody went back to check.
+Most firms assume it got sorted at some point. Then people joined, permissions were handed out in a hurry, someone became an admin to fix one thing and stayed one, and nobody went back to check.
 
-That is not negligence. It is just what happens when nobody owns it.
+That is not negligence. It is what happens when nobody owns it.
 
-The only way to know is to look. We are running free Microsoft 365 security audits for 100 UK recruitment agencies. Read-only, seven days, and the report is yours to keep whether you ever speak to us again or not.
+The only way to know is to look. We are auditing 100 professional services firms, free.
 
-keybridgeit.com/audit
+Get your free audit: keybridgeit.com/audit
 
-#microsoft365 #recruitment
+#microsoft365 #cybersecurity
 
 ---
 
 ## A3 · What the audit examines
 **Card:** `card-audit-scope.html` · accent teal · badge "Six areas" · headline "Six places **we look.**" · six bullets: Identity and access / Email and collaboration / Devices and endpoints / Data protection / Security baselines / Licence utilisation
 
-When we say free Microsoft 365 security audit, this is what we actually mean.
+Free Microsoft 365 security audit. Here is exactly what we look at.
 
-Six areas, looked at properly.
+Identity and access. Who holds admin rights, who is missing MFA, what your Conditional Access really allows.
 
-Identity and access. Who holds administrator rights, who is missing multi-factor authentication, and what your Conditional Access rules really allow.
+Email and collaboration. The protection around Exchange, Teams and SharePoint against everyday phishing.
 
-Email and collaboration. The protections around Exchange, Teams and SharePoint, and how well they hold up against ordinary phishing.
+Devices. Intune, device compliance, and whether Defender is doing its job.
 
-Devices and endpoints. Intune configuration, device compliance, and whether Defender is doing its job.
+Data. Loss prevention, sensitivity labels, and who can reach the information that would hurt most if it left the building.
 
-Data protection. Data loss prevention, sensitivity labels, and who can reach the information that would hurt most if it walked out of the building.
+Baselines. Your tenant measured against recognised Microsoft practice, so you see what is missing instead of guessing.
 
-Security baselines. Your tenant measured against recognised Microsoft practice, so you can see what is missing instead of guessing.
+Licences. The one that surprises everyone. Most firms already pay for protection they have never switched on.
 
-Licence utilisation. This one surprises people every time. Most firms are already paying for protections they have never switched on.
+All of it, written up plain, quick wins first.
 
-You get all six written up in plain English, with the quick wins separated from the longer jobs. It is yours to keep.
-
-keybridgeit.com/audit
+Get your free audit: keybridgeit.com/audit
 
 #microsoft365 #cybersecurity
 
@@ -93,42 +89,40 @@ keybridgeit.com/audit
 ## A4 · Read-only, seven days, no password
 **Card:** `card-audit-readonly.html` · accent blue · badge "Read-only" · headline "We can look. We **cannot touch.**" · four bullets: You sign in with Microsoft / You approve the permissions / Read-only access / Expires after seven days
 
-The most common question we get about the free audit is a fair one. What are you actually getting access to?
+The most common question about the free audit is a fair one. What are you actually giving us access to?
 
-So, plainly.
+Plainly:
 
-You sign in directly with Microsoft. Your password never touches us and we never ask for it. Before you approve anything, you see exactly which permissions are being requested. The access is read-only, which means we can look at how your tenant is configured but we cannot change a single setting. And it expires after seven days whether we are finished or not.
+You sign in with Microsoft. Your password never touches us, and we never ask for it. You see every permission before you approve it. The access is read-only, so we can see how your tenant is set up but cannot change a thing. And it expires after seven days either way.
 
-Your users notice nothing. No downtime, no interruption to email, no prompts landing in anyone's inbox.
+Your team notices nothing. No downtime, no prompts, no interruption.
 
-It is also not a penetration test. We are not trying to break in. We are reading your configuration the way an auditor reads accounts, and writing down what we find.
+It is not a penetration test. We are not trying to break in. We read your configuration and write down what we find.
 
-At the end you get the report and a conversation to walk through it. If you take that report straight to your existing IT provider and ask them to fix everything on it, that is a perfectly good outcome and we will not chase you.
-
-keybridgeit.com/audit
+Get your free audit: keybridgeit.com/audit
 
 #microsoft365 #cybersecurity
 
 ---
 
 ## A5 · The findings report
-**Card:** `card-audit-findings.html` · accent purple · badge "Coming soon" · headline "State of Recruitment **Microsoft 365 Security.**" · sub: the first industry benchmark, built from 100 anonymised audits
+**Card:** `card-audit-findings.html` · accent purple · badge "Coming soon" · headline "State of Professional Services **Microsoft 365 Security.**" · sub: the first benchmark of its kind, built from 100 anonymised audits
 
-Every audit we run gets stripped of anything identifying and added to a data set.
+Every audit we run gets stripped of anything identifying and added to one data set.
 
-At the end of the hundred, we are publishing it as the State of Recruitment Microsoft 365 Security report. As far as we can tell it will be the first of its kind for this industry.
+At the end, we are publishing it as the first State of Professional Services Microsoft 365 Security report.
 
-The reason is simple. Right now, if you run a 60-person agency and you want to know whether your security setup is normal, good, or quietly alarming, there is nothing to measure yourself against. General cyber statistics get written about all UK businesses, which lumps you in with a chip shop and a bank and tells you very little about your own risk.
+The reason is simple. If you run a 60-person firm and want to know whether your setup is normal, good, or quietly alarming, there is nothing to measure against. General cyber stats lump you in with every business in the country and tell you almost nothing about your own risk.
 
-We want agency leaders to be able to look at a page and think, right, so most firms our size have that switched on and we do not.
+We want firm leaders to look at one page and think: most firms our size have that switched on, and we do not.
 
-No client is named. No tenant is identifiable. Just the shape of the thing.
+No client named. No tenant identifiable. Just the shape of the thing.
 
-If you want your agency counted, the audit is free and open now.
+Want your firm counted? The audit is free.
 
-keybridgeit.com/audit
+Get your free audit: keybridgeit.com/audit
 
-#recruitment #cybersecurity
+#microsoft365 #cybersecurity
 
 ---
 
@@ -137,21 +131,15 @@ keybridgeit.com/audit
 
 Short one.
 
-We are giving away 100 free Microsoft 365 security audits to UK recruitment agencies.
+100 free Microsoft 365 security audits, for professional services firms across the UK.
 
-What it costs you: about ten minutes to connect, and no money at all.
+Costs you ten minutes to connect and nothing at all. You get a written report on how your tenant is really configured, what is exposed, and what to fix first. Keep it whatever you decide, and take it to your current provider if you have one.
 
-What you get: a written report on how your Microsoft 365 tenant is actually configured, what is exposed, what to fix first and what can wait. Plus half an hour with us to talk it through, if you want it.
+That is a fine use of it.
 
-What you owe us afterwards: nothing at all. Take the report to your current provider if you have one. That is a fine use of it.
+Get your free audit: keybridgeit.com/audit
 
-We are doing this because we have spent fifteen years inside recruitment IT, and we would rather more agencies had this looked at than not.
-
-If you want one of the remaining places, start here.
-
-keybridgeit.com/audit
-
-#recruitment #microsoft365
+#microsoft365 #cybersecurity
 
 ---
 
