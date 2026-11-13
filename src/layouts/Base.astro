@@ -2,6 +2,9 @@
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import AuditBanner from "../components/AuditBanner.astro";
+import OutageBanner from "../components/OutageBanner.astro";
+// Set to false once Microsoft 365 is back to normal; the audit banner returns.
+const OUTAGE_BANNER = true;
 import Footer from "../components/Footer.astro";
 import { company } from "../data/site";
 
@@ -79,7 +82,7 @@ const canonical = new URL(Astro.url.pathname, siteOrigin).href;
     />
   </head>
   <body>
-    <AuditBanner />
+    {OUTAGE_BANNER ? <OutageBanner /> : <AuditBanner />}
     <Nav />
     <main>
       <slot />

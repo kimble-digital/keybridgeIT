@@ -1,0 +1,79 @@
+---
+// Temporary banner for a Microsoft 365 service outage. Rendered in Base.astro
+// in place of the audit banner while OUTAGE_BANNER is true there. Fixed to the
+// top like the audit banner and uses the same --banner-h offset, so the nav and
+// every hero sit below it. Dismissal lasts for the browser session only.
+const STATUS_URL = "https://status.cloud.microsoft/m365/referrer=serviceStatusRedirect";
+---
+<div id="outageBanner" class="outage-banner" role="region" aria-label="Microsoft 365 service status">
+  <a href={STATUS_URL} class="ob-link" target="_blank" rel="noopener noreferrer">
+    <span class="ob-live"><span class="ob-dot"></span>LIVE</span>
+    <span class="ob-text"><b>Microsoft 365 is experiencing a global outage.</b><span class="ob-sub"> Microsoft is posting updates on its service status page.</span></span>
+    <span class="ob-short"><b>Microsoft 365 outage</b></span>
+    <span class="ob-cta"><span class="ob-cta-long">Check Microsoft's live status</span><span class="ob-cta-short">Live status</span> <span class="ob-arr">→</span></span>
+  </a>
+  <button id="outageBannerClose" class="ob-close" aria-label="Dismiss banner">&times;</button>
+</div>
+<script is:inline>
+  try { if (sessionStorage.getItem("kb-outage-banner-dismissed")) document.getElementById("outageBanner").remove(); } catch (e) {}
+</script>
+<style is:global>
+  :root:has(#outageBanner){--banner-h:44px}
+  body:has(#outageBanner) nav#nav{top:var(--banner-h)}
+  @media(max-width:640px){:root:has(#outageBanner){--banner-h:40px}}
+</style>
+<style>
+  .outage-banner{
+    position:fixed;top:0;left:0;right:0;z-index:110;height:var(--banner-h,44px);
+    display:flex;align-items:center;justify-content:center;
+    background:#14171f;border-bottom:2px solid var(--orange);overflow:hidden;
+  }
+  .ob-link{
+    position:relative;z-index:2;display:flex;align-items:center;gap:14px;
+    color:#fff;text-decoration:none;font-size:14px;padding:0 46px 0 18px;
+    max-width:100%;white-space:nowrap;overflow:hidden;
+  }
+  .ob-live{
+    display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;
+    font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.14em;color:var(--orange);
+    padding:3px 9px;border:1px solid rgba(243,146,0,.6);border-radius:999px;
+  }
+  .ob-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange);animation:obPulse 1.4s ease-in-out infinite}
+  @keyframes obPulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .ob-text{overflow:hidden;text-overflow:ellipsis}
+  .ob-text b{font-weight:600}
+  .ob-sub{opacity:.8}
+  .ob-cta{
+    flex:0 0 auto;font-family:var(--display);font-weight:600;font-size:13px;color:#14171f;
+    background:var(--orange);padding:5px 13px;border-radius:8px;transition:filter .2s;
+  }
+  .ob-link:hover .ob-cta{filter:brightness(1.1)}
+  .ob-arr{display:inline-block;transition:transform .2s}
+  .ob-link:hover .ob-arr{transform:translateX(3px)}
+  .ob-close{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:3;
+    background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;line-height:1;
+    width:30px;height:30px;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;
+  }
+  .ob-close:hover{background:rgba(255,255,255,.12);color:#fff}
+  @media(max-width:1000px){.ob-sub{display:none}}
+  @media(max-width:640px){
+    .ob-link{gap:10px;font-size:13px;padding-left:12px}
+    .ob-live{display:none}
+    .ob-text b{font-weight:600}
+    .ob-cta{font-size:12px;padding:4px 10px}
+  }
+  .ob-short,.ob-cta-short{display:none}
+  @media(max-width:640px){
+    .ob-text,.ob-cta-long{display:none}
+    .ob-short,.ob-cta-short{display:inline}
+    .ob-short b{font-weight:600}
+  }
+  @media(prefers-reduced-motion:reduce){.ob-dot{animation:none}}
+</style>
+<script>
+  document.getElementById("outageBannerClose")?.addEventListener("click", () => {
+    try { sessionStorage.setItem("kb-outage-banner-dismissed", "1"); } catch (e) {}
+    document.getElementById("outageBanner")?.remove();
+  });
+</script>
